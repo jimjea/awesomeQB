@@ -153,7 +153,25 @@ $(document).ready(function(){
     var RWOy = $('.RWO').position().top;
     var LWOx = $('.LWO').position().left;
     var LWOy = $('.LWO').position().top;
-    
-  })
+    LWOroute(LWOx, LWOy);
+    RWOroute(RWOx, RWOy);
+    RSLOTroute(RSLOTx, RSLOTy);
+    var reset = function(){
+      console.log('got here')
+      $('.RSLOT').css({
+        left: RSLOTx,
+        top: RSLOTy
+      })
+      $('.RWO').css({
+        left: RWOx,
+        top: RWOy
+      })
+      $('.LWO').css({
+        left: LWOx,
+        top: LWOy
+      })
+    };
+    setInterval(reset,4500);
+  });
 
 });
