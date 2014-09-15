@@ -176,4 +176,7 @@ $(document).ready(function(){
 
 
   // Start New Game
+  $('.newGame').on('click', function() {
+    location.reload();
+  })
 });
