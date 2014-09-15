@@ -6,6 +6,7 @@ $(document).ready(function(){
   };
 
 
+
   // QB
   var placeqb = function() {
     $('.qb').css({
@@ -15,6 +16,9 @@ $(document).ready(function(){
     })
   }
   placeqb();
+
+
+
 
   // Ball
   var placeball = function() {
@@ -58,23 +62,20 @@ $(document).ready(function(){
   leftWideOut()
 
   // LWO Route
-  $('.startGame').one('click', function(event) {
-    var x = $('.LWO').position().left;
-    var y = $('.LWO').position().top;
-
-    console.log(x, y)
-
-    var LWOroute = function() {
+    var LWOroute = function(x, y) {
       $('.LWO').animate({
         left: x + 'px',
         top: y - 270 + 'px'
       }, 900)
       .animate({
         left: x + 100 + 'px',
-        top: y - 480 + 'px'
+        top: y - 460 + 'px'
       }, 900)
     }
-    LWOroute();
+  $('.startGame').one('click', function(event) {
+    var x = $('.LWO').position().left;
+    var y = $('.LWO').position().top;
+    LWOroute(x, y);
   });
 
 
@@ -91,14 +92,7 @@ $(document).ready(function(){
   rightWideOut()
 
   // RWO Route
-  $('.startGame').one('click', function(event) {
-    $('.startGame').remove();
-    var x = $('.RWO').position().left;
-    var y = $('.RWO').position().top;
-
-    console.log(x, y)
-
-    var RWOroute = function() {
+    var RWOroute = function(x, y) {
       $('.RWO').animate({
         left: x + 'px',
         top: y - 200 + 'px'
@@ -108,7 +102,11 @@ $(document).ready(function(){
         top: y - 200 + 'px'
       }, 900)
     }
-    RWOroute();
+  $('.startGame').one('click', function(event) {
+    $('.startGame').remove();
+    var x = $('.RWO').position().left;
+    var y = $('.RWO').position().top;
+    RWOroute(x, y);
   });
 
 
@@ -125,27 +123,37 @@ $(document).ready(function(){
   rightSlot()
 
   // RSLOT Route
+  var RSLOTroute = function(x, y) {
+    $('.RSLOT').animate({
+      left: x + 'px',
+      top: y - 150 + 'px'
+    }, 1000)
+    .animate({
+      left: x - 70 + 'px',
+      top: y - 250 + 'px'
+    }, 900)
+    .animate({
+      left: x + 70 + 'px',
+      top: y - 400 + 'px'
+    }, 900)
+  }
   $('.startGame').one('click', function(event) {
     var x = $('.RSLOT').position().left;
     var y = $('.RSLOT').position().top;
-
-    console.log(x, y)
-
-    var RSLOTroute = function() {
-      $('.RSLOT').animate({
-        left: x + 'px',
-        top: y - 150 + 'px'
-      }, 1000)
-      .animate({
-        left: x - 70 + 'px',
-        top: y - 250 + 'px'
-      }, 900)
-      .animate({
-        left: x + 70 + 'px',
-        top: y - 400 + 'px'
-      }, 900)
-    }
-    RSLOTroute();
+    RSLOTroute(x, y);
   });
+
+
+
+  // Show route
+  $('.showRoutes').on('click', function(event) {
+    var RSLOTx = $('.RSLOT').position().left;
+    var RSLOTy = $('.RSLOT').position().top;
+    var RWOx = $('.RWO').position().left;
+    var RWOy = $('.RWO').position().top;
+    var LWOx = $('.LWO').position().left;
+    var LWOy = $('.LWO').position().top;
+    
+  })
 
 });
