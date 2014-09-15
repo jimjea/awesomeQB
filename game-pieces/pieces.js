@@ -145,7 +145,7 @@ $(document).ready(function(){
 
 
 
-  // Show route
+  // Show Route
   $('.showRoutes').on('click', function(event) {
     var RSLOTx = $('.RSLOT').position().left;
     var RSLOTy = $('.RSLOT').position().top;
@@ -171,7 +171,9 @@ $(document).ready(function(){
         top: LWOy
       })
     };
-    setInterval(reset,4500);
+    setTimeout(reset,4500);
   });
 
+
+  // Start New Game
 });

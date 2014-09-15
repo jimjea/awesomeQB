@@ -41,3 +41,11 @@
   border: solid 1px black;
   padding: 5px;
 }
+
+.newGame {
+  position: fixed;
+  left: 330px;
+  top: 200px;
+  border: solid 1px black;
+  padding: 5px;
+}
