@@ -27,7 +27,7 @@ $(document).ready(function(){
   placeball();
 
   // throw ball to mouse on click
-  $('.gameBoard').on('click', function(event) {
+  $('.gameBoard').one('click', function(event) {
     var startX = gameOptions.width/2;
     var startY = gameOptions.height-10;
     var x = event.clientX;
@@ -101,11 +101,11 @@ $(document).ready(function(){
     var RWOroute = function() {
       $('.RWO').animate({
         left: x + 'px',
-        top: y - 300 + 'px'
+        top: y - 200 + 'px'
       }, 1000)
       .animate({
         left: x - 270 + 'px',
-        top: y - 300 + 'px'
+        top: y - 200 + 'px'
       }, 900)
     }
     RWOroute();
@@ -134,11 +134,15 @@ $(document).ready(function(){
     var RSLOTroute = function() {
       $('.RSLOT').animate({
         left: x + 'px',
-        top: y - 250 + 'px'
+        top: y - 150 + 'px'
       }, 1000)
       .animate({
-        left: x + 70 + 'px',
+        left: x - 70 + 'px',
         top: y - 250 + 'px'
+      }, 900)
+      .animate({
+        left: x + 70 + 'px',
+        top: y - 400 + 'px'
       }, 900)
     }
     RSLOTroute();
