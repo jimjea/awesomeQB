@@ -1,7 +1,16 @@
 .gameBoard {
+  position: absolute;
   width: 310px;
   height: 500px;
   border: solid 1px black;
+  overflow: hidden;
+}
+
+.startGame {
+  position: absolute;
+  width: 310px;
+  height: 500px;
+  z-index: 10;
 }
 
 .ball {
@@ -20,4 +29,12 @@
   text-indent: 100%;
   white-space: nowrap;
   overflow: hidden;
+}
+
+.showRoutes {
+  position: fixed;
+  left: 330px;
+  top: 150px;
+  border: solid 1px black;
+  padding: 5px;
 }

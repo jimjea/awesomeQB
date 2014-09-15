@@ -11,7 +11,7 @@ $(document).ready(function(){
     $('.qb').css({
       position: 'absolute',
       left: gameOptions.width/2 + 'px',
-      top: gameOptions.height-10 + 'px'
+      top: gameOptions.height - 20 + 'px'
     })
   }
   placeqb();
@@ -20,8 +20,8 @@ $(document).ready(function(){
   var placeball = function() {
     $('.ball').css({
       position: 'absolute',
-      left: gameOptions.width/2 + 'px',
-      top: gameOptions.height-10 + 'px'
+      left: gameOptions.width/2 - 6 + 'px',
+      top: gameOptions.height - 24 + 'px'
     })  
   }
   placeball();
@@ -32,20 +32,18 @@ $(document).ready(function(){
     var startY = gameOptions.height-10;
     var x = event.clientX;
     var y = event.clientY;
+    console.log(x, y)
 
     var slope = (y-startY)/(x-startX);
 
-    console.log(slope)
-
     var throwball = function() {
       $('.ball').animate({
-        left: x + x * slope + 'px',
-        top: y + y * slope + 'px'
-      }, 900)
+        left: x - 10 + 'px',
+        top: y - 18 + 'px'
+      }, 400)
     }
     throwball();
   });
-
 
 
 
@@ -60,7 +58,7 @@ $(document).ready(function(){
   leftWideOut()
 
   // LWO Route
-  $('.gameBoard').one('click', function(event) {
+  $('.startGame').one('click', function(event) {
     var x = $('.LWO').position().left;
     var y = $('.LWO').position().top;
 
@@ -78,7 +76,7 @@ $(document).ready(function(){
     }
     LWOroute();
   });
-  
+
 
 
 
@@ -93,7 +91,8 @@ $(document).ready(function(){
   rightWideOut()
 
   // RWO Route
-  $('.gameBoard').one('click', function(event) {
+  $('.startGame').one('click', function(event) {
+    $('.startGame').remove();
     var x = $('.RWO').position().left;
     var y = $('.RWO').position().top;
 
@@ -126,7 +125,7 @@ $(document).ready(function(){
   rightSlot()
 
   // RSLOT Route
-  $('.gameBoard').one('click', function(event) {
+  $('.startGame').one('click', function(event) {
     var x = $('.RSLOT').position().left;
     var y = $('.RSLOT').position().top;
 
