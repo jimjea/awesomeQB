@@ -67,10 +67,19 @@ $(document).ready(function(){
         top: y - 270 + 'px'
       }, {
         duration: 2000,
-        step: function() {
+        step: function(x, y) {
+          var route = [];
+          route.push(x);
           var hit = $('.LWO').collision('.ball');
           if (hit.length !== 0) {
-            console.log('hit')
+            console.log($('.ball').offset())
+            // for (var i = 0; i < route.length; i++) {
+            //   if (route[i] % 2 ===0) {
+            //     $('.ball').offset().left = route[i]
+            //   } else {
+            //     $('.ball').offset().top = route[i]
+            //   }
+            // }
           }
         }
       })
@@ -79,7 +88,7 @@ $(document).ready(function(){
         top: y - 460 + 'px'
       }, {
         duration: 2000,
-        step: function() {
+        step: function(x, y) {
           var hit = $('.LWO').collision('.ball');
           if (hit.length !== 0) {
             console.log('hit')
