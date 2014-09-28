@@ -72,7 +72,9 @@ $(document).ready(function(){
           route.push(x);
           var hit = $('.LWO').collision('.ball');
           if (hit.length !== 0) {
+            // need to change position of ball to the same position as the receiver
             console.log($('.ball').offset())
+
             // for (var i = 0; i < route.length; i++) {
             //   if (route[i] % 2 ===0) {
             //     $('.ball').offset().left = route[i]
