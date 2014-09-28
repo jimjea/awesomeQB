@@ -36,17 +36,16 @@ $(document).ready(function(){
     var startY = gameOptions.height-10;
     var x = event.clientX;
     var y = event.clientY;
-    console.log(x, y)
 
     var slope = (y-startY)/(x-startX);
 
-    var throwball = function() {
+    var zipball = function() {
       $('.ball').animate({
         left: x - 10 + 'px',
         top: y - 18 + 'px'
-      }, 400)
+      }, 600)
     }
-    throwball();
+    zipball();
   });
 
 
@@ -66,11 +65,27 @@ $(document).ready(function(){
       $('.LWO').animate({
         left: x + 'px',
         top: y - 270 + 'px'
-      }, 900)
+      }, {
+        duration: 2000,
+        step: function() {
+          var hit = $('.LWO').collision('.ball');
+          if (hit.length !== 0) {
+            console.log('hit')
+          }
+        }
+      })
       .animate({
         left: x + 100 + 'px',
         top: y - 460 + 'px'
-      }, 900)
+      }, {
+        duration: 2000,
+        step: function() {
+          var hit = $('.LWO').collision('.ball');
+          if (hit.length !== 0) {
+            console.log('hit')
+          }
+        }
+      })
     }
   $('.startGame').one('click', function(event) {
     var x = $('.LWO').position().left;
@@ -96,11 +111,27 @@ $(document).ready(function(){
       $('.RWO').animate({
         left: x + 'px',
         top: y - 200 + 'px'
-      }, 1000)
+      }, {
+        duration: 2000,
+        step: function() {
+          var hit = $('.RWO').collision('.ball');
+          if (hit.length !== 0) {
+            console.log('hit')
+          }
+        }
+      })
       .animate({
         left: x - 270 + 'px',
         top: y - 200 + 'px'
-      }, 900)
+      }, {
+        duration: 2000,
+        step: function() {
+          var hit = $('.RWO').collision('.ball');
+          if (hit.length !== 0) {
+            console.log('hit')
+          }
+        }
+      })
     }
   $('.startGame').one('click', function(event) {
     $('.startGame').remove();
@@ -127,15 +158,39 @@ $(document).ready(function(){
     $('.RSLOT').animate({
       left: x + 'px',
       top: y - 150 + 'px'
-    }, 1000)
+    }, {
+      duration: 2000,
+      step: function() {
+        var hit = $('.RSLOT').collision('.ball');
+        if (hit.length !== 0) {
+          console.log('hit')
+        }
+      }
+    })
     .animate({
       left: x - 70 + 'px',
       top: y - 250 + 'px'
-    }, 900)
+    }, {
+      duration: 2000,
+      step: function() {
+        var hit = $('.RSLOT').collision('.ball');
+        if (hit.length !== 0) {
+          console.log('hit')
+        }
+      }
+    })
     .animate({
       left: x + 70 + 'px',
       top: y - 400 + 'px'
-    }, 900)
+    }, {
+      duration: 2000,
+      step: function() {
+        var hit = $('.RSLOT').collision('.ball');
+        if (hit.length !== 0) {
+          console.log('hit')
+        }
+      }
+    })
   }
   $('.startGame').one('click', function(event) {
     var x = $('.RSLOT').position().left;
@@ -157,7 +212,6 @@ $(document).ready(function(){
     RWOroute(RWOx, RWOy);
     RSLOTroute(RSLOTx, RSLOTy);
     var reset = function(){
-      console.log('got here')
       $('.RSLOT').css({
         left: RSLOTx,
         top: RSLOTy
