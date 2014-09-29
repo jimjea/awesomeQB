@@ -17,6 +17,7 @@
 }
 
 .ball {
+  position: absolute;
   background-image: url('./assets/football.jpg');
   height: 16px;
   width: 10px;

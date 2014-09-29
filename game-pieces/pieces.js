@@ -50,13 +50,27 @@ $(document).ready(function(){
 
 
 
+
+  // Ball caught!
+  var ballCaught = function() {
+    // $('.gameBoard').append('<div class="caught">caught</div>');
+    // $('.caught').css({position: 'absolute'}).offset().left = $(this).offset().left;
+    // $('.caught').css({position: 'absolute'}).offset().top = $(this).offset().top;
+    console.log('caught');
+  }
+
+
+
   // LWO
   var leftWideOut = function() {
     $('.LWO').css({
         position: 'absolute',
         left: 30 + 'px',
         top: gameOptions.height - 25 + 'px'
-      })
+      }).data('collision', false);
+    $('.LWO').on('collision_start', function() {
+      $('.gameBoard').append('<div>caught</div>')
+    })
   }
   leftWideOut()
 
@@ -67,21 +81,40 @@ $(document).ready(function(){
         top: y - 270 + 'px'
       }, {
         duration: 2000,
-        step: function(x, y) {
-          var route = [];
-          route.push(x);
-          var hit = $('.LWO').collision('.ball');
-          if (hit.length !== 0) {
-            // need to change position of ball to the same position as the receiver
-            console.log($('.ball').offset())
-            // for (var i = 0; i < route.length; i++) {
-            //   if (route[i] % 2 ===0) {
-            //     $('.ball').offset().left = route[i]
-            //   } else {
-            //     $('.ball').offset().top = route[i]
-            //   }
-            // }
+        step: function() {
+          
+          // handles only revealing the caught message once
+          var hit_list = $(this).collision(".ball");
+          var current_collision = hit_list.length != 0;
+
+          var changed_collision = current_collision != $(this).data("collision");
+
+          if (changed_collision) {
+              $(this).data("collision", current_collision);
+              $(this).trigger("collision_" + (current_collision ? "start" : "stop"));
           }
+
+          // var hit = $('.LWO').collision('.ball');
+          // if (hit.length !== 0) {
+          //   // this should make the ball
+          //   $(this).data('collision', true);
+          //   if ($(this).data().collision) {
+          //     console.log('hi')
+          //   }
+
+          //   // $('.ball').animate({
+          //   //   left: 100 + 'px',
+          //   //   top: -20 + 'px'
+          //   // })
+
+          //   // for (var i = 0; i < route.length; i++) {
+          //   //   if (route[i] % 2 ===0) {
+          //   //     $('.ball').offset().left = '100px'
+          //   //   } else {
+          //   //     $('.ball').offset().top = '1000px'
+          //   //   }
+          //   // }
+          // }
         }
       })
       .animate({
@@ -90,16 +123,22 @@ $(document).ready(function(){
       }, {
         duration: 2000,
         step: function(x, y) {
-          var hit = $('.LWO').collision('.ball');
-          if (hit.length !== 0) {
-            console.log('hit')
+          // handles only revealing the caught message once
+          var hit_list = $(this).collision(".ball");
+          var current_collision = hit_list.length != 0;
+
+          var changed_collision = current_collision != $(this).data("collision");
+
+          if (changed_collision) {
+              $(this).data("collision", current_collision);
+              $(this).trigger("collision_" + (current_collision ? "start" : "stop"));
           }
         }
       })
     }
   $('.startGame').one('click', function(event) {
-    var x = $('.LWO').position().left;
-    var y = $('.LWO').position().top;
+    var x = $('.LWO').offset().left;
+    var y = $('.LWO').offset().top;
     LWOroute(x, y);
   });
 
@@ -112,7 +151,10 @@ $(document).ready(function(){
         position: 'absolute',
         left: gameOptions.width - 30 + 'px',
         top: gameOptions.height - 25 + 'px'
-      })
+      }).data('collision', false);
+    $('.RWO').on('collision_start', function() {
+      $('.gameBoard').append('<div>caught</div>')
+    })
   }
   rightWideOut()
 
@@ -124,9 +166,15 @@ $(document).ready(function(){
       }, {
         duration: 2000,
         step: function() {
-          var hit = $('.RWO').collision('.ball');
-          if (hit.length !== 0) {
-            console.log('hit')
+          // handles only revealing the caught message once
+          var hit_list = $(this).collision(".ball");
+          var current_collision = hit_list.length != 0;
+
+          var changed_collision = current_collision != $(this).data("collision");
+
+          if (changed_collision) {
+              $(this).data("collision", current_collision);
+              $(this).trigger("collision_" + (current_collision ? "start" : "stop"));
           }
         }
       })
@@ -136,17 +184,23 @@ $(document).ready(function(){
       }, {
         duration: 2000,
         step: function() {
-          var hit = $('.RWO').collision('.ball');
-          if (hit.length !== 0) {
-            console.log('hit')
+          // handles only revealing the caught message once
+          var hit_list = $(this).collision(".ball");
+          var current_collision = hit_list.length != 0;
+
+          var changed_collision = current_collision != $(this).data("collision");
+
+          if (changed_collision) {
+              $(this).data("collision", current_collision);
+              $(this).trigger("collision_" + (current_collision ? "start" : "stop"));
           }
         }
       })
     }
   $('.startGame').one('click', function(event) {
     $('.startGame').remove();
-    var x = $('.RWO').position().left;
-    var y = $('.RWO').position().top;
+    var x = $('.RWO').offset().left;
+    var y = $('.RWO').offset().top;
     RWOroute(x, y);
   });
 
@@ -159,7 +213,10 @@ $(document).ready(function(){
         position: 'absolute',
         left: gameOptions.width - 85 + 'px',
         top: gameOptions.height - 20 + 'px'
-      })
+      }).data('collision', false);
+    $('.RSLOT').on('collision_start', function() {
+      $('.gameBoard').append('<div>caught</div>')
+    })
   }
   rightSlot()
 
@@ -171,9 +228,15 @@ $(document).ready(function(){
     }, {
       duration: 2000,
       step: function() {
-        var hit = $('.RSLOT').collision('.ball');
-        if (hit.length !== 0) {
-          console.log('hit')
+        // handles only revealing the caught message once
+        var hit_list = $(this).collision(".ball");
+        var current_collision = hit_list.length != 0;
+
+        var changed_collision = current_collision != $(this).data("collision");
+
+        if (changed_collision) {
+            $(this).data("collision", current_collision);
+            $(this).trigger("collision_" + (current_collision ? "start" : "stop"));
         }
       }
     })
@@ -183,9 +246,15 @@ $(document).ready(function(){
     }, {
       duration: 2000,
       step: function() {
-        var hit = $('.RSLOT').collision('.ball');
-        if (hit.length !== 0) {
-          console.log('hit')
+        // handles only revealing the caught message once
+        var hit_list = $(this).collision(".ball");
+        var current_collision = hit_list.length != 0;
+
+        var changed_collision = current_collision != $(this).data("collision");
+
+        if (changed_collision) {
+            $(this).data("collision", current_collision);
+            $(this).trigger("collision_" + (current_collision ? "start" : "stop"));
         }
       }
     })
@@ -195,16 +264,22 @@ $(document).ready(function(){
     }, {
       duration: 2000,
       step: function() {
-        var hit = $('.RSLOT').collision('.ball');
-        if (hit.length !== 0) {
-          console.log('hit')
+        // handles only revealing the caught message once
+        var hit_list = $(this).collision(".ball");
+        var current_collision = hit_list.length != 0;
+
+        var changed_collision = current_collision != $(this).data("collision");
+
+        if (changed_collision) {
+            $(this).data("collision", current_collision);
+            $(this).trigger("collision_" + (current_collision ? "start" : "stop"));
         }
       }
     })
   }
   $('.startGame').one('click', function(event) {
-    var x = $('.RSLOT').position().left;
-    var y = $('.RSLOT').position().top;
+    var x = $('.RSLOT').offset().left;
+    var y = $('.RSLOT').offset().top;
     RSLOTroute(x, y);
   });
 
@@ -212,12 +287,12 @@ $(document).ready(function(){
 
   // Show Route
   $('.showRoutes').on('click', function(event) {
-    var RSLOTx = $('.RSLOT').position().left;
-    var RSLOTy = $('.RSLOT').position().top;
-    var RWOx = $('.RWO').position().left;
-    var RWOy = $('.RWO').position().top;
-    var LWOx = $('.LWO').position().left;
-    var LWOy = $('.LWO').position().top;
+    var RSLOTx = $('.RSLOT').offset().left;
+    var RSLOTy = $('.RSLOT').offset().top;
+    var RWOx = $('.RWO').offset().left;
+    var RWOy = $('.RWO').offset().top;
+    var LWOx = $('.LWO').offset().left;
+    var LWOy = $('.LWO').offset().top;
     LWOroute(LWOx, LWOy);
     RWOroute(RWOx, RWOy);
     RSLOTroute(RSLOTx, RSLOTy);
@@ -235,7 +310,7 @@ $(document).ready(function(){
         top: LWOy
       })
     };
-    setTimeout(reset,4500);
+    setTimeout(reset, 6000);
   });
 
 
