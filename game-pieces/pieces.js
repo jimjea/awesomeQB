@@ -6,8 +6,16 @@ $(document).ready(function(){
   };
 
 
+  // Start New Game
+  $('.newGame').on('click', function() {
+    location.reload();
+  })
 
-  // QB
+
+/**************************************/
+//                Q B                 //
+/**************************************/
+
   var placeqb = function() {
     $('.qb').css({
       position: 'absolute',
@@ -19,8 +27,9 @@ $(document).ready(function(){
 
 
 
-
-  // Ball
+/**************************************/
+//               B A L L              //
+/**************************************/
   var placeball = function() {
     $('.ball').css({
       position: 'absolute',
@@ -50,18 +59,9 @@ $(document).ready(function(){
 
 
 
-
-  // Ball caught!
-  var ballCaught = function() {
-    // $('.gameBoard').append('<div class="caught">caught</div>');
-    // $('.caught').css({position: 'absolute'}).offset().left = $(this).offset().left;
-    // $('.caught').css({position: 'absolute'}).offset().top = $(this).offset().top;
-    console.log('caught');
-  }
-
-
-
-  // LWO
+/**************************************/
+//       L E F T  W I D E  O U T      //
+/**************************************/
   var leftWideOut = function() {
     $('.LWO').css({
         position: 'absolute',
@@ -144,8 +144,9 @@ $(document).ready(function(){
 
 
 
-
-  // RWO
+/**************************************/
+//     R I G H T  W I D E  O U T      //
+/**************************************/
   var rightWideOut = function() {
     $('.RWO').css({
         position: 'absolute',
@@ -206,8 +207,9 @@ $(document).ready(function(){
 
 
 
-
-  // RSLOT
+/**************************************/
+//         R I G H T  S L O T         //
+/**************************************/
   var rightSlot = function() {
     $('.RSLOT').css({
         position: 'absolute',
@@ -285,7 +287,9 @@ $(document).ready(function(){
 
 
 
-  // Show Route
+/**************************************/
+//     P R E V I E W  R O U T E S     //
+/**************************************/
   $('.showRoutes').on('click', function(event) {
     var RSLOTx = $('.RSLOT').offset().left;
     var RSLOTy = $('.RSLOT').offset().top;
@@ -313,9 +317,4 @@ $(document).ready(function(){
     setTimeout(reset, 6000);
   });
 
-
-  // Start New Game
-  $('.newGame').on('click', function() {
-    location.reload();
-  })
 });
