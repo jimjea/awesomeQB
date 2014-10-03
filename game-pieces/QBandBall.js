@@ -44,6 +44,7 @@ $(document).ready(function(){
   placeball();
 
   // throw ball to mouse on click
+  // ball handles all collision logic
   $('.gameBoard').one('click', function(event) {
     $('.zipBall').remove();
     var startX = gameOptions.width/2;
@@ -60,33 +61,37 @@ $(document).ready(function(){
         top: y - 7 + 'px'
       }, {
         duration: 600,
-        // done: function(event) {
-        //   var LWOHit = $(this).collision(".LWO");
-        //   var RWOHit = $(this).collision(".RWO");
-        //   var RSLOTHit = $(this).collision(".RSLOT");
-        //   if (LWOHit.length > 0) {
-        //     console.log(event)
-        //     $('.LWO').stop(true, false).animate({top: event.originalProperties.top + 25});
-        //     // $('.ball').animate({top: event.delegateTarget.offsetTop - 25});
-        //   } else if (RWOHit.length > 0) {
-        //     $('.RWO').stop(true, false).animate({top: event.originalProperties.top + 25});
-        //   } else if (RSLOTHit.length > 0) {
-        //     $('.RSLOT').stop(true, false).animate({top: event.originalProperties.top + 25});
-        //   } else {
-        //     $('.LWO').stop(true, false).animate({top: event.originalProperties.top + 25});
-        //     $('.RWO').stop(true, false).animate({top: event.originalProperties.top + 25});
-        //     $('.RSLOT').stop(true, false).animate({top: event.originalProperties.top + 25});
-        //     console.log('incomplete pass')
-        //   }
-        // }
+        done: function(event) {
+          var LWOHit = $(this).collision(".LWO");
+          var RWOHit = $(this).collision(".RWO");
+          var RSLOTHit = $(this).collision(".RSLOT");
+          if (LWOHit.length > 0) {
+            $('.LWO').stop(true, false).animate({top: event.tweens[1].end - 25 + 'px'}, 800);
+            $('.lobBall').animate({top: event.tweens[1].end - 25 + 'px'}, 800);
+          } else if (RWOHit.length > 0) {
+            $('.RWO').stop(true, false).animate({top: event.tweens[1].end - 25 + 'px'}, 800);
+            $('.lobBall').animate({top: event.tweens[1].end - 25 + 'px'}, 800);
+          } else if (RSLOTHit.length > 0) {
+            $('.RSLOT').stop(true, false).animate({top: event.tweens[1].end - 25 + 'px'}, 800);
+            $('.lobBall').animate({top: event.tweens[1].end - 25 + 'px'}, 800);
+          } else {
+            $('.LWO').stop(true, false).animate({top: $('.LWO')[0].offsetTop - 10, left: $('.LWO')[0].offsetLeft + 15}, 800);
+            $('.RWO').stop(true, false).animate({top: $('.RWO')[0].offsetTop - 6, left: $('.RWO')[0].offsetLeft - 15}, 800);
+            $('.RSLOT').stop(true, false).animate({top: $('.RSLOT')[0].offsetTop - 7, left: $('.RSLOT')[0].offsetLeft}, 800);
+            console.log('incomplete pass')
+          }
+        }
       })
     }
     lobBall();
   });
 
+  // zips ball in a straight on on flick
+  // receiver can catch the ball anywhere in the line
   $('.zipBall').on('flick', function(event) {
     console.log(event)
   })
+
 
   /**************************************/
   //     P R E V I E W  R O U T E S     //
