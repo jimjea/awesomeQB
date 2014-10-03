@@ -19,10 +19,10 @@ $(document).ready(function(){
     $('.qb').css({
       position: 'absolute',
       left: gameOptions.width/2 + 'px',
-      top: gameOptions.height - 20 + 'px'
+      top: gameOptions.height - 10 + 'px'
     })
   }
-  // placeqb();
+  placeqb();
 
 
 
@@ -61,6 +61,9 @@ $(document).ready(function(){
         top: y - 7 + 'px'
       }, {
         duration: 600,
+        step: function() {
+
+        },
         done: function(event) {
           var LWOHit = $(this).collision(".LWO");
           var RWOHit = $(this).collision(".RWO");
