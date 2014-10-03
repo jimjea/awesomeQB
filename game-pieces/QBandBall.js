@@ -30,16 +30,22 @@ $(document).ready(function(){
 //               B A L L              //
 /**************************************/
   var placeball = function() {
-    $('.ball').css({
+    $('.lobBall').css({
       position: 'absolute',
       left: gameOptions.width/2 + 'px',
       top: gameOptions.height - 10 + 'px'
-    })  
+    });
+    $('.zipBall').css({
+      position: 'absolute',
+      left: gameOptions.width/2 + 'px',
+      top: gameOptions.height - 10 + 'px'
+    })    
   }
   placeball();
 
   // throw ball to mouse on click
   $('.gameBoard').one('click', function(event) {
+    $('.zipBall').remove();
     var startX = gameOptions.width/2;
     var startY = gameOptions.height-10;
     var x = event.clientX;
@@ -49,7 +55,7 @@ $(document).ready(function(){
 
     // Lobbing the ball on click will only allow the receiver to catch it as the ball ends its animation
     var lobBall = function() {
-      $('.ball').animate({
+      $('.lobBall').animate({
         left: x - 5 + 'px',
         top: y - 7 + 'px'
       }, {
@@ -59,13 +65,15 @@ $(document).ready(function(){
           var RWOHit = $(this).collision(".RWO");
           var RSLOTHit = $(this).collision(".RSLOT");
           if (LWOHit.length > 0) {
-            console.log('hit')
+            console.log(event)
+            $('.LWO').stop(true, false).animate({top: event.originalProperties.top + 25});
+            // $('.ball').animate({top: event.delegateTarget.offsetTop - 25});
           }
           if (RWOHit.length > 0) {
-            console.log('hit')
+            $('.RWO').stop(true, false).animate({top: event.originalProperties.top + 25});
           }
           if (RSLOTHit.length > 0) {
-            console.log('hit')
+            $('.RSLOT').stop(true, false).animate({top: event.originalProperties.top + 25});
           }
         }
       })
@@ -73,7 +81,7 @@ $(document).ready(function(){
     lobBall();
   });
 
-  $('.ball').on('flick', function(event) {
+  $('.zipBall').on('flick', function(event) {
     console.log(event)
   })
 

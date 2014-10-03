@@ -9,7 +9,7 @@ var leftWideOut = function() {
     }).data('collision', false);
   $('.LWO').on('collision_start', function(event) {
     // $('.LWO').stop(true, false).animate({top: event.delegateTarget.offsetTop - 25});
-    // $('.ball').animate({top: event.delegateTarget.offsetTop - 25});
+    // $('.zipBall').animate({top: event.delegateTarget.offsetTop - 25});
     $('.gameBoard').append('<div>caught</div>').offset({top: '400px'})
   })
 }
@@ -25,7 +25,7 @@ leftWideOut()
       step: function() {
         
         // handles only revealing the caught message once
-        var hit_list = $(this).collision(".ball");
+        var hit_list = $(this).collision(".zipBall");
         var current_collision = hit_list.length != 0;
 
         var changed_collision = current_collision != $(this).data("collision");
@@ -43,7 +43,7 @@ leftWideOut()
       duration: 1200,
       step: function() {
         // handles only revealing the caught message once
-        var hit_list = $(this).collision(".ball");
+        var hit_list = $(this).collision(".zipBall");
         var current_collision = hit_list.length != 0;
 
         var changed_collision = current_collision != $(this).data("collision");
@@ -69,7 +69,7 @@ var rightWideOut = function() {
     }).data('collision', false);
   $('.RWO').on('collision_start', function(event) {
     // $('.RWO').stop(true, false).animate({top: event.delegateTarget.offsetTop - 25});
-    // $('.ball').animate({top: event.delegateTarget.offsetTop - 25});
+    // $('.zipBall').animate({top: event.delegateTarget.offsetTop - 25});
     $('.gameBoard').append('<div>caught</div>')
   })
 }
@@ -84,7 +84,7 @@ rightWideOut()
       duration: 1200,
       step: function() {
         // handles only revealing the caught message once
-        var hit_list = $(this).collision(".ball");
+        var hit_list = $(this).collision(".zipBall");
         var current_collision = hit_list.length != 0;
 
         var changed_collision = current_collision != $(this).data("collision");
@@ -102,7 +102,7 @@ rightWideOut()
       duration: 1200,
       step: function() {
         // handles only revealing the caught message once
-        var hit_list = $(this).collision(".ball");
+        var hit_list = $(this).collision(".zipBall");
         var current_collision = hit_list.length != 0;
 
         var changed_collision = current_collision != $(this).data("collision");
@@ -127,7 +127,7 @@ var rightSlot = function() {
     }).data('collision', false);
   $('.RSLOT').on('collision_start', function(event) {
     // $('.RSLOT').stop(true, false).animate({top: event.delegateTarget.offsetTop - 25});
-    // $('.ball').animate({top: event.delegateTarget.offsetTop - 25});
+    // $('.zipBall').animate({top: event.delegateTarget.offsetTop - 25});
     $('.gameBoard').append('<div>caught</div>')
   })
 }
@@ -142,7 +142,7 @@ var RSLOTroute = function(x, y) {
     duration: 1200,
     step: function() {
       // handles only revealing the caught message once
-      var hit_list = $(this).collision(".ball");
+      var hit_list = $(this).collision(".zipBall");
       var current_collision = hit_list.length != 0;
 
       var changed_collision = current_collision != $(this).data("collision");
@@ -160,7 +160,7 @@ var RSLOTroute = function(x, y) {
     duration: 1200,
     step: function() {
       // handles only revealing the caught message once
-      var hit_list = $(this).collision(".ball");
+      var hit_list = $(this).collision(".zipBall");
       var current_collision = hit_list.length != 0;
 
       var changed_collision = current_collision != $(this).data("collision");
@@ -178,7 +178,7 @@ var RSLOTroute = function(x, y) {
     duration: 1200,
     step: function() {
       // handles only revealing the caught message once
-      var hit_list = $(this).collision(".ball");
+      var hit_list = $(this).collision(".zipBall");
       var current_collision = hit_list.length != 0;
 
       var changed_collision = current_collision != $(this).data("collision");
