@@ -19,7 +19,7 @@ $(document).ready(function(){
     $('.qb').css({
       position: 'absolute',
       left: gameOptions.width/2 + 'px',
-      top: gameOptions.height - 10 + 'px'
+      top: gameOptions.height - 20 + 'px'
     })
   }
   placeqb();
@@ -33,12 +33,12 @@ $(document).ready(function(){
     $('.lobBall').css({
       position: 'absolute',
       left: gameOptions.width/2 + 'px',
-      top: gameOptions.height - 10 + 'px'
+      top: gameOptions.height - 30 + 'px'
     });
     $('.zipBall').css({
       position: 'absolute',
       left: gameOptions.width/2 + 'px',
-      top: gameOptions.height - 10 + 'px'
+      top: gameOptions.height - 30 + 'px'
     })    
   }
   placeball();

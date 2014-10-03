@@ -5,14 +5,14 @@ var leftWideOut = function() {
   $('.LWO').css({
       position: 'absolute',
       left: 30 + 'px',
-      top: gameOptions.height - 25 + 'px'
+      top: gameOptions.height - 30 + 'px'
     }).data('collision', false);
   $('.LWO').on('collision_start', function(event) {
     // $('.LWO').stop(true, false).animate({top: event.delegateTarget.offsetTop - 25});
     // $('.zipBall').animate({top: event.delegateTarget.offsetTop - 25});
     $('.gameBoard').append('<div>caught</div>').offset({top: '400px'})
   })
-}
+};
 leftWideOut()
 
 // LWO Route
@@ -65,14 +65,9 @@ var rightWideOut = function() {
   $('.RWO').css({
       position: 'absolute',
       left: gameOptions.width - 30 + 'px',
-      top: gameOptions.height - 25 + 'px'
-    }).data('collision', false);
-  $('.RWO').on('collision_start', function(event) {
-    // $('.RWO').stop(true, false).animate({top: event.delegateTarget.offsetTop - 25});
-    // $('.zipBall').animate({top: event.delegateTarget.offsetTop - 25});
-    $('.gameBoard').append('<div>caught</div>')
-  })
-}
+      top: gameOptions.height - 30 + 'px'
+    })
+};
 rightWideOut()
 
 // RWO Route
@@ -81,37 +76,13 @@ rightWideOut()
       left: x + 'px',
       top: y - 200 + 'px'
     }, {
-      duration: 1200,
-      step: function() {
-        // handles only revealing the caught message once
-        var hit_list = $(this).collision(".zipBall");
-        var current_collision = hit_list.length != 0;
-
-        var changed_collision = current_collision != $(this).data("collision");
-
-        if (changed_collision) {
-            $(this).data("collision", current_collision);
-            $(this).trigger("collision_" + (current_collision ? "start" : "stop"));
-        }
-      }
+      duration: 1200
     })
     .animate({
       left: x - 270 + 'px',
       top: y - 200 + 'px'
     }, {
       duration: 1200,
-      step: function() {
-        // handles only revealing the caught message once
-        var hit_list = $(this).collision(".zipBall");
-        var current_collision = hit_list.length != 0;
-
-        var changed_collision = current_collision != $(this).data("collision");
-
-        if (changed_collision) {
-            $(this).data("collision", current_collision);
-            $(this).trigger("collision_" + (current_collision ? "start" : "stop"));
-        }
-      }
     })
   }
 
@@ -123,14 +94,9 @@ var rightSlot = function() {
   $('.RSLOT').css({
       position: 'absolute',
       left: gameOptions.width - 85 + 'px',
-      top: gameOptions.height - 20 + 'px'
-    }).data('collision', false);
-  $('.RSLOT').on('collision_start', function(event) {
-    // $('.RSLOT').stop(true, false).animate({top: event.delegateTarget.offsetTop - 25});
-    // $('.zipBall').animate({top: event.delegateTarget.offsetTop - 25});
-    $('.gameBoard').append('<div>caught</div>')
-  })
-}
+      top: gameOptions.height - 25 + 'px'
+    })
+};
 rightSlot()
 
 // RSLOT Route
@@ -140,54 +106,18 @@ var RSLOTroute = function(x, y) {
     top: y - 150 + 'px'
   }, {
     duration: 1200,
-    step: function() {
-      // handles only revealing the caught message once
-      var hit_list = $(this).collision(".zipBall");
-      var current_collision = hit_list.length != 0;
-
-      var changed_collision = current_collision != $(this).data("collision");
-
-      if (changed_collision) {
-          $(this).data("collision", current_collision);
-          $(this).trigger("collision_" + (current_collision ? "start" : "stop"));
-      }
-    }
   })
   .animate({
     left: x - 70 + 'px',
     top: y - 250 + 'px'
   }, {
-    duration: 1200,
-    step: function() {
-      // handles only revealing the caught message once
-      var hit_list = $(this).collision(".zipBall");
-      var current_collision = hit_list.length != 0;
-
-      var changed_collision = current_collision != $(this).data("collision");
-
-      if (changed_collision) {
-          $(this).data("collision", current_collision);
-          $(this).trigger("collision_" + (current_collision ? "start" : "stop"));
-      }
-    }
+    duration: 1200
   })
   .animate({
     left: x + 70 + 'px',
     top: y - 400 + 'px'
   }, {
-    duration: 1200,
-    step: function() {
-      // handles only revealing the caught message once
-      var hit_list = $(this).collision(".zipBall");
-      var current_collision = hit_list.length != 0;
-
-      var changed_collision = current_collision != $(this).data("collision");
-
-      if (changed_collision) {
-          $(this).data("collision", current_collision);
-          $(this).trigger("collision_" + (current_collision ? "start" : "stop"));
-      }
-    }
+    duration: 1200
   })
 }
 
