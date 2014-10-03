@@ -47,6 +47,7 @@ $(document).ready(function(){
 
     var slope = (y-startY)/(x-startX);
 
+    // Lobbing the ball on click will only allow the receiver to catch it as the ball ends its animation
     var lobBall = function() {
       $('.ball').animate({
         left: x - 5 + 'px',
@@ -54,10 +55,16 @@ $(document).ready(function(){
       }, {
         duration: 600,
         done: function(event) {
-          // var hit_list1 = $(this).collision(".LWO");
-          // var hit_list2 = $(this).collision(".RWO");
-          var hit_list3 = $(this).collision(".RSLOT");
-          if ( hit_list3.length > 0) {
+          var LWOHit = $(this).collision(".LWO");
+          var RWOHit = $(this).collision(".RWO");
+          var RSLOTHit = $(this).collision(".RSLOT");
+          if (LWOHit.length > 0) {
+            console.log('hit')
+          }
+          if (RWOHit.length > 0) {
+            console.log('hit')
+          }
+          if (RSLOTHit.length > 0) {
             console.log('hit')
           }
         }
