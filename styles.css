@@ -62,3 +62,11 @@
   height: 47px;
   width: 60px;
 }
+
+.incomplete {
+  position: absolute;
+  background-image: url('./assets/incomplete1.png');
+  display: none;
+  height: 65px;
+  width: 65px;
+}
