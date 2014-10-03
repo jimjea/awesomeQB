@@ -60,22 +60,25 @@ $(document).ready(function(){
         top: y - 7 + 'px'
       }, {
         duration: 600,
-        done: function(event) {
-          var LWOHit = $(this).collision(".LWO");
-          var RWOHit = $(this).collision(".RWO");
-          var RSLOTHit = $(this).collision(".RSLOT");
-          if (LWOHit.length > 0) {
-            console.log(event)
-            $('.LWO').stop(true, false).animate({top: event.originalProperties.top + 25});
-            // $('.ball').animate({top: event.delegateTarget.offsetTop - 25});
-          }
-          if (RWOHit.length > 0) {
-            $('.RWO').stop(true, false).animate({top: event.originalProperties.top + 25});
-          }
-          if (RSLOTHit.length > 0) {
-            $('.RSLOT').stop(true, false).animate({top: event.originalProperties.top + 25});
-          }
-        }
+        // done: function(event) {
+        //   var LWOHit = $(this).collision(".LWO");
+        //   var RWOHit = $(this).collision(".RWO");
+        //   var RSLOTHit = $(this).collision(".RSLOT");
+        //   if (LWOHit.length > 0) {
+        //     console.log(event)
+        //     $('.LWO').stop(true, false).animate({top: event.originalProperties.top + 25});
+        //     // $('.ball').animate({top: event.delegateTarget.offsetTop - 25});
+        //   } else if (RWOHit.length > 0) {
+        //     $('.RWO').stop(true, false).animate({top: event.originalProperties.top + 25});
+        //   } else if (RSLOTHit.length > 0) {
+        //     $('.RSLOT').stop(true, false).animate({top: event.originalProperties.top + 25});
+        //   } else {
+        //     $('.LWO').stop(true, false).animate({top: event.originalProperties.top + 25});
+        //     $('.RWO').stop(true, false).animate({top: event.originalProperties.top + 25});
+        //     $('.RSLOT').stop(true, false).animate({top: event.originalProperties.top + 25});
+        //     console.log('incomplete pass')
+        //   }
+        // }
       })
     }
     lobBall();
