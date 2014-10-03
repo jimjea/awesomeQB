@@ -22,7 +22,7 @@ $(document).ready(function(){
       top: gameOptions.height - 20 + 'px'
     })
   }
-  placeqb();
+  // placeqb();
 
 
 
@@ -32,8 +32,8 @@ $(document).ready(function(){
   var placeball = function() {
     $('.ball').css({
       position: 'absolute',
-      left: gameOptions.width/2 - 6 + 'px',
-      top: gameOptions.height - 24 + 'px'
+      left: gameOptions.width/2 + 'px',
+      top: gameOptions.height - 10 + 'px'
     })  
   }
   placeball();
@@ -47,14 +47,28 @@ $(document).ready(function(){
 
     var slope = (y-startY)/(x-startX);
 
-    var zipball = function() {
+    var lobBall = function() {
       $('.ball').animate({
-        left: x - 10 + 'px',
-        top: y - 18 + 'px'
-      }, 600)
+        left: x - 5 + 'px',
+        top: y - 7 + 'px'
+      }, {
+        duration: 600,
+        done: function(event) {
+          // var hit_list1 = $(this).collision(".LWO");
+          // var hit_list2 = $(this).collision(".RWO");
+          var hit_list3 = $(this).collision(".RSLOT");
+          if ( hit_list3.length > 0) {
+            console.log('hit')
+          }
+        }
+      })
     }
-    zipball();
+    lobBall();
   });
+
+  $('.ball').on('flick', function(event) {
+    console.log(event)
+  })
 
   /**************************************/
   //     P R E V I E W  R O U T E S     //

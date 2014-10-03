@@ -8,8 +8,8 @@ var leftWideOut = function() {
       top: gameOptions.height - 25 + 'px'
     }).data('collision', false);
   $('.LWO').on('collision_start', function(event) {
-    $('.LWO').stop(true, false).animate({top: event.delegateTarget.offsetTop - 25});
-    $('.ball').animate({top: event.delegateTarget.offsetTop - 25});
+    // $('.LWO').stop(true, false).animate({top: event.delegateTarget.offsetTop - 25});
+    // $('.ball').animate({top: event.delegateTarget.offsetTop - 25});
     $('.gameBoard').append('<div>caught</div>').offset({top: '400px'})
   })
 }
@@ -68,8 +68,8 @@ var rightWideOut = function() {
       top: gameOptions.height - 25 + 'px'
     }).data('collision', false);
   $('.RWO').on('collision_start', function(event) {
-    $('.RWO').stop(true, false).animate({top: event.delegateTarget.offsetTop - 25});
-    $('.ball').animate({top: event.delegateTarget.offsetTop - 25});
+    // $('.RWO').stop(true, false).animate({top: event.delegateTarget.offsetTop - 25});
+    // $('.ball').animate({top: event.delegateTarget.offsetTop - 25});
     $('.gameBoard').append('<div>caught</div>')
   })
 }
@@ -126,8 +126,8 @@ var rightSlot = function() {
       top: gameOptions.height - 20 + 'px'
     }).data('collision', false);
   $('.RSLOT').on('collision_start', function(event) {
-    $('.RSLOT').stop(true, false).animate({top: event.delegateTarget.offsetTop - 25});
-    $('.ball').animate({top: event.delegateTarget.offsetTop - 25});
+    // $('.RSLOT').stop(true, false).animate({top: event.delegateTarget.offsetTop - 25});
+    // $('.ball').animate({top: event.delegateTarget.offsetTop - 25});
     $('.gameBoard').append('<div>caught</div>')
   })
 }
