@@ -68,14 +68,18 @@ $(document).ready(function(){
           if (LWOHit.length > 0) {
             $('.LWO').stop(true, false).animate({top: event.tweens[1].end - 25 + 'px'}, 800);
             $('.lobBall').animate({top: event.tweens[1].end - 25 + 'px'}, 800);
-            $('.caught').show()
-            setTimeout(function(){$('.caught').hide()}, 500);
+            $('.caught').offset({top: event.tweens[1].end - 15, left: event.tweens[0].end - 15}).show()
+            setTimeout(function(){$('.caught').hide()}, 700);
           } else if (RWOHit.length > 0) {
             $('.RWO').stop(true, false).animate({top: event.tweens[1].end - 25 + 'px'}, 800);
             $('.lobBall').animate({top: event.tweens[1].end - 25 + 'px'}, 800);
+            $('.caught').offset({top: event.tweens[1].end - 15, left: event.tweens[0].end - 15}).show()
+            setTimeout(function(){$('.caught').hide()}, 700);
           } else if (RSLOTHit.length > 0) {
             $('.RSLOT').stop(true, false).animate({top: event.tweens[1].end - 25 + 'px'}, 800);
             $('.lobBall').animate({top: event.tweens[1].end - 25 + 'px'}, 800);
+            $('.caught').offset({top: event.tweens[1].end - 15, left: event.tweens[0].end - 15}).show()
+            setTimeout(function(){$('.caught').hide()}, 700);
           } else {
             $('.lobBall').animate({top: event.tweens[1].end - 8 + 'px', left: event.tweens[0].end + 1 + 'px'}, 400);
             $('.LWO').stop(true, false).animate({top: $('.LWO')[0].offsetTop - 10, left: $('.LWO')[0].offsetLeft + 15}, 800);
