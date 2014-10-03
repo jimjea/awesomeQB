@@ -68,6 +68,8 @@ $(document).ready(function(){
           if (LWOHit.length > 0) {
             $('.LWO').stop(true, false).animate({top: event.tweens[1].end - 25 + 'px'}, 800);
             $('.lobBall').animate({top: event.tweens[1].end - 25 + 'px'}, 800);
+            $('.caught').show()
+            setTimeout(function(){$('.caught').hide()}, 500);
           } else if (RWOHit.length > 0) {
             $('.RWO').stop(true, false).animate({top: event.tweens[1].end - 25 + 'px'}, 800);
             $('.lobBall').animate({top: event.tweens[1].end - 25 + 'px'}, 800);
@@ -75,10 +77,10 @@ $(document).ready(function(){
             $('.RSLOT').stop(true, false).animate({top: event.tweens[1].end - 25 + 'px'}, 800);
             $('.lobBall').animate({top: event.tweens[1].end - 25 + 'px'}, 800);
           } else {
+            $('.lobBall').animate({top: event.tweens[1].end - 20 + 'px'}, {duration: 1000, easings: 'easeInOutQuart'})
             $('.LWO').stop(true, false).animate({top: $('.LWO')[0].offsetTop - 10, left: $('.LWO')[0].offsetLeft + 15}, 800);
             $('.RWO').stop(true, false).animate({top: $('.RWO')[0].offsetTop - 6, left: $('.RWO')[0].offsetLeft - 15}, 800);
             $('.RSLOT').stop(true, false).animate({top: $('.RSLOT')[0].offsetTop - 7, left: $('.RSLOT')[0].offsetLeft}, 800);
-            console.log('incomplete pass')
           }
         }
       })
