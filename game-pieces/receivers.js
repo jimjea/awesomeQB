@@ -2,9 +2,12 @@
 //      L E F T  W I D E  O U T       //
 /**************************************/
 var LWOroutes = {
-  1: {firstX: 0, firstY: -270, secondX: 100, secondY: -460}, // post
-  2: {firstX: 0, firstY: -270, secondX: 10, secondY: -150}   // curl
+  1: {firstX: 0, firstY: -270, secondX: 10, secondY: -150},     // curl
+  2: {firstX: 0, firstY: -270, secondX: 100, secondY: -430},    // post
+  3: {firstX: 0, firstY: -200, secondX: 250, secondY: -200},   // cross
+  4: {firstX: 150, firstY: -200, secondX: 160, secondY: -430}   // slant then fade
 }
+var LWORouteNumber;
 
 var leftWideOut = function() {
   $('.LWO').css({
@@ -15,17 +18,18 @@ var leftWideOut = function() {
   $('.LWO').on('collision_start', function(event) {
     $('.gameBoard').append('<div>caught</div>').offset({top: '400px'})
   })
+  // Define route number upon receiver placement so the random generator is not reset on previewing the route
+  LWORouteNumber = Math.floor(Math.random() * 3) + 1;
 };
 leftWideOut()
 
 // LWO Route
   var LWOroute = function(x, y) {
-    var routeNumber = Math.floor(Math.random() * 2) + 1;
     $('.LWO').animate({
-      left: x + LWOroutes[routeNumber].firstX + 'px',
-      top: y + LWOroutes[routeNumber].firstY + 'px'
+      left: x + LWOroutes[LWORouteNumber].firstX + 'px',
+      top: y + LWOroutes[LWORouteNumber].firstY + 'px'
     }, {
-      duration: 1200,
+      duration: 1500,
       // LEAVING ONE EXAMPLE TO USE LATER TO DISPLAY A SINGLE INSTANCE
       step: function() {
         
@@ -42,10 +46,10 @@ leftWideOut()
       }
     })
     .animate({
-      left: x + LWOroutes[routeNumber].secondX + 'px',
-      top: y + LWOroutes[routeNumber].secondY + 'px'
+      left: x + LWOroutes[LWORouteNumber].secondX + 'px',
+      top: y + LWOroutes[LWORouteNumber].secondY + 'px'
     }, {
-      duration: 1200,
+      duration: 1500,
       step: function() {
         // handles only revealing the caught message once
         var hit_list = $(this).collision(".zipBall");
@@ -59,6 +63,12 @@ leftWideOut()
         }
       }
     })
+    .animate({
+      left: x + LWOroutes[LWORouteNumber].thirdX + 'px',
+      top: y + LWOroutes[LWORouteNumber].thirdY + 'px'
+    }, {
+      duration: 1500,
+    })
   }
 
 
@@ -66,28 +76,43 @@ leftWideOut()
 /**************************************/
 //     R I G H T  W I D E  O U T      //
 /**************************************/
+var RWOroutes = {
+  1: {firstX: 0, firstY: -270, secondX: -120, secondY: -430},     // post
+  2: {firstX: 0, firstY: -280, secondX: -10, secondY: -150},      // curl
+  3: {firstX: -150, firstY: -200, secondX: -160, secondY: -430},  // slant then fade
+  4: {firstX: 0, firstY: -220, secondX: -250, secondY: -220},     // cross
+}
+var RWORouteNumber;
+
 var rightWideOut = function() {
   $('.RWO').css({
       position: 'absolute',
       left: gameOptions.width - 30 + 'px',
       top: gameOptions.height - 30 + 'px'
     })
+  RWORouteNumber = Math.floor(Math.random() * 4) + 1;
 };
 rightWideOut()
 
 // RWO Route
   var RWOroute = function(x, y) {
     $('.RWO').animate({
-      left: x + 'px',
-      top: y - 200 + 'px'
+      left: x + RWOroutes[RWORouteNumber].firstX + 'px',
+      top: y + RWOroutes[RWORouteNumber].firstY + 'px'
     }, {
-      duration: 1200
+      duration: 1500
     })
     .animate({
-      left: x - 270 + 'px',
-      top: y - 200 + 'px'
+      left: x + RWOroutes[RWORouteNumber].secondX + 'px',
+      top: y + RWOroutes[RWORouteNumber].secondY + 'px'
     }, {
-      duration: 1200,
+      duration: 1500,
+    })
+    .animate({
+      left: x + RWOroutes[RWORouteNumber].thirdX + 'px',
+      top: y + RWOroutes[RWORouteNumber].thirdY + 'px'
+    }, {
+      duration: 1500,
     })
   }
 
@@ -116,19 +141,19 @@ var RSLOTroute = function(x, y) {
     left: x + 'px',
     top: y - 150 + 'px'
   }, {
-    duration: 1200,
+    duration: 1500,
   })
   .animate({
     left: x - 70 + 'px',
     top: y - 250 + 'px'
   }, {
-    duration: 1200
+    duration: 1500
   })
   .animate({
     left: x + 70 + 'px',
     top: y - 400 + 'px'
   }, {
-    duration: 1200
+    duration: 1500
   })
 }
 
@@ -176,5 +201,5 @@ $('.showRoutes').on('click', function(event) {
       top: LWOy
     })
   };
-  setTimeout(reset, 3900);
+  setTimeout(reset, 4700);
 });
