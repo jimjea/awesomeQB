@@ -9,7 +9,7 @@ var LWOroutes = {
   2: {firstX: 0, firstY: -40, secondX: 78, secondY: -85},                              // post
   3: {firstX: 0, firstY: -38, secondX: 78, secondY: -38},                              // cross
   4: {firstX: 0, firstY: -32, secondX: 40, secondY: -60, thirdX: 0, thirdY: -85},      // post corner
-  5: {firstX: 53, firstY: -22, secondX: 78, secondY: -86}                             // slant then corner
+  5: {firstX: 53, firstY: -22, secondX: 78, secondY: -85}                             // slant then corner
 }
 var LWORouteNumber;
 
@@ -92,16 +92,16 @@ var LWOroute = function(x, y) {
 //     R I G H T  W I D E  O U T      //
 /**************************************/
 var RWOroutes = {
-  1: {firstX: 0, firstY: -240, secondX: -130, secondY: -430},                           // post
-  2: {firstX: 0, firstY: -230, secondX: -10, secondY: -150},                            // curl
-  3: {firstX: -150, firstY: -200, secondX: -240, secondY: -430},                        // slant then corner
-  4: {firstX: 0, firstY: -220, secondX: -250, secondY: -220},                           // cross
-  5: {firstX: 0, firstY: 150, secondX: -100, secondY: -240, thirdX: -10, thirdY: -430}  // post corner
+  1: {firstX: 0, firstY: -40, secondX: -3, secondY: -30},                               // curl
+  2: {firstX: 0, firstY: -40, secondX: -78, secondY: -85},                              // post
+  3: {firstX: -53, firstY: -22, secondX: -78, secondY: -85},                            // slant then corner
+  4: {firstX: 0, firstY: -32, secondX: -78, secondY: -32},                              // cross
+  5: {firstX: 0, firstY: -32, secondX: -40, secondY: -60, thirdX: -0, thirdY: -85}      // post corner
 }
 var RWORouteNumber;
 
 var rightWideOut = function() {
-  RWORouteNumber = Math.floor(Math.random() * 4) + 1;
+  RWORouteNumber = Math.floor(Math.random() * 5) + 1;
   $('.RWO').css({
       position: 'absolute',
       left: 85 + '%',
@@ -120,20 +120,20 @@ ctx.stroke();
 // RWO Route
 var RWOroute = function(x, y) {
   $('.RWO').animate({
-    left: x + RWOroutes[RWORouteNumber].firstX + 'px',
-    top: y + RWOroutes[RWORouteNumber].firstY + 'px'
+    left: x + RWOroutes[RWORouteNumber].firstX + '%',
+    top: y + RWOroutes[RWORouteNumber].firstY + '%'
   }, {
     duration: 1500
   })
   .animate({
-    left: x + RWOroutes[RWORouteNumber].secondX + 'px',
-    top: y + RWOroutes[RWORouteNumber].secondY + 'px'
+    left: x + RWOroutes[RWORouteNumber].secondX + '%',
+    top: y + RWOroutes[RWORouteNumber].secondY + '%'
   }, {
     duration: 1500,
   })
   .animate({
-    left: x + RWOroutes[RWORouteNumber].thirdX + 'px',
-    top: y + RWOroutes[RWORouteNumber].thirdY + 'px'
+    left: x + RWOroutes[RWORouteNumber].thirdX + '%',
+    top: y + RWOroutes[RWORouteNumber].thirdY + '%'
   }, {
     duration: 1500,
   })
@@ -213,8 +213,8 @@ $('#preview').on('click', function(event) {
   var SLOTy = $('.SLOT').offset().top;
   var LWOx = 10;
   var LWOy = 93;
-  var RWOx = $('.RWO').offset().left;
-  var RWOy = $('.RWO').offset().top;
+  var RWOx = 85;
+  var RWOy = 93;
   RWOroute(RWOx, RWOy);
   LWOroute(LWOx, LWOy);
   RSLOTroute(SLOTx, SLOTy);
