@@ -70,7 +70,7 @@
   position: absolute;
   background-image: url('./assets/incomplete1.png');
   display: none;
-  height: 65px;
+  height: 62px;
   width: 65px;
   z-index: 11;
 }

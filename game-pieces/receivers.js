@@ -1,6 +1,11 @@
 /**************************************/
 //      L E F T  W I D E  O U T       //
 /**************************************/
+var LWOroutes = {
+  1: {firstX: 0, firstY: -270, secondX: 100, secondY: -460}, // post
+  2: {firstX: 0, firstY: -270, secondX: 10, secondY: -150}   // curl
+}
+
 var leftWideOut = function() {
   $('.LWO').css({
       position: 'absolute',
@@ -15,9 +20,10 @@ leftWideOut()
 
 // LWO Route
   var LWOroute = function(x, y) {
+    var routeNumber = Math.floor(Math.random() * 2) + 1;
     $('.LWO').animate({
-      left: x + 'px',
-      top: y - 270 + 'px'
+      left: x + LWOroutes[routeNumber].firstX + 'px',
+      top: y + LWOroutes[routeNumber].firstY + 'px'
     }, {
       duration: 1200,
       // LEAVING ONE EXAMPLE TO USE LATER TO DISPLAY A SINGLE INSTANCE
@@ -36,8 +42,8 @@ leftWideOut()
       }
     })
     .animate({
-      left: x + 100 + 'px',
-      top: y - 460 + 'px'
+      left: x + LWOroutes[routeNumber].secondX + 'px',
+      top: y + LWOroutes[routeNumber].secondY + 'px'
     }, {
       duration: 1200,
       step: function() {
