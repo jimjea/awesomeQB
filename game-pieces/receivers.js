@@ -3,13 +3,13 @@
 /**************************************/
 
 // All code documentation for receivers will be in LEFT WIDE OUT since all receivers are virtually the same
-// 94, 10
+
 var LWOroutes = {
   1: {firstX: 0, firstY: -40, secondX: 3, secondY: -30},                               // curl
   2: {firstX: 0, firstY: -40, secondX: 78, secondY: -85},                              // post
   3: {firstX: 0, firstY: -38, secondX: 78, secondY: -38},                              // cross
   4: {firstX: 0, firstY: -32, secondX: 40, secondY: -60, thirdX: 0, thirdY: -85},      // post corner
-  5: {firstX: 53, firstY: -22, secondX: 78, secondY: -85}                             // slant then corner
+  5: {firstX: 75, firstY: -22, secondX: 78, secondY: -85}                             // slant then corner
 }
 var LWORouteNumber;
 
@@ -94,7 +94,7 @@ var LWOroute = function(x, y) {
 var RWOroutes = {
   1: {firstX: 0, firstY: -40, secondX: -3, secondY: -30},                               // curl
   2: {firstX: 0, firstY: -40, secondX: -78, secondY: -85},                              // post
-  3: {firstX: -53, firstY: -22, secondX: -78, secondY: -85},                            // slant then corner
+  3: {firstX: -75, firstY: -22, secondX: -78, secondY: -85},                            // slant then corner
   4: {firstX: 0, firstY: -32, secondX: -78, secondY: -32},                              // cross
   5: {firstX: 0, firstY: -32, secondX: -40, secondY: -60, thirdX: -0, thirdY: -85}      // post corner
 }
@@ -144,23 +144,23 @@ var RWOroute = function(x, y) {
 //             S L O T                //
 /**************************************/
 var SLOTposition = {
-  0: 68 + '%',
-  1: 28 + '%'
+  0: 68,
+  1: 28
 };
 var position;
-
+// 68, 94 28, 94
 var SLOTRoutes = {
   0: { // routes when slot is on the right
-    1: {firstX: 0, firstY: -150, secondX: -70, secondY: -250, thirdX: 70, thirdY: -400},  // post corner
-    2: {firstX: -120, firstY: -100, secondX: -190, secondY: -430},                        // slant to corner
-    3: {firstX: 0, firstY: -150, secondX: 60, secondY: -150},                             // out
-    4: {firstX: 0, firstY: -150, secondX: 60, secondY: -150, thirdX: -190, thirdY: -150}, // out then in
+    1: {firstX: 0, firstY: -30, secondX: -35, secondY: -50, thirdX: 21, thirdY: -70}, // post corner
+    2: {firstX: -60, firstY: -25, secondX: -61, secondY: -86},                        // slant to corner
+    3: {firstX: 0, firstY: -30, secondX: 20, secondY: -30},                           // out
+    4: {firstX: 0, firstY: -30, secondX: 20, secondY: -30, thirdX: -60, thirdY: -30}, // out then in
   },
   1: {  // routes when slot is on the left
-    1: {firstX: 0, firstY: -150, secondX: 70, secondY: -250, thirdX: 10, thirdY: -400},   // post corner
-    2: {firstX: 120, firstY: -100, secondX: 190, secondY: -430},                          // slant to corner
-    3: {firstX: 0, firstY: -150, secondX: -60, secondY: -150},                            // out
-    4: {firstX: 0, firstY: -150, secondX: -60, secondY: -150, thirdX: 190, thirdY: -150}, // out then in
+    1: {firstX: 0, firstY: -30, secondX: 35, secondY: -50, thirdX: -21, thirdY: -70}, // post corner
+    2: {firstX: 60, firstY: -25, secondX: 61, secondY: -86},                          // slant to corner
+    3: {firstX: 0, firstY: -30, secondX: -20, secondY: -30},                          // out
+    4: {firstX: 0, firstY: -30, secondX: -20, secondY: -30, thirdX: 60, thirdY: -30}, // out then in
   }
 };
 var SLOTRouteNumber;
@@ -170,7 +170,7 @@ var rightSlot = function() {
   SLOTRouteNumber = Math.floor(Math.random() * 4) + 1;
   $('.SLOT').css({
       position: 'absolute',
-      left: SLOTposition[position],
+      left: SLOTposition[position] + '%',
       top: 94 + '%'
     })
 };
@@ -185,20 +185,20 @@ dtx.stroke();
 // SLOT Route
 var RSLOTroute = function(x, y) {
   $('.SLOT').animate({
-    left: x + SLOTRoutes[position][SLOTRouteNumber].firstX + 'px',
-    top: y + SLOTRoutes[position][SLOTRouteNumber].firstY + 'px'
+    left: x + SLOTRoutes[position][SLOTRouteNumber].firstX + '%',
+    top: y + SLOTRoutes[position][SLOTRouteNumber].firstY + '%'
   }, {
     duration: 1500,
   })
   .animate({
-    left: x + SLOTRoutes[position][SLOTRouteNumber].secondX + 'px',
-    top: y + SLOTRoutes[position][SLOTRouteNumber].secondY + 'px'
+    left: x + SLOTRoutes[position][SLOTRouteNumber].secondX + '%',
+    top: y + SLOTRoutes[position][SLOTRouteNumber].secondY + '%'
   }, {
     duration: 1500
   })
   .animate({
-    left: x + SLOTRoutes[position][SLOTRouteNumber].thirdX + 'px',
-    top: y + SLOTRoutes[position][SLOTRouteNumber].thirdY + 'px'
+    left: x + SLOTRoutes[position][SLOTRouteNumber].thirdX + '%',
+    top: y + SLOTRoutes[position][SLOTRouteNumber].thirdY + '%'
   }, {
     duration: 1500
   })
@@ -208,9 +208,9 @@ var RSLOTroute = function(x, y) {
 // Start the game on click
 $('#preview').on('click', function(event) {
   $('#preview').remove();
-  console.log($('.SLOT'))
-  var SLOTx = $('.SLOT').offset().left;
-  var SLOTy = $('.SLOT').offset().top;
+  console.log(SLOTposition[position])
+  var SLOTx = SLOTposition[position];
+  var SLOTy = 94;
   var LWOx = 10;
   var LWOy = 93;
   var RWOx = 85;
