@@ -87,20 +87,26 @@ rightWideOut()
 
 
 /**************************************/
-//         R I G H T  S L O T         //
+//             S L O T                //
 /**************************************/
+var SLOTposition = {
+  0: gameOptions.width - 85 + 'px',
+  1: 90 + 'px'
+};
+
 var rightSlot = function() {
-  $('.RSLOT').css({
+  var position = Math.round(Math.random());
+  $('.SLOT').css({
       position: 'absolute',
-      left: gameOptions.width - 85 + 'px',
+      left: SLOTposition[position],
       top: gameOptions.height - 25 + 'px'
     })
 };
 rightSlot()
 
-// RSLOT Route
+// SLOT Route
 var RSLOTroute = function(x, y) {
-  $('.RSLOT').animate({
+  $('.SLOT').animate({
     left: x + 'px',
     top: y - 150 + 'px'
   }, {
@@ -124,24 +130,25 @@ var RSLOTroute = function(x, y) {
 // Start the game on click
 $('.startGame').on('click', function(event) {
   $('.startGame').remove();
-  var RSLOTx = $('.RSLOT').offset().left;
-  var RSLOTy = $('.RSLOT').offset().top;
+  var SLOTx = $('.SLOT').offset().left;
+  var SLOTy = $('.SLOT').offset().top;
   var LWOx = $('.LWO').offset().left;
   var LWOy = $('.LWO').offset().top;
   var RWOx = $('.RWO').offset().left;
   var RWOy = $('.RWO').offset().top;
   RWOroute(RWOx, RWOy);
   LWOroute(LWOx, LWOy);
-  RSLOTroute(RSLOTx, RSLOTy);
+  RSLOTroute(SLOTx, SLOTy);
 });
+
 
 
 /**************************************/
 //     P R E V I E W  R O U T E S     //
 /**************************************/
 $('.showRoutes').on('click', function(event) {
-  var RSLOTx = $('.RSLOT').offset().left;
-  var RSLOTy = $('.RSLOT').offset().top;
+  var RSLOTx = $('.SLOT').offset().left;
+  var RSLOTy = $('.SLOT').offset().top;
   var RWOx = $('.RWO').offset().left;
   var RWOy = $('.RWO').offset().top;
   var LWOx = $('.LWO').offset().left;
@@ -150,7 +157,7 @@ $('.showRoutes').on('click', function(event) {
   RWOroute(RWOx, RWOy);
   RSLOTroute(RSLOTx, RSLOTy);
   var reset = function(){
-    $('.RSLOT').css({
+    $('.SLOT').css({
       left: RSLOTx,
       top: RSLOTy
     })
