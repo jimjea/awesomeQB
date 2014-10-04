@@ -126,9 +126,21 @@ var SLOTposition = {
   0: gameOptions.width - 85 + 'px',
   1: 90 + 'px'
 };
+var position;
+
+var SLOTroutes = {
+  0: { // routes when slot is on the right
+    1: 
+  }
+  1: {  // routes when slot is on the left
+
+  }
+};
+var SLOTRouteNumber;
 
 var rightSlot = function() {
-  var position = Math.round(Math.random());
+  position = Math.round(Math.random());
+  SLOTRouteNumber = Math.floor(Math.random() * 5);
   $('.SLOT').css({
       position: 'absolute',
       left: SLOTposition[position],
