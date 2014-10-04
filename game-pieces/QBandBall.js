@@ -18,12 +18,12 @@ $(document).ready(function(){
   var placeqb = function() {
     $('.qb').css({
       position: 'absolute',
-      left: gameOptions.width/2 + 'px',
-      top: gameOptions.height - 20 + 'px'
+      left: 48 + '%',
+      top: 94.7 + '%'
     });
     $('#preview').on('click', function() {
       $('.qb').animate({
-        top: gameOptions.height - 10 + 'px'
+        top: 96.5 + '%'
       }, 600);
     });
   };
@@ -37,13 +37,13 @@ $(document).ready(function(){
   var placeball = function() {
     $('.lobBall, .zipBall').css({
       position: 'absolute',
-      left: gameOptions.width/2 + 'px',
-      top: gameOptions.height - 30 + 'px'
+      left: 49 + '%',
+      top: 92 + '%'
     });
     $('#preview').on('click', function() {
       $('.lobBall, .zipBall').animate({
-        top: gameOptions.height - 15 + 'px',
-        left: gameOptions.width/2 + 8 + 'px'
+        left: 50.5 + '%',
+        top: 95.5 + '%'
       }, 800)
     });    
   }
@@ -63,12 +63,12 @@ $(document).ready(function(){
     // Lobbing the ball on click will only allow the receiver to catch it as the ball ends its animation
     var lobBall = function() {
       $('.lobBall').animate({
-        left: x - 5 + 'px',
-        top: y - 7 + 'px'
+        left: x - 16 + 'px',
+        top: y - 10 + 'px'
       }, {
         duration: 600,
         step: function() {
-
+          // add size increasing as it progresses
         },
         done: function(event) {
           var LWOHit = $(this).collision(".LWO");

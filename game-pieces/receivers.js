@@ -1,12 +1,15 @@
 /**************************************/
 //      L E F T  W I D E  O U T       //
 /**************************************/
+
+// All code documentation for receivers will be in LEFT WIDE OUT since all receivers are virtually the same
+// 94, 10
 var LWOroutes = {
-  1: {firstX: 0, firstY: -230, secondX: 10, secondY: -150},                             // curl
-  2: {firstX: 0, firstY: -220, secondX: 130, secondY: -430},                            // post
-  3: {firstX: 0, firstY: -200, secondX: 250, secondY: -200},                            // cross
-  4: {firstX: 0, firstY: -150, secondX: 100, secondY: -240, thirdX: 10, thirdY: -430},  // post corner
-  5: {firstX: 150, firstY: -200, secondX: 250, secondY: -430}                           // slant then corner
+  1: {firstX: 0, firstY: -40, secondX: 3, secondY: -30},                               // curl
+  2: {firstX: 0, firstY: -40, secondX: 78, secondY: -85},                              // post
+  3: {firstX: 0, firstY: -38, secondX: 78, secondY: -38},                              // cross
+  4: {firstX: 0, firstY: -32, secondX: 40, secondY: -60, thirdX: 0, thirdY: -85},      // post corner
+  5: {firstX: 53, firstY: -22, secondX: 78, secondY: -86}                             // slant then corner
 }
 var LWORouteNumber;
 
@@ -15,8 +18,8 @@ var leftWideOut = function() {
   LWORouteNumber = Math.floor(Math.random() * 5) + 1;
   $('.LWO').css({
       position: 'absolute',
-      left: 30 + 'px',
-      top: gameOptions.height - 30 + 'px'
+      left: 10 + '%',
+      top: 93 + '%'
     }).data('collision', false);
   $('.LWO').on('collision_start', function(event) {
     $('.gameBoard').append('<div>caught</div>').offset({top: '400px'})
@@ -25,53 +28,63 @@ var leftWideOut = function() {
 };
 leftWideOut()
 
+// Route preview using canvas
+var LWOpreview = document.getElementById("preview");
+var LWOtx = LWOpreview.getContext("2d");
+LWOtx.moveTo('50%', '50%');
+LWOtx.lineTo('15%', '20%');
+LWOtx.strokeStyle = "white";
+LWOtx.lineWidth = 10;
+LWOtx.lineCap = "round";
+LWOtx.stroke();
+
 // LWO Route
-  var LWOroute = function(x, y) {
-    $('.LWO').animate({
-      left: x + LWOroutes[LWORouteNumber].firstX + 'px',
-      top: y + LWOroutes[LWORouteNumber].firstY + 'px'
-    }, {
-      duration: 1500,
-      // LEAVING ONE EXAMPLE TO USE LATER TO DISPLAY A SINGLE INSTANCE
-      step: function() {
-        
-        // handles only revealing the caught message once
-        var hit_list = $(this).collision(".zipBall");
-        var current_collision = hit_list.length != 0;
+var LWOroute = function(x, y) {
+  $('.LWO').animate({
+    left: x + LWOroutes[LWORouteNumber].firstX + '%',
+    top: y + LWOroutes[LWORouteNumber].firstY + '%'
+  }, {
+    duration: 1500,
+    // LEAVING ONE EXAMPLE TO USE LATER TO DISPLAY A SINGLE INSTANCE
+    step: function() {
+      
+      // handles only revealing the caught message once
+      var hit_list = $(this).collision(".zipBall");
+      var current_collision = hit_list.length != 0;
 
-        var changed_collision = current_collision != $(this).data("collision");
+      var changed_collision = current_collision != $(this).data("collision");
 
-        if (changed_collision) {
-            $(this).data("collision", current_collision);
-            $(this).trigger("collision_" + (current_collision ? "start" : "stop"));
-        }
+      if (changed_collision) {
+          $(this).data("collision", current_collision);
+          $(this).trigger("collision_" + (current_collision ? "start" : "stop"));
       }
-    })
-    .animate({
-      left: x + LWOroutes[LWORouteNumber].secondX + 'px',
-      top: y + LWOroutes[LWORouteNumber].secondY + 'px'
-    }, {
-      duration: 1500,
-      step: function() {
-        // handles only revealing the caught message once
-        var hit_list = $(this).collision(".zipBall");
-        var current_collision = hit_list.length != 0;
+    }
+  })
+  .animate({
+    left: x + LWOroutes[LWORouteNumber].secondX + '%',
+    top: y + LWOroutes[LWORouteNumber].secondY + '%'
+  }, {
+    duration: 1500,
+    step: function() {
+      // handles only revealing the caught message once
+      var hit_list = $(this).collision(".zipBall");
+      var current_collision = hit_list.length != 0;
 
-        var changed_collision = current_collision != $(this).data("collision");
+      var changed_collision = current_collision != $(this).data("collision");
 
-        if (changed_collision) {
-            $(this).data("collision", current_collision);
-            $(this).trigger("collision_" + (current_collision ? "start" : "stop"));
-        }
+      if (changed_collision) {
+          $(this).data("collision", current_collision);
+          $(this).trigger("collision_" + (current_collision ? "start" : "stop"));
       }
-    })
-    .animate({
-      left: x + LWOroutes[LWORouteNumber].thirdX + 'px',
-      top: y + LWOroutes[LWORouteNumber].thirdY + 'px'
-    }, {
-      duration: 1500,
-    })
-  }
+    }
+  })
+  .animate({
+    left: x + LWOroutes[LWORouteNumber].thirdX + '%',
+    top: y + LWOroutes[LWORouteNumber].thirdY + '%'
+  }, {
+    duration: 1500,
+  })
+}
 
 
 
@@ -91,8 +104,8 @@ var rightWideOut = function() {
   RWORouteNumber = Math.floor(Math.random() * 4) + 1;
   $('.RWO').css({
       position: 'absolute',
-      left: gameOptions.width - 30 + 'px',
-      top: gameOptions.height - 30 + 'px'
+      left: 85 + '%',
+      top: 93 + '%'
     })
 };
 rightWideOut()
@@ -103,41 +116,36 @@ ctx.moveTo(0,0);
 ctx.lineTo(200,100);
 ctx.stroke();
 
-var d = document.getElementById("preview");
-var dtx = d.getContext("2d");
-dtx.moveTo(300, 20);
-dtx.lineTo(150,100);
-dtx.stroke();
 
 // RWO Route
-  var RWOroute = function(x, y) {
-    $('.RWO').animate({
-      left: x + RWOroutes[RWORouteNumber].firstX + 'px',
-      top: y + RWOroutes[RWORouteNumber].firstY + 'px'
-    }, {
-      duration: 1500
-    })
-    .animate({
-      left: x + RWOroutes[RWORouteNumber].secondX + 'px',
-      top: y + RWOroutes[RWORouteNumber].secondY + 'px'
-    }, {
-      duration: 1500,
-    })
-    .animate({
-      left: x + RWOroutes[RWORouteNumber].thirdX + 'px',
-      top: y + RWOroutes[RWORouteNumber].thirdY + 'px'
-    }, {
-      duration: 1500,
-    })
-  }
+var RWOroute = function(x, y) {
+  $('.RWO').animate({
+    left: x + RWOroutes[RWORouteNumber].firstX + 'px',
+    top: y + RWOroutes[RWORouteNumber].firstY + 'px'
+  }, {
+    duration: 1500
+  })
+  .animate({
+    left: x + RWOroutes[RWORouteNumber].secondX + 'px',
+    top: y + RWOroutes[RWORouteNumber].secondY + 'px'
+  }, {
+    duration: 1500,
+  })
+  .animate({
+    left: x + RWOroutes[RWORouteNumber].thirdX + 'px',
+    top: y + RWOroutes[RWORouteNumber].thirdY + 'px'
+  }, {
+    duration: 1500,
+  })
+}
 
 
 /**************************************/
 //             S L O T                //
 /**************************************/
 var SLOTposition = {
-  0: gameOptions.width - 85 + 'px',
-  1: 90 + 'px'
+  0: 68 + '%',
+  1: 28 + '%'
 };
 var position;
 
@@ -163,10 +171,16 @@ var rightSlot = function() {
   $('.SLOT').css({
       position: 'absolute',
       left: SLOTposition[position],
-      top: gameOptions.height - 25 + 'px'
+      top: 94 + '%'
     })
 };
 rightSlot()
+
+var d = document.getElementById("preview");
+var dtx = d.getContext("2d");
+dtx.moveTo(300, 20);
+dtx.lineTo(150,100);
+dtx.stroke();
 
 // SLOT Route
 var RSLOTroute = function(x, y) {
@@ -194,10 +208,11 @@ var RSLOTroute = function(x, y) {
 // Start the game on click
 $('#preview').on('click', function(event) {
   $('#preview').remove();
+  console.log($('.SLOT'))
   var SLOTx = $('.SLOT').offset().left;
   var SLOTy = $('.SLOT').offset().top;
-  var LWOx = $('.LWO').offset().left;
-  var LWOy = $('.LWO').offset().top;
+  var LWOx = 10;
+  var LWOy = 93;
   var RWOx = $('.RWO').offset().left;
   var RWOy = $('.RWO').offset().top;
   RWOroute(RWOx, RWOy);
@@ -215,8 +230,8 @@ $('.showRoutes').on('click', function(event) {
   var RSLOTy = $('.SLOT').offset().top;
   var RWOx = $('.RWO').offset().left;
   var RWOy = $('.RWO').offset().top;
-  var LWOx = $('.LWO').offset().left;
-  var LWOy = $('.LWO').offset().top;
+  var LWOx = 10;
+  var LWOy = 94;
   LWOroute(LWOx, LWOy);
   RWOroute(RWOx, RWOy);
   RSLOTroute(RSLOTx, RSLOTy);
@@ -230,8 +245,8 @@ $('.showRoutes').on('click', function(event) {
       top: RWOy
     })
     $('.LWO').css({
-      left: LWOx,
-      top: LWOy
+      left: LWOx + '%',
+      top: LWOy + '%'
     })
   };
   setTimeout(reset, 4700);
