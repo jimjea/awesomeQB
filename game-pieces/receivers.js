@@ -2,6 +2,15 @@
 //      L E F T  W I D E  O U T       //
 /**************************************/
 
+// helper funciton for previewing routes
+var CP = function(x, y) { // calculate x and y pixel coordinates based on %
+  var xPercent = x/100;
+  var yPercent = y/100;
+  return [gameOptions.width * xPercent, gameOptions.height * yPercent];
+};
+
+
+
 // All code documentation for receivers will be in LEFT WIDE OUT since all receivers are virtually the same
 
 var LWOroutes = {
@@ -25,18 +34,27 @@ var leftWideOut = function() {
     $('.gameBoard').append('<div>caught</div>').offset({top: '400px'})
   })
 
+  /***********************************/
+  //     C A N V A S  L O G I C      //
+  /***********************************/
+  var LWOpreview = document.getElementById("preview");
+  var LWOtx = LWOpreview.getContext("2d");
+  var LWOstart = CP(10, 93);
+  LWOtx.moveTo(LWOstart[0], LWOstart[1]);
+  var LWOFirstMove = CP(LWOroutes[LWORouteNumber].firstX, LWOroutes[LWORouteNumber].firstY);
+  LWOtx.lineTo(LWOFirstMove[0], LWOFirstMove[1]);
+  // LWOtx.lineTo(200, 300);
+  LWOtx.lineTo(undefined, undefined);
+  LWOtx.globalAlpha = 0.4;
+  LWOtx.strokeStyle = "white";
+  LWOtx.lineWidth = 10;
+  LWOtx.lineCap = "round";
+  LWOtx.stroke();
+  
+
 };
 leftWideOut()
 
-// Route preview using canvas
-var LWOpreview = document.getElementById("preview");
-var LWOtx = LWOpreview.getContext("2d");
-LWOtx.moveTo('50%', '50%');
-LWOtx.lineTo('15%', '20%');
-LWOtx.strokeStyle = "white";
-LWOtx.lineWidth = 10;
-LWOtx.lineCap = "round";
-LWOtx.stroke();
 
 // LWO Route
 var LWOroute = function(x, y) {
@@ -110,11 +128,17 @@ var rightWideOut = function() {
 };
 rightWideOut()
 
-var c = document.getElementById("preview");
-var ctx = c.getContext("2d");
-ctx.moveTo(0,0);
-ctx.lineTo(200,100);
-ctx.stroke();
+var RWOpreview = document.getElementById("preview");
+var RWOtx = RWOpreview.getContext("2d");
+RWOtx.moveTo(50, 50);
+RWOtx.lineTo(50, 100);
+RWOtx.lineTo(110, 200);
+RWOtx.lineTo(undefined, undefined);
+RWOtx.globalAlpha = .8;
+RWOtx.strokeStyle = "white";
+RWOtx.lineWidth = 10;
+RWOtx.lineCap = "round";
+RWOtx.stroke();
 
 
 // RWO Route
@@ -158,7 +182,7 @@ var SLOTRoutes = {
   },
   1: {  // routes when slot is on the left
     1: {firstX: 0, firstY: -30, secondX: 35, secondY: -50, thirdX: -21, thirdY: -70}, // post corner
-    2: {firstX: 60, firstY: -25, secondX: 61, secondY: -86},                          // slant to corner
+    2: {firstX: 59, firstY: -25, secondX: 60, secondY: -86},                          // slant to corner
     3: {firstX: 0, firstY: -30, secondX: -20, secondY: -30},                          // out
     4: {firstX: 0, firstY: -30, secondX: -20, secondY: -30, thirdX: 60, thirdY: -30}, // out then in
   }
@@ -176,11 +200,17 @@ var rightSlot = function() {
 };
 rightSlot()
 
-var d = document.getElementById("preview");
-var dtx = d.getContext("2d");
-dtx.moveTo(300, 20);
-dtx.lineTo(150,100);
-dtx.stroke();
+var RSLOTpreview = document.getElementById("preview");
+var RSLOTtx = RSLOTpreview.getContext("2d");
+RSLOTtx.moveTo(50, 50);
+RSLOTtx.lineTo(50, 100);
+RSLOTtx.lineTo(110, 200);
+RSLOTtx.lineTo(undefined, undefined);
+RSLOTtx.globalAlpha = .8;
+RSLOTtx.strokeStyle = "white";
+RSLOTtx.lineWidth = 10;
+RSLOTtx.lineCap = "round";
+RSLOTtx.stroke();
 
 // SLOT Route
 var RSLOTroute = function(x, y) {
