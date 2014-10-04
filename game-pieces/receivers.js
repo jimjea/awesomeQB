@@ -8,8 +8,6 @@ var leftWideOut = function() {
       top: gameOptions.height - 30 + 'px'
     }).data('collision', false);
   $('.LWO').on('collision_start', function(event) {
-    // $('.LWO').stop(true, false).animate({top: event.delegateTarget.offsetTop - 25});
-    // $('.zipBall').animate({top: event.delegateTarget.offsetTop - 25});
     $('.gameBoard').append('<div>caught</div>').offset({top: '400px'})
   })
 };
@@ -22,6 +20,7 @@ leftWideOut()
       top: y - 270 + 'px'
     }, {
       duration: 1200,
+      // LEAVING ONE EXAMPLE TO USE LATER TO DISPLAY A SINGLE INSTANCE
       step: function() {
         
         // handles only revealing the caught message once

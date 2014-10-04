@@ -20,8 +20,13 @@ $(document).ready(function(){
       position: 'absolute',
       left: gameOptions.width/2 + 'px',
       top: gameOptions.height - 20 + 'px'
-    })
-  }
+    });
+    $('.startGame').on('click', function() {
+      $('.qb').animate({
+        top: gameOptions.height - 10 + 'px'
+      }, 600);
+    });
+  };
   placeqb();
 
 
@@ -30,16 +35,17 @@ $(document).ready(function(){
 //               B A L L              //
 /**************************************/
   var placeball = function() {
-    $('.lobBall').css({
+    $('.lobBall, .zipBall').css({
       position: 'absolute',
       left: gameOptions.width/2 + 'px',
       top: gameOptions.height - 30 + 'px'
     });
-    $('.zipBall').css({
-      position: 'absolute',
-      left: gameOptions.width/2 + 'px',
-      top: gameOptions.height - 30 + 'px'
-    })    
+    $('.startGame').on('click', function() {
+      $('.lobBall, .zipBall').animate({
+        top: gameOptions.height - 18 + 'px',
+        left: gameOptions.width/2 + 5 + 'px'
+      }, 600)
+    });    
   }
   placeball();
 
