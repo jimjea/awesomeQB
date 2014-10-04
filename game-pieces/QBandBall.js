@@ -21,7 +21,7 @@ $(document).ready(function(){
       left: gameOptions.width/2 + 'px',
       top: gameOptions.height - 20 + 'px'
     });
-    $('.startGame').on('click', function() {
+    $('#preview').on('click', function() {
       $('.qb').animate({
         top: gameOptions.height - 10 + 'px'
       }, 600);
@@ -40,7 +40,7 @@ $(document).ready(function(){
       left: gameOptions.width/2 + 'px',
       top: gameOptions.height - 30 + 'px'
     });
-    $('.startGame').on('click', function() {
+    $('#preview').on('click', function() {
       $('.lobBall, .zipBall').animate({
         top: gameOptions.height - 15 + 'px',
         left: gameOptions.width/2 + 8 + 'px'

@@ -9,12 +9,15 @@
   background-size: 100% 100%;
 }
 
-.startGame {
+#preview {
   position: absolute;
   width: 310px;
   height: 500px;
+  border: solid 1px black;
+  overflow: hidden;
   z-index: 10;
 }
+
 
 .lobBall, .zipBall {
   position: absolute;
@@ -47,6 +50,7 @@
   top: 150px;
   border: solid 1px black;
   padding: 5px;
+  cursor: 'pointer';
 }
 
 .newGame {
@@ -55,6 +59,7 @@
   top: 200px;
   border: solid 1px black;
   padding: 5px;
+  cursor: 'pointer';
 }
 
 .caught {
