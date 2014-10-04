@@ -110,34 +110,7 @@ $(document).ready(function(){
   })
 
 
-  /**************************************/
-  //     P R E V I E W  R O U T E S     //
-  /**************************************/
-  $('.showRoutes').on('click', function(event) {
-    var RSLOTx = $('.RSLOT').offset().left;
-    var RSLOTy = $('.RSLOT').offset().top;
-    var RWOx = $('.RWO').offset().left;
-    var RWOy = $('.RWO').offset().top;
-    var LWOx = $('.LWO').offset().left;
-    var LWOy = $('.LWO').offset().top;
-    LWOroute(LWOx, LWOy);
-    RWOroute(RWOx, RWOy);
-    RSLOTroute(RSLOTx, RSLOTy);
-    var reset = function(){
-      $('.RSLOT').css({
-        left: RSLOTx,
-        top: RSLOTy
-      })
-      $('.RWO').css({
-        left: RWOx,
-        top: RWOy
-      })
-      $('.LWO').css({
-        left: LWOx,
-        top: LWOy
-      })
-    };
-    setTimeout(reset, 3900);
-  });
+
+
 
 });
