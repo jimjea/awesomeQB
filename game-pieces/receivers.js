@@ -2,10 +2,11 @@
 //      L E F T  W I D E  O U T       //
 /**************************************/
 var LWOroutes = {
-  1: {firstX: 0, firstY: -270, secondX: 10, secondY: -150},     // curl
-  2: {firstX: 0, firstY: -270, secondX: 100, secondY: -430},    // post
-  3: {firstX: 0, firstY: -200, secondX: 250, secondY: -200},   // cross
-  4: {firstX: 150, firstY: -200, secondX: 160, secondY: -430}   // slant then fade
+  1: {firstX: 0, firstY: -230, secondX: 10, secondY: -150},                             // curl
+  2: {firstX: 0, firstY: -220, secondX: 130, secondY: -430},                            // post
+  3: {firstX: 0, firstY: -200, secondX: 250, secondY: -200},                            // cross
+  4: {firstX: 0, firstY: -150, secondX: 130, secondY: -240, thirdX: 10, thirdY: -430},  // post corner
+  5: {firstX: 150, firstY: -200, secondX: 160, secondY: -430}                           // slant then fade
 }
 var LWORouteNumber;
 
@@ -19,7 +20,7 @@ var leftWideOut = function() {
     $('.gameBoard').append('<div>caught</div>').offset({top: '400px'})
   })
   // Define route number upon receiver placement so the random generator is not reset on previewing the route
-  LWORouteNumber = Math.floor(Math.random() * 3) + 1;
+  LWORouteNumber = Math.floor(Math.random() * 5) + 1;
 };
 leftWideOut()
 
@@ -77,10 +78,11 @@ leftWideOut()
 //     R I G H T  W I D E  O U T      //
 /**************************************/
 var RWOroutes = {
-  1: {firstX: 0, firstY: -270, secondX: -120, secondY: -430},     // post
-  2: {firstX: 0, firstY: -280, secondX: -10, secondY: -150},      // curl
-  3: {firstX: -150, firstY: -200, secondX: -160, secondY: -430},  // slant then fade
-  4: {firstX: 0, firstY: -220, secondX: -250, secondY: -220},     // cross
+  1: {firstX: 0, firstY: -240, secondX: -130, secondY: -430},                           // post
+  2: {firstX: 0, firstY: -230, secondX: -10, secondY: -150},                            // curl
+  3: {firstX: -150, firstY: -200, secondX: -160, secondY: -430},                        // slant then fade
+  4: {firstX: 0, firstY: -220, secondX: -250, secondY: -220},                           // cross
+  5: {firstX: 0, firstY: 150, secondX: -130, secondY: -240, thirdX: -10, thirdY: -430}  // post corner
 }
 var RWORouteNumber;
 
