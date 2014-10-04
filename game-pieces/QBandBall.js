@@ -42,8 +42,8 @@ $(document).ready(function(){
     });
     $('.startGame').on('click', function() {
       $('.lobBall, .zipBall').animate({
-        top: gameOptions.height - 18 + 'px',
-        left: gameOptions.width/2 + 5 + 'px'
+        top: gameOptions.height - 15 + 'px',
+        left: gameOptions.width/2 + 8 + 'px'
       }, 600)
     });    
   }
