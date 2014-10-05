@@ -6,6 +6,7 @@
 var CP = function(x, y) { // calculate x and y pixel coordinates based on %
   var xPercent = x/100;
   var yPercent = y/100;
+  // console.log(gameOptions.width * .75)
   return [gameOptions.width * xPercent, gameOptions.height * yPercent];
 };
 
@@ -25,10 +26,11 @@ var LWORouteNumber;
 var leftWideOut = function() {
   // Define route number upon receiver placement so the random generator is not reset on previewing the route
   LWORouteNumber = Math.floor(Math.random() * 5) + 1;
+  var startX = 10, startY = 93
   $('.LWO').css({
       position: 'absolute',
-      left: 10 + '%',
-      top: 93 + '%'
+      left: startX + '%',
+      top: startY + '%'
     }).data('collision', false);
   $('.LWO').on('collision_start', function(event) {
     $('.gameBoard').append('<div>caught</div>').offset({top: '400px'})
@@ -39,14 +41,19 @@ var leftWideOut = function() {
   /***********************************/
   var LWOpreview = document.getElementById("preview");
   var LWOtx = LWOpreview.getContext("2d");
-  var LWOstart = CP(10, 93);
-  LWOtx.moveTo(LWOstart[0], LWOstart[1]);
-  var LWOFirstMove = CP(LWOroutes[LWORouteNumber].firstX, LWOroutes[LWORouteNumber].firstY);
-  LWOtx.lineTo(LWOFirstMove[0], LWOFirstMove[1]);
-  // LWOtx.lineTo(200, 300);
-  LWOtx.lineTo(undefined, undefined);
-  LWOtx.globalAlpha = 0.4;
-  LWOtx.strokeStyle = "white";
+  var LWOstart = CP(startX, startY);
+  LWOtx.moveTo(LWOstart[0] + 9, LWOstart[1] + 10);
+  var LWOFirstMove = CP(startX + LWOroutes[LWORouteNumber].firstX, startY + LWOroutes[LWORouteNumber].firstY);
+  LWOtx.lineTo(LWOFirstMove[0] + 9, LWOFirstMove[1] + 10);
+  LWOtx.lineTo(LWOFirstMove[0] + 9, LWOFirstMove[1] + 10);
+  var LWOSecondMove = CP(startX + LWOroutes[LWORouteNumber].secondX, startY + LWOroutes[LWORouteNumber].secondY);
+  LWOtx.lineTo(LWOSecondMove[0] + 9, LWOSecondMove[1] + 10);
+  LWOtx.lineTo(LWOSecondMove[0] + 9, LWOSecondMove[1] + 10);
+  var LWOThirdMove = CP(startX + LWOroutes[LWORouteNumber].thirdX, startY + LWOroutes[LWORouteNumber].thirdY);
+  LWOtx.lineTo(LWOThirdMove[0] + 9, LWOThirdMove[1] + 10);
+  LWOtx.lineTo(LWOThirdMove[0] + 9, LWOThirdMove[1] + 10);
+  LWOtx.globalAlpha = 0.2;
+  LWOtx.strokeStyle = "blue";
   LWOtx.lineWidth = 10;
   LWOtx.lineCap = "round";
   LWOtx.stroke();
@@ -120,25 +127,33 @@ var RWORouteNumber;
 
 var rightWideOut = function() {
   RWORouteNumber = Math.floor(Math.random() * 5) + 1;
+  var startX = 85, startY = 93;
   $('.RWO').css({
       position: 'absolute',
       left: 85 + '%',
       top: 93 + '%'
     })
+
+  /***********************************/
+  //     C A N V A S  L O G I C      //
+  /***********************************/
+  var RWOpreview = document.getElementById("preview");
+  var RWOtx = RWOpreview.getContext("2d");
+  var RWOstart = CP(startX, startY);
+  RWOtx.moveTo(RWOstart[0] + 9, RWOstart[1] + 10);
+  var RWOFirstMove = CP(startX + RWOroutes[RWORouteNumber].firstX, startY + RWOroutes[RWORouteNumber].firstY);
+  RWOtx.lineTo(RWOFirstMove[0] + 9, RWOFirstMove[1] + 10);
+  var RWOSecondMove = CP(startX + RWOroutes[RWORouteNumber].secondX, startY + RWOroutes[RWORouteNumber].secondY);
+  RWOtx.lineTo(RWOSecondMove[0] + 9, RWOSecondMove[1] + 10);
+  var RWOThirdMove = CP(startX + RWOroutes[RWORouteNumber].thirdX, startY + RWOroutes[RWORouteNumber].thirdY);
+  RWOtx.lineTo(RWOThirdMove[0] + 9, RWOThirdMove[1] + 10);
+  RWOtx.globalAlpha = 0.2;
+  RWOtx.strokeStyle = "red";
+  RWOtx.lineWidth = 10;
+  RWOtx.lineCap = "round";
+  RWOtx.stroke();
 };
 rightWideOut()
-
-var RWOpreview = document.getElementById("preview");
-var RWOtx = RWOpreview.getContext("2d");
-RWOtx.moveTo(50, 50);
-RWOtx.lineTo(50, 100);
-RWOtx.lineTo(110, 200);
-RWOtx.lineTo(undefined, undefined);
-RWOtx.globalAlpha = .8;
-RWOtx.strokeStyle = "white";
-RWOtx.lineWidth = 10;
-RWOtx.lineCap = "round";
-RWOtx.stroke();
 
 
 // RWO Route
@@ -173,7 +188,7 @@ var SLOTposition = {
 };
 var position;
 // 68, 94 28, 94
-var SLOTRoutes = {
+var SLOTroutes = {
   0: { // routes when slot is on the right
     1: {firstX: 0, firstY: -30, secondX: -35, secondY: -50, thirdX: 21, thirdY: -70}, // post corner
     2: {firstX: -60, firstY: -25, secondX: -61, secondY: -86},                        // slant to corner
@@ -191,44 +206,53 @@ var SLOTRouteNumber;
 
 var rightSlot = function() {
   position = Math.round(Math.random());
+  var startX = SLOTposition[position], startY = 94;
   SLOTRouteNumber = Math.floor(Math.random() * 4) + 1;
   $('.SLOT').css({
       position: 'absolute',
       left: SLOTposition[position] + '%',
       top: 94 + '%'
     })
+
+  /***********************************/
+  //     C A N V A S  L O G I C      //
+  /***********************************/
+  var SLOTpreview = document.getElementById("preview");
+  var SLOTtx = SLOTpreview.getContext("2d");
+  var SLOTstart = CP(startX, startY);
+  SLOTtx.moveTo(SLOTstart[0] + 9, SLOTstart[1] + 10);
+  var SLOTFirstMove = CP(startX + SLOTroutes[position][SLOTRouteNumber].firstX, startY + SLOTroutes[position][SLOTRouteNumber].firstY);
+  SLOTtx.lineTo(SLOTFirstMove[0] + 9, SLOTFirstMove[1] + 10);
+  var SLOTSecondMove = CP(startX + SLOTroutes[position][SLOTRouteNumber].secondX, startY + SLOTroutes[position][SLOTRouteNumber].secondY);
+  SLOTtx.lineTo(SLOTSecondMove[0] + 9, SLOTSecondMove[1] + 10);
+  var SLOTThirdMove = CP(startX + SLOTroutes[position][SLOTRouteNumber].thirdX, startY + SLOTroutes[position][SLOTRouteNumber].thirdY);
+  SLOTtx.lineTo(SLOTThirdMove[0] + 9, SLOTThirdMove[1] + 10);
+  SLOTtx.globalAlpha = 0.4;
+  SLOTtx.strokeStyle = "white";
+  SLOTtx.lineWidth = 10;
+  SLOTtx.lineCap = "round";
+  SLOTtx.stroke();
 };
 rightSlot()
 
-var RSLOTpreview = document.getElementById("preview");
-var RSLOTtx = RSLOTpreview.getContext("2d");
-RSLOTtx.moveTo(50, 50);
-RSLOTtx.lineTo(50, 100);
-RSLOTtx.lineTo(110, 200);
-RSLOTtx.lineTo(undefined, undefined);
-RSLOTtx.globalAlpha = .8;
-RSLOTtx.strokeStyle = "white";
-RSLOTtx.lineWidth = 10;
-RSLOTtx.lineCap = "round";
-RSLOTtx.stroke();
 
 // SLOT Route
-var RSLOTroute = function(x, y) {
+var SLOTroute = function(x, y) {
   $('.SLOT').animate({
-    left: x + SLOTRoutes[position][SLOTRouteNumber].firstX + '%',
-    top: y + SLOTRoutes[position][SLOTRouteNumber].firstY + '%'
+    left: x + SLOTroutes[position][SLOTRouteNumber].firstX + '%',
+    top: y + SLOTroutes[position][SLOTRouteNumber].firstY + '%'
   }, {
     duration: 1500,
   })
   .animate({
-    left: x + SLOTRoutes[position][SLOTRouteNumber].secondX + '%',
-    top: y + SLOTRoutes[position][SLOTRouteNumber].secondY + '%'
+    left: x + SLOTroutes[position][SLOTRouteNumber].secondX + '%',
+    top: y + SLOTroutes[position][SLOTRouteNumber].secondY + '%'
   }, {
     duration: 1500
   })
   .animate({
-    left: x + SLOTRoutes[position][SLOTRouteNumber].thirdX + '%',
-    top: y + SLOTRoutes[position][SLOTRouteNumber].thirdY + '%'
+    left: x + SLOTroutes[position][SLOTRouteNumber].thirdX + '%',
+    top: y + SLOTroutes[position][SLOTRouteNumber].thirdY + '%'
   }, {
     duration: 1500
   })
@@ -247,7 +271,7 @@ $('#preview').on('click', function(event) {
   var RWOy = 93;
   RWOroute(RWOx, RWOy);
   LWOroute(LWOx, LWOy);
-  RSLOTroute(SLOTx, SLOTy);
+  SLOTroute(SLOTx, SLOTy);
 });
 
 
@@ -256,23 +280,23 @@ $('#preview').on('click', function(event) {
 //     P R E V I E W  R O U T E S     //
 /**************************************/
 $('.showRoutes').on('click', function(event) {
-  var RSLOTx = $('.SLOT').offset().left;
-  var RSLOTy = $('.SLOT').offset().top;
-  var RWOx = $('.RWO').offset().left;
-  var RWOy = $('.RWO').offset().top;
+  var RSLOTx = SLOTposition[position];
+  var RSLOTy = 94;
+  var RWOx = 85;
+  var RWOy = 93;
   var LWOx = 10;
-  var LWOy = 94;
+  var LWOy = 93;
   LWOroute(LWOx, LWOy);
   RWOroute(RWOx, RWOy);
-  RSLOTroute(RSLOTx, RSLOTy);
+  SLOTroute(RSLOTx, RSLOTy);
   var reset = function(){
     $('.SLOT').css({
-      left: RSLOTx,
-      top: RSLOTy
+      left: RSLOTx + '%',
+      top: RSLOTy + '%'
     })
     $('.RWO').css({
-      left: RWOx,
-      top: RWOy
+      left: RWOx + '%',
+      top: RWOy + '%'
     })
     $('.LWO').css({
       left: LWOx + '%',
