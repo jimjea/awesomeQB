@@ -68,7 +68,7 @@
   display: none;
   height: 47px;
   width: 60px;
-  z-index: 20;
+  z-index: 30;
 }
 
 .incomplete {
