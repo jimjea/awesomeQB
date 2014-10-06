@@ -24,7 +24,7 @@ $(document).ready(function(){
     $('#SLOTpreview').on('click', function() {
       $('.qb').animate({
         top: 96.5 + '%'
-      }, 600);
+      }, 400);
     });
   };
   placeqb();
@@ -44,7 +44,7 @@ $(document).ready(function(){
       $('.lobBall, .zipBall').animate({
         left: 50.5 + '%',
         top: 95.5 + '%'
-      }, 800)
+      }, 400)
     });    
   }
   placeball();
@@ -57,10 +57,20 @@ $(document).ready(function(){
     $('.zipBall').remove();
     var x = event.clientX;
     var y = event.clientY;
+    var startX = gameOptions.width * .505;
+    var startY = gameOptions.height * .955;
 
+    // var angle1 = Math.atan2(startX, startY - y)
+    // var angle2 = Math.atan2(x - startX, y - startY)
+    // var degree = (angle1 - angle2) *100;
+    // console.log (x,y)
+    // console.log (startX,startY)
+    // console.log(startX, startY - y)
+    // $('.lobBall').css('-webkit-transform', 'rotate(' + degree + 'deg)')
+
+    // set ball timing based on distance thrown
+    // broken up into thirds of the field
     var setBallDuration = function() {
-      var startX = gameOptions.width * .505;
-      var startY = gameOptions.height * .92;
 
     }
 
@@ -72,7 +82,7 @@ $(document).ready(function(){
         top: y - 5 + 'px'
       }, {
         duration: 600,
-        step: function() {
+        step: function() { // adjusts the size of the ball as it travels
           // if (ballSize < 40) {
           //   while (ballSize < 40)
           //     ballSize++;
@@ -113,7 +123,7 @@ $(document).ready(function(){
             $('.SLOT').stop(true, false).animate({top: $('.SLOT')[0].offsetTop - 7, left: $('.SLOT')[0].offsetLeft}, 800);
           }
 
-          setTimeout(function(){location.reload()}, 1000);
+          // setTimeout(function(){location.reload()}, 1000);
         }
       })
     }
