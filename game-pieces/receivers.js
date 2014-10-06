@@ -42,37 +42,37 @@ var LWOroute = function(x, y) {
   }, {
     duration: LWOroutes[LWORouteNumber].firstDur,
     // LEAVING ONE EXAMPLE TO USE LATER TO DISPLAY A SINGLE INSTANCE
-    step: function() {
+    // step: function() {
       
-      // handles only revealing the caught message once
-      var hit_list = $(this).collision(".zipBall");
-      var current_collision = hit_list.length != 0;
+    //   // handles only revealing the caught message once
+    //   var hit_list = $(this).collision(".zipBall");
+    //   var current_collision = hit_list.length != 0;
 
-      var changed_collision = current_collision != $(this).data("collision");
+    //   var changed_collision = current_collision != $(this).data("collision");
 
-      if (changed_collision) {
-          $(this).data("collision", current_collision);
-          $(this).trigger("collision_" + (current_collision ? "start" : "stop"));
-      }
-    }
+    //   if (changed_collision) {
+    //       $(this).data("collision", current_collision);
+    //       $(this).trigger("collision_" + (current_collision ? "start" : "stop"));
+    //   }
+    // }
   })
   .animate({
     left: x + LWOroutes[LWORouteNumber].secondX + '%',
     top: y + LWOroutes[LWORouteNumber].secondY + '%'
   }, {
     duration: LWOroutes[LWORouteNumber].secondDur,
-    step: function() {
-      // handles only revealing the caught message once
-      var hit_list = $(this).collision(".zipBall");
-      var current_collision = hit_list.length != 0;
+    // step: function() {
+    //   // handles only revealing the caught message once
+    //   var hit_list = $(this).collision(".zipBall");
+    //   var current_collision = hit_list.length != 0;
 
-      var changed_collision = current_collision != $(this).data("collision");
+    //   var changed_collision = current_collision != $(this).data("collision");
 
-      if (changed_collision) {
-          $(this).data("collision", current_collision);
-          $(this).trigger("collision_" + (current_collision ? "start" : "stop"));
-      }
-    }
+    //   if (changed_collision) {
+    //       $(this).data("collision", current_collision);
+    //       $(this).trigger("collision_" + (current_collision ? "start" : "stop"));
+    //   }
+    // }
   })
   .animate({
     left: x + LWOroutes[LWORouteNumber].thirdX + '%',
