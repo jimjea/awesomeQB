@@ -77,7 +77,7 @@ $(document).ready(function(){
     var ballSize = 0;
     var lobBall = function() {
       $('.lobBall').animate({
-        left: x - 15 + 'px',
+        left: x - 10 + 'px',
         top: y - 11 + 'px'
       }, {
         duration: 600,
