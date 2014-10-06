@@ -101,3 +101,14 @@ canvas {
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
+
+.touchdown {
+  position: absolute;
+  background-image: url('./assets/touchdown.png');
+  display: none;
+  height: 62px;
+  width: 65px;
+  z-index: 40;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
