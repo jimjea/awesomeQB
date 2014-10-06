@@ -1,7 +1,7 @@
-  // var gameOptions = {
-  //   width: 310,
-  //   height: 500
-  // };
+  var gameOptions = {
+    width: $(window).width(),
+    height: $(window).height()
+  };
 
 $(document).ready(function(){
 
