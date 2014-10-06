@@ -35,33 +35,34 @@ function preview() {
 
   function drawStuff() {
     var lwoX = 10, lwoY = 93;
-    LWOcontext.moveTo(LWOcanvas.width * (lwoX/100) + 9, LWOcanvas.height * (lwoY/100) + 10);
+    var width = $('.gameBoard').width() * .025;
+    LWOcontext.moveTo(LWOcanvas.width * (lwoX/100) + width, LWOcanvas.height * (lwoY/100) + 10);
     LWOcontext.lineTo(LWOcanvas.width * ((lwoX + LWOroutes[LWORouteNumber].firstX)/100) + 9, LWOcanvas.height * ((lwoY + LWOroutes[LWORouteNumber].firstY)/100) + 10);
     LWOcontext.lineTo(LWOcanvas.width * ((lwoX + LWOroutes[LWORouteNumber].secondX)/100) + 9, LWOcanvas.height * ((lwoY + LWOroutes[LWORouteNumber].secondY)/100) + 10);
     LWOcontext.lineTo(LWOcanvas.width * ((lwoX + LWOroutes[LWORouteNumber].thirdX)/100) + 9, LWOcanvas.height * ((lwoY + LWOroutes[LWORouteNumber].thirdY)/100) + 10);
     LWOcontext.globalAlpha = 0.2;
     LWOcontext.strokeStyle = "blue";
-    LWOcontext.lineWidth = $('.gameBoard').width() * .025;
+    LWOcontext.lineWidth = width;
     LWOcontext.lineCap = "round";
     LWOcontext.stroke();
     var rwoX = 85, rwoY = 93
-    RWOcontext.moveTo(RWOcanvas.width * (rwoX/100) + 9, RWOcanvas.height * (rwoY/100) + 10);
+    RWOcontext.moveTo(RWOcanvas.width * (rwoX/100) + width, RWOcanvas.height * (rwoY/100) + 10);
     RWOcontext.lineTo(RWOcanvas.width * ((rwoX + RWOroutes[RWORouteNumber].firstX)/100) + 9, RWOcanvas.height * ((rwoY + RWOroutes[RWORouteNumber].firstY)/100) + 10);
     RWOcontext.lineTo(RWOcanvas.width * ((rwoX + RWOroutes[RWORouteNumber].secondX)/100) + 9, RWOcanvas.height * ((rwoY + RWOroutes[RWORouteNumber].secondY)/100) + 10);
     RWOcontext.lineTo(RWOcanvas.width * ((rwoX + RWOroutes[RWORouteNumber].thirdX)/100) + 9, RWOcanvas.height * ((rwoY + RWOroutes[RWORouteNumber].thirdY)/100) + 10);
     RWOcontext.globalAlpha = 0.2;
     RWOcontext.strokeStyle = "red";
-    RWOcontext.lineWidth = $('.gameBoard').width() * .025;
+    RWOcontext.lineWidth = width;
     RWOcontext.lineCap = "round";
     RWOcontext.stroke();
     var slotX = SLOTposition[position], slotY = 94
-    SLOTcontext.moveTo(SLOTcanvas.width * (slotX/100) + 9, SLOTcanvas.height * (slotY/100) + 10);
+    SLOTcontext.moveTo(SLOTcanvas.width * (slotX/100) + width, SLOTcanvas.height * (slotY/100) + 10);
     SLOTcontext.lineTo(SLOTcanvas.width * ((slotX + SLOTroutes[position][SLOTRouteNumber].firstX)/100) + 9, SLOTcanvas.height * ((slotY + SLOTroutes[position][SLOTRouteNumber].firstY)/100) + 10);
     SLOTcontext.lineTo(SLOTcanvas.width * ((slotX + SLOTroutes[position][SLOTRouteNumber].secondX)/100) + 9, SLOTcanvas.height * ((slotY + SLOTroutes[position][SLOTRouteNumber].secondY)/100) + 10);
     SLOTcontext.lineTo(SLOTcanvas.width * ((slotX + SLOTroutes[position][SLOTRouteNumber].thirdX)/100) + 9, SLOTcanvas.height * ((slotY + SLOTroutes[position][SLOTRouteNumber].thirdY)/100) + 10);
     SLOTcontext.globalAlpha = 0.2;
     SLOTcontext.strokeStyle = "yellow";
-    SLOTcontext.lineWidth = $('.gameBoard').width() * .025;
+    SLOTcontext.lineWidth = width;
     SLOTcontext.lineCap = "round";
     SLOTcontext.stroke();
   }
