@@ -6,11 +6,11 @@
 // All code documentation for receivers will be in LEFT WIDE OUT since all receivers are virtually the same
 
 var LWOroutes = {
-  1: {firstX: 0, firstY: -40, firstDur: 1500, secondX: 3, secondY: -30, secondDur: 900},                                          // curl
+  1: {firstX: 0, firstY: -40, firstDur: 1500, secondX: 3, secondY: -30, secondDur: 600},                                          // curl
   2: {firstX: 0, firstY: -40, firstDur: 1500, secondX: 78, secondY: -85, secondDur: 1900},                                         // post
-  3: {firstX: 0, firstY: -38, firstDur: 1500, secondX: 78, secondY: -38, secondDur: 1900},                                         // cross
+  3: {firstX: 0, firstY: -38, firstDur: 1500, secondX: 78, secondY: -38, secondDur: 1700},                                         // cross
   4: {firstX: 0, firstY: -32, firstDur: 1500, secondX: 40, secondY: -60, secondDur: 1500, thirdX: 0, thirdY: -85, thirdDur: 1500}, // post corner
-  5: {firstX: 75, firstY: -22, firstDur: 2500, secondX: 78, secondY: -85, secondDur: 1900}                                         // slant then corner
+  5: {firstX: 75, firstY: -22, firstDur: 2000, secondX: 78, secondY: -85, secondDur: 1900}                                         // slant then corner
 }
 var LWORouteNumber;
 
@@ -86,10 +86,10 @@ var LWOroute = function(x, y) {
 //     R I G H T  W I D E  O U T      //
 /**************************************/
 var RWOroutes = {
-  1: {firstX: 0, firstY: -40, firstDur: 1500, secondX: -3, secondY: -30, secondDur: 900},                               // curl
-  2: {firstX: 0, firstY: -40, firstDur: 1500, secondX: -78, secondY: -85, secondDur: 3000},                              // post
-  3: {firstX: -75, firstY: -22, firstDur: 2500, secondX: -78, secondY: -85, secondDur: 1500},                            // slant then corner
-  4: {firstX: 0, firstY: -32, firstDur: 1500, secondX: -78, secondY: -32, secondDur: 2500},                              // cross
+  1: {firstX: 0, firstY: -40, firstDur: 1500, secondX: -3, secondY: -30, secondDur: 600},                               // curl
+  2: {firstX: 0, firstY: -40, firstDur: 1500, secondX: -78, secondY: -85, secondDur: 2000},                              // post
+  3: {firstX: -75, firstY: -22, firstDur: 2000, secondX: -78, secondY: -85, secondDur: 1500},                            // slant then corner
+  4: {firstX: 0, firstY: -32, firstDur: 1500, secondX: -78, secondY: -32, secondDur: 1700},                              // cross
   5: {firstX: 0, firstY: -32, firstDur: 1500, secondX: -40, secondY: -60, secondDur: 1500, thirdX: -0, thirdY: -85, thirdDur: 1500}      // post corner
 }
 var RWORouteNumber;
@@ -120,13 +120,13 @@ var RWOroute = function(x, y) {
     left: x + RWOroutes[RWORouteNumber].secondX + '%',
     top: y + RWOroutes[RWORouteNumber].secondY + '%'
   }, {
-    duration: RWOroutes[RWORouteNumber].firstDur
+    duration: RWOroutes[RWORouteNumber].secondDur
   })
   .animate({
     left: x + RWOroutes[RWORouteNumber].thirdX + '%',
     top: y + RWOroutes[RWORouteNumber].thirdY + '%'
   }, {
-    duration: RWOroutes[RWORouteNumber].firstDur
+    duration: RWOroutes[RWORouteNumber].thirdDur
   })
 }
 
@@ -206,35 +206,3 @@ $('#preview').on('click', function(event) {
   LWOroute(LWOx, LWOy);
   SLOTroute(SLOTx, SLOTy);
 });
-
-
-
-// /**************************************/
-// //     P R E V I E W  R O U T E S     //
-// /**************************************/
-// $('.showRoutes').on('click', function(event) {
-//   var RSLOTx = SLOTposition[position];
-//   var RSLOTy = 94;
-//   var RWOx = 85;
-//   var RWOy = 93;
-//   var LWOx = 10;
-//   var LWOy = 93;
-//   LWOroute(LWOx, LWOy);
-//   RWOroute(RWOx, RWOy);
-//   SLOTroute(RSLOTx, RSLOTy);
-//   var reset = function(){
-//     $('.SLOT').css({
-//       left: RSLOTx + '%',
-//       top: RSLOTy + '%'
-//     })
-//     $('.RWO').css({
-//       left: RWOx + '%',
-//       top: RWOy + '%'
-//     })
-//     $('.LWO').css({
-//       left: LWOx + '%',
-//       top: LWOy + '%'
-//     })
-//   };
-//   setTimeout(reset, 4700);
-// });

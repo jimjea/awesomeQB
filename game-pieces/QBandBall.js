@@ -58,7 +58,14 @@ $(document).ready(function(){
     var x = event.clientX;
     var y = event.clientY;
 
+    var setBallDuration = function() {
+      var startX = gameOptions.width * .505;
+      var startY = gameOptions.height * .92;
+
+    }
+
     // Lobbing the ball on click will only allow the receiver to catch it as the ball ends its animation
+    var ballSize = 0;
     var lobBall = function() {
       $('.lobBall').animate({
         left: x - 9 + 'px',
@@ -66,7 +73,17 @@ $(document).ready(function(){
       }, {
         duration: 600,
         step: function() {
-          // add size increasing as it progresses
+          // if (ballSize < 40) {
+          //   while (ballSize < 40)
+          //     ballSize++;
+          //     $('.lobBall').height(ballSize).width(ballSize);
+          // } 
+          // // else {
+          // //   while (ballSize > 0) {
+          // //     $('.lobBall').height(ballSize).width(ballSize);
+          // //     ballSize--;
+          // //   }
+          // // }
         },
         done: function(event) {
           var LWOHit = $(this).collision(".LWO");
