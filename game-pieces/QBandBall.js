@@ -123,7 +123,7 @@ $(document).ready(function(){
             $('.SLOT').stop(true, false).animate({top: $('.SLOT')[0].offsetTop - 7, left: $('.SLOT')[0].offsetLeft}, 800);
           }
 
-          // setTimeout(function(){location.reload()}, 1000);
+          setTimeout(function(){location.reload()}, 1000);
         }
       })
     }
