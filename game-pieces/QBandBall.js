@@ -101,20 +101,20 @@ $(document).ready(function(){
           if (LWOHit.length > 0) {
             $('.LWO').stop(true, false).animate({top: event.tweens[1].end - 25 + 'px'}, 800);
             $('.lobBall').animate({top: event.tweens[1].end - 25 + 'px'}, 800);
-            $('.caught').css({height: $('.gameBoard').height() * .11, width: $('.gameBoard').height() * .12}).offset({top: event.tweens[1].end - 25, left: event.tweens[0].end - 25}).show()
+            $('.caught').css({height: $('.gameBoard').height() * .11, width: $('.gameBoard').height() * .12}).offset({top: event.tweens[1].end - 30, left: event.tweens[0].end - 30}).show()
             setTimeout(function(){$('.caught').hide()}, 400);
           } else if (RWOHit.length > 0) {
             $('.RWO').stop(true, false).animate({top: event.tweens[1].end - 25 + 'px'}, 800);
             $('.lobBall').animate({top: event.tweens[1].end - 25 + 'px'}, 800);
-            $('.caught').css({height: $('.gameBoard').height() * .11, width: $('.gameBoard').height() * .12}).offset({top: event.tweens[1].end - 25, left: event.tweens[0].end - 25}).show()
+            $('.caught').css({height: $('.gameBoard').height() * .11, width: $('.gameBoard').height() * .12}).offset({top: event.tweens[1].end - 30, left: event.tweens[0].end - 30}).show()
             setTimeout(function(){$('.caught').hide()}, 400);
           } else if (SLOTHit.length > 0) {
             $('.SLOT').stop(true, false).animate({top: event.tweens[1].end - 25 + 'px'}, 800);
             $('.lobBall').animate({top: event.tweens[1].end - 25 + 'px'}, 800);
-            $('.caught').css({height: $('.gameBoard').height() * .11, width: $('.gameBoard').height() * .12}).offset({top: event.tweens[1].end - 25, left: event.tweens[0].end - 25}).show()
+            $('.caught').css({height: $('.gameBoard').height() * .11, width: $('.gameBoard').height() * .12}).offset({top: event.tweens[1].end - 30, left: event.tweens[0].end - 30}).show()
             setTimeout(function(){$('.caught').hide()}, 400);
           } else {
-            $('.incomplete').css({height: $('.gameBoard').height() * .11, width: $('.gameBoard').height() * .12}).offset({top: event.tweens[1].end - 35, left: event.tweens[0].end - 35}).show();
+            $('.incomplete').css({height: $('.gameBoard').height() * .11, width: $('.gameBoard').height() * .12}).offset({top: event.tweens[1].end - 45, left: event.tweens[0].end - 45}).show();
             setTimeout(function(){$('.incomplete').hide()}, 400);
             $('.lobBall').animate({top: event.tweens[1].end - 8 + 'px', left: event.tweens[0].end + 1 + 'px'}, 400);
             $('.LWO').stop(true, false).animate({top: $('.LWO')[0].offsetTop - 10, left: $('.LWO')[0].offsetLeft + 15}, 800);
