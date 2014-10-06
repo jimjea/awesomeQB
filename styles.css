@@ -1,7 +1,11 @@
+div {
+  -webkit-user-select: none;
+}
+
 .gameBoard {
   position: absolute;
-  width: 310px;
-  height: 500px;
+  width: 100%;
+  height: 100%;
   border: solid 1px black;
   overflow: hidden;
   background-image: url('./assets/field.jpg');
@@ -11,8 +15,8 @@
 
 #preview {
   position: absolute;
-  border: solid 1px black;
-  overflow: hidden;
+  height: window.innerHeight;
+  width: window.innerWidth;
   z-index: 25;
 }
 
@@ -25,11 +29,13 @@
   text-indent: 100%;
   white-space: nowrap;
   overflow: hidden;
-  z-index: 18;
+  z-index: 31;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
 .zipBall {
-  z-index: 10;
+  z-index: 32;
 }
 
 .receiver, .qb {
@@ -41,25 +47,8 @@
   white-space: nowrap;
   overflow: hidden;
   z-index: 30;
-}
-
-
-.showRoutes {
-  position: fixed;
-  left: 330px;
-  top: 150px;
-  border: solid 1px black;
-  padding: 5px;
-  cursor: 'pointer';
-}
-
-.newGame {
-  position: fixed;
-  left: 330px;
-  top: 200px;
-  border: solid 1px black;
-  padding: 5px;
-  cursor: 'pointer';
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
 .caught {
@@ -68,7 +57,9 @@
   display: none;
   height: 47px;
   width: 60px;
-  z-index: 30;
+  z-index: 40;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
 .incomplete {
@@ -77,5 +68,7 @@
   display: none;
   height: 62px;
   width: 65px;
-  z-index: 20;
+  z-index: 40;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }

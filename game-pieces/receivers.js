@@ -7,7 +7,7 @@ var CP = function(x, y) { // calculate x and y pixel coordinates based on %
   var xPercent = x/100;
   var yPercent = y/100;
   // console.log(gameOptions.width * .75)
-  return [gameOptions.width * xPercent, gameOptions.height * yPercent];
+  return [xPercent, yPercent];
 };
 
 
@@ -15,11 +15,11 @@ var CP = function(x, y) { // calculate x and y pixel coordinates based on %
 // All code documentation for receivers will be in LEFT WIDE OUT since all receivers are virtually the same
 
 var LWOroutes = {
-  1: {firstX: 0, firstY: -40, secondX: 3, secondY: -30},                               // curl
-  2: {firstX: 0, firstY: -40, secondX: 78, secondY: -85},                              // post
-  3: {firstX: 0, firstY: -38, secondX: 78, secondY: -38},                              // cross
-  4: {firstX: 0, firstY: -32, secondX: 40, secondY: -60, thirdX: 0, thirdY: -85},      // post corner
-  5: {firstX: 75, firstY: -22, secondX: 78, secondY: -85}                             // slant then corner
+  1: {firstX: 0, firstY: -40, firstDur: 1500, secondX: 3, secondY: -30, secondDur: 1500},                                          // curl
+  2: {firstX: 0, firstY: -40, firstDur: 1500, secondX: 78, secondY: -85, secondDur: 1500},                                         // post
+  3: {firstX: 0, firstY: -38, firstDur: 1500, secondX: 78, secondY: -38, secondDur: 1500},                                         // cross
+  4: {firstX: 0, firstY: -32, firstDur: 1500, secondX: 40, secondY: -60, secondDur: 1500, thirdX: 0, thirdY: -85, thirdDur: 1500}, // post corner
+  5: {firstX: 75, firstY: -22, firstDur: 2500, secondX: 78, secondY: -85, secondDur: 1900}                                         // slant then corner
 }
 var LWORouteNumber;
 
@@ -69,7 +69,7 @@ var LWOroute = function(x, y) {
     left: x + LWOroutes[LWORouteNumber].firstX + '%',
     top: y + LWOroutes[LWORouteNumber].firstY + '%'
   }, {
-    duration: 1500,
+    duration: LWOroutes[LWORouteNumber].firstDur,
     // LEAVING ONE EXAMPLE TO USE LATER TO DISPLAY A SINGLE INSTANCE
     step: function() {
       
@@ -89,7 +89,7 @@ var LWOroute = function(x, y) {
     left: x + LWOroutes[LWORouteNumber].secondX + '%',
     top: y + LWOroutes[LWORouteNumber].secondY + '%'
   }, {
-    duration: 1500,
+    duration: LWOroutes[LWORouteNumber].secondDur,
     step: function() {
       // handles only revealing the caught message once
       var hit_list = $(this).collision(".zipBall");
@@ -107,7 +107,7 @@ var LWOroute = function(x, y) {
     left: x + LWOroutes[LWORouteNumber].thirdX + '%',
     top: y + LWOroutes[LWORouteNumber].thirdY + '%'
   }, {
-    duration: 1500,
+    duration: LWOroutes[LWORouteNumber].thirdDur,
   })
 }
 
@@ -117,11 +117,11 @@ var LWOroute = function(x, y) {
 //     R I G H T  W I D E  O U T      //
 /**************************************/
 var RWOroutes = {
-  1: {firstX: 0, firstY: -40, secondX: -3, secondY: -30},                               // curl
-  2: {firstX: 0, firstY: -40, secondX: -78, secondY: -85},                              // post
-  3: {firstX: -75, firstY: -22, secondX: -78, secondY: -85},                            // slant then corner
-  4: {firstX: 0, firstY: -32, secondX: -78, secondY: -32},                              // cross
-  5: {firstX: 0, firstY: -32, secondX: -40, secondY: -60, thirdX: -0, thirdY: -85}      // post corner
+  1: {firstX: 0, firstY: -40, firstDur: 1500, secondX: -3, secondY: -30, secondDur: 1500},                               // curl
+  2: {firstX: 0, firstY: -40, firstDur: 1500, secondX: -78, secondY: -85, secondDur: 1500},                              // post
+  3: {firstX: -75, firstY: -22, firstDur: 2500, secondX: -78, secondY: -85, secondDur: 1500},                            // slant then corner
+  4: {firstX: 0, firstY: -32, firstDur: 1500, secondX: -78, secondY: -32, secondDur: 1500},                              // cross
+  5: {firstX: 0, firstY: -32, firstDur: 1500, secondX: -40, secondY: -60, secondDur: 1500, thirdX: -0, thirdY: -85, thirdDur: 1500}      // post corner
 }
 var RWORouteNumber;
 
@@ -162,19 +162,19 @@ var RWOroute = function(x, y) {
     left: x + RWOroutes[RWORouteNumber].firstX + '%',
     top: y + RWOroutes[RWORouteNumber].firstY + '%'
   }, {
-    duration: 1500
+    duration: RWOroutes[RWORouteNumber].firstDur
   })
   .animate({
     left: x + RWOroutes[RWORouteNumber].secondX + '%',
     top: y + RWOroutes[RWORouteNumber].secondY + '%'
   }, {
-    duration: 1500,
+    duration: RWOroutes[RWORouteNumber].firstDur
   })
   .animate({
     left: x + RWOroutes[RWORouteNumber].thirdX + '%',
     top: y + RWOroutes[RWORouteNumber].thirdY + '%'
   }, {
-    duration: 1500,
+    duration: RWOroutes[RWORouteNumber].firstDur
   })
 }
 
@@ -190,16 +190,16 @@ var position;
 // 68, 94 28, 94
 var SLOTroutes = {
   0: { // routes when slot is on the right
-    1: {firstX: 0, firstY: -30, secondX: -35, secondY: -50, thirdX: 21, thirdY: -70}, // post corner
-    2: {firstX: -60, firstY: -25, secondX: -61, secondY: -86},                        // slant to corner
-    3: {firstX: 0, firstY: -30, secondX: 20, secondY: -30},                           // out
-    4: {firstX: 0, firstY: -30, secondX: 20, secondY: -30, thirdX: -60, thirdY: -30}, // out then in
+    1: {firstX: 0, firstY: -30, firstDur: 1500, secondX: -35, secondY: -50, secondDur: 1500, thirdX: 21, thirdY: -70, thirdDur: 1500},  // post corner
+    2: {firstX: -60, firstY: -25, firstDur: 1500, secondX: -61, secondY: -86, secondDur: 1500},                                         // slant to corner
+    3: {firstX: 0, firstY: -30, firstDur: 1500, secondX: 20, secondY: -30, secondDur: 1500},                                            // out
+    4: {firstX: 0, firstY: -30, firstDur: 1500, secondX: 20, secondY: -30, secondDur: 1000, thirdX: -60, thirdY: -30, thirdDur: 1900},  // out then in
   },
   1: {  // routes when slot is on the left
-    1: {firstX: 0, firstY: -30, secondX: 35, secondY: -50, thirdX: -21, thirdY: -70}, // post corner
-    2: {firstX: 59, firstY: -25, secondX: 60, secondY: -86},                          // slant to corner
-    3: {firstX: 0, firstY: -30, secondX: -20, secondY: -30},                          // out
-    4: {firstX: 0, firstY: -30, secondX: -20, secondY: -30, thirdX: 60, thirdY: -30}, // out then in
+    1: {firstX: 0, firstY: -30, firstDur: 1500, secondX: 35, secondY: -50, secondDur: 1500, thirdX: -21, thirdY: -70, thirdDur: 1500},  // post corner
+    2: {firstX: 59, firstY: -25, firstDur: 1500, secondX: 60, secondY: -86, secondDur: 1500},                                           // slant to corner
+    3: {firstX: 0, firstY: -30, firstDur: 1500, secondX: -20, secondY: -30, secondDur: 1500},                                           // out
+    4: {firstX: 0, firstY: -30, firstDur: 1500, secondX: -20, secondY: -30, secondDur: 1000, thirdX: 60, thirdY: -30, thirdDur: 1900},  // out then in
   }
 };
 var SLOTRouteNumber;
@@ -242,19 +242,19 @@ var SLOTroute = function(x, y) {
     left: x + SLOTroutes[position][SLOTRouteNumber].firstX + '%',
     top: y + SLOTroutes[position][SLOTRouteNumber].firstY + '%'
   }, {
-    duration: 1500,
+    duration: SLOTroutes[position][SLOTRouteNumber].firstDur,
   })
   .animate({
     left: x + SLOTroutes[position][SLOTRouteNumber].secondX + '%',
     top: y + SLOTroutes[position][SLOTRouteNumber].secondY + '%'
   }, {
-    duration: 1500
+    duration: SLOTroutes[position][SLOTRouteNumber].secondDur
   })
   .animate({
     left: x + SLOTroutes[position][SLOTRouteNumber].thirdX + '%',
     top: y + SLOTroutes[position][SLOTRouteNumber].thirdY + '%'
   }, {
-    duration: 1500
+    duration: SLOTroutes[position][SLOTRouteNumber].thirdDur
   })
 }
 

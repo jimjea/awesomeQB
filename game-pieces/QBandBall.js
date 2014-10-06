@@ -1,7 +1,7 @@
-  var gameOptions = {
-    width: 310,
-    height: 500
-  };
+  // var gameOptions = {
+  //   width: 310,
+  //   height: 500
+  // };
 
 $(document).ready(function(){
 
@@ -53,12 +53,8 @@ $(document).ready(function(){
   // ball handles all collision logic
   $('.gameBoard').one('click', function(event) {
     $('.zipBall').remove();
-    var startX = gameOptions.width/2;
-    var startY = gameOptions.height-10;
     var x = event.clientX;
     var y = event.clientY;
-
-    var slope = (y-startY)/(x-startX);
 
     // Lobbing the ball on click will only allow the receiver to catch it as the ball ends its animation
     var lobBall = function() {
@@ -97,6 +93,8 @@ $(document).ready(function(){
             $('.RWO').stop(true, false).animate({top: $('.RWO')[0].offsetTop - 6, left: $('.RWO')[0].offsetLeft - 15}, 800);
             $('.SLOT').stop(true, false).animate({top: $('.SLOT')[0].offsetTop - 7, left: $('.SLOT')[0].offsetLeft}, 800);
           }
+
+          setTimeout(function(){location.reload()}, 1000);
         }
       })
     }
@@ -105,9 +103,43 @@ $(document).ready(function(){
 
   // zips ball in a straight on on flick
   // receiver can catch the ball anywhere in the line
-  $('.zipBall').on('flick', function(event) {
-    console.log(event)
-  })
+    $('.zipBall').mousedown(function (event) {
+        startDownX = event.pageX;
+        startDownY = event.pageY;
+    });
+        
+    /* Work out fling direction on end of fling */
+    $('.gameBoard').on('dblclick', function(event){
+       
+        var rise = -(event.pageY - startDownY); /* Page Origin is different from graph */
+        var run = event.pageX - startDownX;
+        var newX = $('.zipBall').position().left;
+        var newY = $('.zipBall').position().top;
+        var distanceToFling = 100;
+
+        if (run == 0 || Math.abs(rise/run) > 3) {
+            if (rise > 0) {
+              newY -= distanceToFling;
+            } else if (rise < 0) {
+              newY += distanceToFling;
+            }
+        }
+        else {
+            if (run > 0) {
+                newX += distanceToFling;
+                newY -= (rise/run) * distanceToFling;
+            }
+            else {
+                newX -= distanceToFling;
+                newY += (rise/run) * distanceToFling;
+            }
+        }
+       
+         $('.zipBall').animate({
+             left: newX,
+             top: newY
+            }, 1000);
+    });
 
 
 
