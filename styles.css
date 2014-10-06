@@ -46,6 +46,8 @@ canvas {
   z-index: 31;
   background-repeat: no-repeat;
   background-size: 100% 100%;
+  -webkit-transform: rotate(25deg);
+  /*-webkit-transform-origin: 20% 40%;*/
 }
 
 .zipBall {

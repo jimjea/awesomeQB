@@ -1,5 +1,0 @@
-  1: {firstX: 0, firstY: -40, secondX: 3, secondY: -30},                          // curl
-  2: {firstX: 0, firstY: -40, secondX: 78, secondY: -85},                         // post
-  3: {firstX: 0, firstY: -38, secondX: 78, secondY: -38},                         // cross
-  4: {firstX: 0, firstY: -32, secondX: 40, secondY: -60, thirdX: 0, thirdY: -85}, // post corner
-  5: {firstX: 53, firstY: -22, secondX: 78, secondY: -86}                         // slant then corner
