@@ -114,7 +114,7 @@ $(document).ready(function(){
             $('.caught').css({height: $('.gameBoard').height() * .11, width: $('.gameBoard').height() * .12}).offset({top: event.tweens[1].end - 30, left: event.tweens[0].end - 30}).show()
             setTimeout(function(){$('.caught').hide()}, 400);
           } else {
-            $('.incomplete').css({height: $('.gameBoard').height() * .11, width: $('.gameBoard').height() * .12}).offset({top: event.tweens[1].end - 45, left: event.tweens[0].end - 45}).show();
+            $('.incomplete').css({height: $('.gameBoard').height() * .11, width: $('.gameBoard').height() * .12}).offset({top: event.tweens[1].end - 55, left: event.tweens[0].end - 55}).show();
             setTimeout(function(){$('.incomplete').hide()}, 400);
             $('.lobBall').animate({top: event.tweens[1].end - 8 + 'px', left: event.tweens[0].end + 1 + 'px'}, 400);
             $('.LWO').stop(true, false).animate({top: $('.LWO')[0].offsetTop - 10, left: $('.LWO')[0].offsetLeft + 15}, 800);
