@@ -98,6 +98,7 @@ $(document).ready(function(){
           var LWOHit = $(this).collision(".LWO");
           var RWOHit = $(this).collision(".RWO");
           var SLOTHit = $(this).collision(".SLOT");
+          console.log(event)
           if (LWOHit.length > 0) {
             $('.LWO').stop(true, false).animate({top: event.tweens[1].end - 25 + 'px'}, 800);
             $('.lobBall').animate({top: event.tweens[1].end - 25 + 'px'}, 800);
@@ -114,7 +115,7 @@ $(document).ready(function(){
             $('.caught').css({height: $('.gameBoard').height() * .11, width: $('.gameBoard').height() * .12}).offset({top: event.tweens[1].end - 40, left: event.tweens[0].end - 40}).show()
             setTimeout(function(){$('.caught').hide()}, 400);
           } else {
-            $('.incomplete').css({height: $('.gameBoard').height() * .11, width: $('.gameBoard').height() * .12}).offset({top: event.tweens[1].end - 55, left: event.tweens[0].end - 55}).show();
+            $('.incomplete').css({height: $('.gameBoard').height() * .11, width: $('.gameBoard').height() * .12}).offset({top: event.tweens[1].end - $('.incomplete').height()/2, left: event.tweens[0].end - $('.incomplete').width()/2}).show();
             setTimeout(function(){$('.incomplete').hide()}, 400);
             $('.lobBall').animate({top: event.tweens[1].end - 8 + 'px', left: event.tweens[0].end + 1 + 'px'}, 400);
             $('.LWO').stop(true, false).animate({top: $('.LWO')[0].offsetTop - 10, left: $('.LWO')[0].offsetLeft + 15}, 800);
@@ -122,7 +123,7 @@ $(document).ready(function(){
             $('.SLOT').stop(true, false).animate({top: $('.SLOT')[0].offsetTop - 7, left: $('.SLOT')[0].offsetLeft}, 800);
           }
 
-          setTimeout(function(){location.reload()}, 1000);
+          // setTimeout(function(){location.reload()}, 1000);
         }
       })
     }

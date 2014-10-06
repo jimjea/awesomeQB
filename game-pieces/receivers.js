@@ -25,9 +25,9 @@ var leftWideOut = function() {
       left: startX + '%',
       top: startY + '%'
     }).data('collision', false);
-  $('.LWO').on('collision_start', function(event) {
-    $('.gameBoard').append('<div>caught</div>').offset({top: '400px'})
-  })
+  // $('.LWO').on('collision_start', function(event) {
+  //   $('.gameBoard').append('<div>caught</div>').offset({top: '400px'})
+  // })
   
 
 };
