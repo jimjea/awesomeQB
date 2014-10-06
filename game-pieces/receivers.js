@@ -24,7 +24,8 @@ var leftWideOut = function() {
       width: $('.gameBoard').width() * .07,
       left: startX + '%',
       top: startY + '%'
-    }).data('collision', false);
+    })
+  // .data('collision', false);
   // $('.LWO').on('collision_start', function(event) {
   //   $('.gameBoard').append('<div>caught</div>').offset({top: '400px'})
   // })
@@ -61,18 +62,6 @@ var LWOroute = function(x, y) {
     top: y + LWOroutes[LWORouteNumber].secondY + '%'
   }, {
     duration: LWOroutes[LWORouteNumber].secondDur,
-    // step: function() {
-    //   // handles only revealing the caught message once
-    //   var hit_list = $(this).collision(".zipBall");
-    //   var current_collision = hit_list.length != 0;
-
-    //   var changed_collision = current_collision != $(this).data("collision");
-
-    //   if (changed_collision) {
-    //       $(this).data("collision", current_collision);
-    //       $(this).trigger("collision_" + (current_collision ? "start" : "stop"));
-    //   }
-    // }
   })
   .animate({
     left: x + LWOroutes[LWORouteNumber].thirdX + '%',
