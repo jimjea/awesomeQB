@@ -20,8 +20,8 @@ var leftWideOut = function() {
   var startX = 10, startY = 93
   $('.LWO').css({
       position: 'absolute',
-      height: $('.gameBoard').height() * .06,
-      width: $('.gameBoard').width() * .07,
+      height: $('.gameBoard').height() * .05,
+      width: $('.gameBoard').width() * .06,
       left: startX + '%',
       top: startY + '%'
     })
@@ -90,8 +90,8 @@ var rightWideOut = function() {
   var startX = 85, startY = 93;
   $('.RWO').css({
       position: 'absolute',
-      height: $('.gameBoard').height() * .06,
-      width: $('.gameBoard').width() * .07,
+      height: $('.gameBoard').height() * .05,
+      width: $('.gameBoard').width() * .06,
       left: 85 + '%',
       top: 93 + '%'
     })
@@ -155,8 +155,8 @@ var rightSlot = function() {
   SLOTRouteNumber = Math.floor(Math.random() * 4) + 1;
   $('.SLOT').css({
       position: 'absolute',
-      height: $('.gameBoard').height() * .06,
-      width: $('.gameBoard').width() * .07,
+      height: $('.gameBoard').height() * .05,
+      width: $('.gameBoard').width() * .06,
       left: SLOTposition[position] + '%',
       top: 94 + '%'
     })

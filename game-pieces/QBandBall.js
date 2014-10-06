@@ -13,8 +13,8 @@ $(document).ready(function(){
   var placeqb = function() {
     $('.qb').css({
       position: 'absolute',
-      height: $('.gameBoard').height() * .06,
-      width: $('.gameBoard').width() * .07,
+      height: $('.gameBoard').height() * .05,
+      width: $('.gameBoard').width() * .06,
       left: 48 + '%',
       top: 94.7 + '%'
     });
