@@ -13,10 +13,12 @@ $(document).ready(function(){
   var placeqb = function() {
     $('.qb').css({
       position: 'absolute',
+      height: $('.gameBoard').height() * .04,
+      width: $('.gameBoard').width() * .04,
       left: 48 + '%',
       top: 94.7 + '%'
     });
-    $('#SLOTpreview').on('tap', function() {
+    $('#SLOTpreview').on('click', function() {
       $('.qb').animate({
         top: 96.5 + '%'
       }, 400);
@@ -32,10 +34,12 @@ $(document).ready(function(){
   var placeball = function() {
     $('.lobBall, .zipBall').css({
       position: 'absolute',
+      height: $('.gameBoard').height() * .033,
+      width: $('.gameBoard').width() * .02,
       left: 49 + '%',
       top: 92 + '%'
     });
-    $('#SLOTpreview').on('tap', function() {
+    $('#SLOTpreview').on('click', function() {
       $('.lobBall, .zipBall').animate({
         left: 50.5 + '%',
         top: 95.5 + '%'
@@ -48,7 +52,7 @@ $(document).ready(function(){
 
   // throw ball to mouse on click
   // ball handles all collision logic
-  $('.gameBoard').one('tap', function(event) {
+  $('.gameBoard').one('click', function(event) {
     $('.zipBall').remove();
     var x = event.clientX;
     var y = event.clientY;

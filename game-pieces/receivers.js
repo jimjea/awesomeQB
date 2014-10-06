@@ -20,6 +20,8 @@ var leftWideOut = function() {
   var startX = 10, startY = 93
   $('.LWO').css({
       position: 'absolute',
+      height: $('.gameBoard').height() * .04,
+      width: $('.gameBoard').width() * .04,
       left: startX + '%',
       top: startY + '%'
     }).data('collision', false);
@@ -99,6 +101,8 @@ var rightWideOut = function() {
   var startX = 85, startY = 93;
   $('.RWO').css({
       position: 'absolute',
+      height: $('.gameBoard').height() * .04,
+      width: $('.gameBoard').width() * .04,
       left: 85 + '%',
       top: 93 + '%'
     })
@@ -162,6 +166,8 @@ var rightSlot = function() {
   SLOTRouteNumber = Math.floor(Math.random() * 4) + 1;
   $('.SLOT').css({
       position: 'absolute',
+      height: $('.gameBoard').height() * .04,
+      width: $('.gameBoard').width() * .04,
       left: SLOTposition[position] + '%',
       top: 94 + '%'
     })
@@ -194,7 +200,7 @@ var SLOTroute = function(x, y) {
 
 
 // Start the game on click
-$('#SLOTpreview').on('tap', function(event) {
+$('#SLOTpreview').on('click', function(event) {
   $('#SLOTpreview').remove();
   $('#RWOpreview').remove();
   $('#LWOpreview').remove();
