@@ -13,8 +13,8 @@ $(document).ready(function(){
   var placeqb = function() {
     $('.qb').css({
       position: 'absolute',
-      height: $('.gameBoard').height() * .04,
-      width: $('.gameBoard').width() * .05,
+      height: $('.gameBoard').height() * .06,
+      width: $('.gameBoard').width() * .07,
       left: 48 + '%',
       top: 94.7 + '%'
     });
@@ -34,8 +34,8 @@ $(document).ready(function(){
   var placeball = function() {
     $('.lobBall, .zipBall').css({
       position: 'absolute',
-      height: $('.gameBoard').height() * .033,
-      width: $('.gameBoard').width() * .025,
+      height: $('.gameBoard').height() * .045,
+      width: $('.gameBoard').width() * .03,
       left: 49 + '%',
       top: 92 + '%'
     });
