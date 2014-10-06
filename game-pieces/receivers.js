@@ -21,7 +21,7 @@ var leftWideOut = function() {
   $('.LWO').css({
       position: 'absolute',
       height: $('.gameBoard').height() * .04,
-      width: $('.gameBoard').width() * .04,
+      width: $('.gameBoard').width() * .05,
       left: startX + '%',
       top: startY + '%'
     }).data('collision', false);
@@ -102,7 +102,7 @@ var rightWideOut = function() {
   $('.RWO').css({
       position: 'absolute',
       height: $('.gameBoard').height() * .04,
-      width: $('.gameBoard').width() * .04,
+      width: $('.gameBoard').width() * .05,
       left: 85 + '%',
       top: 93 + '%'
     })
@@ -167,7 +167,7 @@ var rightSlot = function() {
   $('.SLOT').css({
       position: 'absolute',
       height: $('.gameBoard').height() * .04,
-      width: $('.gameBoard').width() * .04,
+      width: $('.gameBoard').width() * .05,
       left: SLOTposition[position] + '%',
       top: 94 + '%'
     })

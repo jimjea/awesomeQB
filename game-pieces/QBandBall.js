@@ -14,7 +14,7 @@ $(document).ready(function(){
     $('.qb').css({
       position: 'absolute',
       height: $('.gameBoard').height() * .04,
-      width: $('.gameBoard').width() * .04,
+      width: $('.gameBoard').width() * .05,
       left: 48 + '%',
       top: 94.7 + '%'
     });
@@ -35,7 +35,7 @@ $(document).ready(function(){
     $('.lobBall, .zipBall').css({
       position: 'absolute',
       height: $('.gameBoard').height() * .033,
-      width: $('.gameBoard').width() * .02,
+      width: $('.gameBoard').width() * .025,
       left: 49 + '%',
       top: 92 + '%'
     });
