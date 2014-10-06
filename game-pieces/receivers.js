@@ -194,8 +194,10 @@ var SLOTroute = function(x, y) {
 
 
 // Start the game on click
-$('#preview').on('click', function(event) {
-  $('#preview').remove();
+$('#SLOTpreview').on('click', function(event) {
+  $('#SLOTpreview').remove();
+  $('#RWOpreview').remove();
+  $('#LWOpreview').remove();
   var SLOTx = SLOTposition[position];
   var SLOTy = 94;
   var LWOx = 10;

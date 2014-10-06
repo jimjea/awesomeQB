@@ -21,7 +21,7 @@ $(document).ready(function(){
       left: 48 + '%',
       top: 94.7 + '%'
     });
-    $('#preview').on('click', function() {
+    $('#SLOTpreview').on('click', function() {
       $('.qb').animate({
         top: 96.5 + '%'
       }, 600);
@@ -40,7 +40,7 @@ $(document).ready(function(){
       left: 49 + '%',
       top: 92 + '%'
     });
-    $('#preview').on('click', function() {
+    $('#SLOTpreview').on('click', function() {
       $('.lobBall, .zipBall').animate({
         left: 50.5 + '%',
         top: 95.5 + '%'
