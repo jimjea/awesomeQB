@@ -5,11 +5,6 @@
 
 $(document).ready(function(){
 
-  // Start New Game
-  $('.newGame').on('click', function() {
-    location.reload();
-  })
-
 
 /**************************************/
 //                Q B                 //
@@ -21,7 +16,7 @@ $(document).ready(function(){
       left: 48 + '%',
       top: 94.7 + '%'
     });
-    $('#SLOTpreview').on('click', function() {
+    $('#SLOTpreview').on('tap', function() {
       $('.qb').animate({
         top: 96.5 + '%'
       }, 400);
@@ -40,7 +35,7 @@ $(document).ready(function(){
       left: 49 + '%',
       top: 92 + '%'
     });
-    $('#SLOTpreview').on('click', function() {
+    $('#SLOTpreview').on('tap', function() {
       $('.lobBall, .zipBall').animate({
         left: 50.5 + '%',
         top: 95.5 + '%'
@@ -53,7 +48,7 @@ $(document).ready(function(){
 
   // throw ball to mouse on click
   // ball handles all collision logic
-  $('.gameBoard').one('click', function(event) {
+  $('.gameBoard').one('tap', function(event) {
     $('.zipBall').remove();
     var x = event.clientX;
     var y = event.clientY;
@@ -123,7 +118,7 @@ $(document).ready(function(){
             $('.SLOT').stop(true, false).animate({top: $('.SLOT')[0].offsetTop - 7, left: $('.SLOT')[0].offsetLeft}, 800);
           }
 
-          // setTimeout(function(){location.reload()}, 1000);
+          setTimeout(function(){location.reload()}, 1000);
         }
       })
     }
@@ -134,10 +129,10 @@ $(document).ready(function(){
 
   // zips ball in a straight on on flick
   // receiver can catch the ball anywhere in the line
-    $('.zipBall').mousedown(function (event) {
-        startDownX = event.pageX;
-        startDownY = event.pageY;
-    });
+    // $('.zipBall').mousedown(function (event) {
+    //     startDownX = event.pageX;
+    //     startDownY = event.pageY;
+    // });
         
     // $('.gameBoard').on('mouseup', function(event){
        
