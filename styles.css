@@ -102,7 +102,7 @@ canvas {
   background-size: 100% 100%;
 }
 
-.touchdown {
+.touchdown, #touchdown {
   position: absolute;
   background-image: url('./assets/touchdown.png');
   display: none;
