@@ -77,8 +77,8 @@ $(document).ready(function(){
     var ballSize = 0;
     var lobBall = function() {
       $('.lobBall').animate({
-        left: x - 9 + 'px',
-        top: y - 5 + 'px'
+        left: x + 'px',
+        top: y + 'px'
       }, {
         duration: 600,
         step: function() { // adjusts the size of the ball as it travels
@@ -114,7 +114,7 @@ $(document).ready(function(){
             $('.caught').css({height: $('.gameBoard').height() * .11, width: $('.gameBoard').height() * .12}).offset({top: event.tweens[1].end - 15, left: event.tweens[0].end - 15}).show()
             setTimeout(function(){$('.caught').hide()}, 400);
           } else {
-            $('.incomplete').css({height: $('.gameBoard').height() * .11, width: $('.gameBoard').height() * .12}).offset({top: event.tweens[1].end - 25, left: event.tweens[0].end - 25}).show();
+            $('.incomplete').css({height: $('.gameBoard').height() * .11, width: $('.gameBoard').height() * .12}).offset({top: event.tweens[1].end, left: event.tweens[0].end}).show();
             setTimeout(function(){$('.incomplete').hide()}, 400);
             $('.lobBall').animate({top: event.tweens[1].end - 8 + 'px', left: event.tweens[0].end + 1 + 'px'}, 400);
             $('.LWO').stop(true, false).animate({top: $('.LWO')[0].offsetTop - 10, left: $('.LWO')[0].offsetLeft + 15}, 800);
