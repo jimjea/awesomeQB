@@ -2,15 +2,6 @@
 //      L E F T  W I D E  O U T       //
 /**************************************/
 
-// helper funciton for previewing routes
-var CP = function(x, y) { // calculate x and y pixel coordinates based on %
-  var xPercent = x/100;
-  var yPercent = y/100;
-  // console.log(gameOptions.width * .75)
-  return [xPercent, yPercent];
-};
-
-
 
 // All code documentation for receivers will be in LEFT WIDE OUT since all receivers are virtually the same
 
@@ -35,28 +26,6 @@ var leftWideOut = function() {
   $('.LWO').on('collision_start', function(event) {
     $('.gameBoard').append('<div>caught</div>').offset({top: '400px'})
   })
-
-  /***********************************/
-  //     C A N V A S  L O G I C      //
-  /***********************************/
-  var LWOpreview = document.getElementById("preview");
-  var LWOtx = LWOpreview.getContext("2d");
-  var LWOstart = CP(startX, startY);
-  LWOtx.moveTo(LWOstart[0] + 9, LWOstart[1] + 10);
-  var LWOFirstMove = CP(startX + LWOroutes[LWORouteNumber].firstX, startY + LWOroutes[LWORouteNumber].firstY);
-  LWOtx.lineTo(LWOFirstMove[0] + 9, LWOFirstMove[1] + 10);
-  LWOtx.lineTo(LWOFirstMove[0] + 9, LWOFirstMove[1] + 10);
-  var LWOSecondMove = CP(startX + LWOroutes[LWORouteNumber].secondX, startY + LWOroutes[LWORouteNumber].secondY);
-  LWOtx.lineTo(LWOSecondMove[0] + 9, LWOSecondMove[1] + 10);
-  LWOtx.lineTo(LWOSecondMove[0] + 9, LWOSecondMove[1] + 10);
-  var LWOThirdMove = CP(startX + LWOroutes[LWORouteNumber].thirdX, startY + LWOroutes[LWORouteNumber].thirdY);
-  LWOtx.lineTo(LWOThirdMove[0] + 9, LWOThirdMove[1] + 10);
-  LWOtx.lineTo(LWOThirdMove[0] + 9, LWOThirdMove[1] + 10);
-  LWOtx.globalAlpha = 0.2;
-  LWOtx.strokeStyle = "blue";
-  LWOtx.lineWidth = 10;
-  LWOtx.lineCap = "round";
-  LWOtx.stroke();
   
 
 };
@@ -134,24 +103,7 @@ var rightWideOut = function() {
       top: 93 + '%'
     })
 
-  /***********************************/
-  //     C A N V A S  L O G I C      //
-  /***********************************/
-  var RWOpreview = document.getElementById("preview");
-  var RWOtx = RWOpreview.getContext("2d");
-  var RWOstart = CP(startX, startY);
-  RWOtx.moveTo(RWOstart[0] + 9, RWOstart[1] + 10);
-  var RWOFirstMove = CP(startX + RWOroutes[RWORouteNumber].firstX, startY + RWOroutes[RWORouteNumber].firstY);
-  RWOtx.lineTo(RWOFirstMove[0] + 9, RWOFirstMove[1] + 10);
-  var RWOSecondMove = CP(startX + RWOroutes[RWORouteNumber].secondX, startY + RWOroutes[RWORouteNumber].secondY);
-  RWOtx.lineTo(RWOSecondMove[0] + 9, RWOSecondMove[1] + 10);
-  var RWOThirdMove = CP(startX + RWOroutes[RWORouteNumber].thirdX, startY + RWOroutes[RWORouteNumber].thirdY);
-  RWOtx.lineTo(RWOThirdMove[0] + 9, RWOThirdMove[1] + 10);
-  RWOtx.globalAlpha = 0.2;
-  RWOtx.strokeStyle = "red";
-  RWOtx.lineWidth = 10;
-  RWOtx.lineCap = "round";
-  RWOtx.stroke();
+
 };
 rightWideOut()
 
@@ -214,24 +166,6 @@ var rightSlot = function() {
       top: 94 + '%'
     })
 
-  /***********************************/
-  //     C A N V A S  L O G I C      //
-  /***********************************/
-  var SLOTpreview = document.getElementById("preview");
-  var SLOTtx = SLOTpreview.getContext("2d");
-  var SLOTstart = CP(startX, startY);
-  SLOTtx.moveTo(SLOTstart[0] + 9, SLOTstart[1] + 10);
-  var SLOTFirstMove = CP(startX + SLOTroutes[position][SLOTRouteNumber].firstX, startY + SLOTroutes[position][SLOTRouteNumber].firstY);
-  SLOTtx.lineTo(SLOTFirstMove[0] + 9, SLOTFirstMove[1] + 10);
-  var SLOTSecondMove = CP(startX + SLOTroutes[position][SLOTRouteNumber].secondX, startY + SLOTroutes[position][SLOTRouteNumber].secondY);
-  SLOTtx.lineTo(SLOTSecondMove[0] + 9, SLOTSecondMove[1] + 10);
-  var SLOTThirdMove = CP(startX + SLOTroutes[position][SLOTRouteNumber].thirdX, startY + SLOTroutes[position][SLOTRouteNumber].thirdY);
-  SLOTtx.lineTo(SLOTThirdMove[0] + 9, SLOTThirdMove[1] + 10);
-  SLOTtx.globalAlpha = 0.4;
-  SLOTtx.strokeStyle = "white";
-  SLOTtx.lineWidth = 10;
-  SLOTtx.lineCap = "round";
-  SLOTtx.stroke();
 };
 rightSlot()
 
@@ -276,32 +210,32 @@ $('#preview').on('click', function(event) {
 
 
 
-/**************************************/
-//     P R E V I E W  R O U T E S     //
-/**************************************/
-$('.showRoutes').on('click', function(event) {
-  var RSLOTx = SLOTposition[position];
-  var RSLOTy = 94;
-  var RWOx = 85;
-  var RWOy = 93;
-  var LWOx = 10;
-  var LWOy = 93;
-  LWOroute(LWOx, LWOy);
-  RWOroute(RWOx, RWOy);
-  SLOTroute(RSLOTx, RSLOTy);
-  var reset = function(){
-    $('.SLOT').css({
-      left: RSLOTx + '%',
-      top: RSLOTy + '%'
-    })
-    $('.RWO').css({
-      left: RWOx + '%',
-      top: RWOy + '%'
-    })
-    $('.LWO').css({
-      left: LWOx + '%',
-      top: LWOy + '%'
-    })
-  };
-  setTimeout(reset, 4700);
-});
+// /**************************************/
+// //     P R E V I E W  R O U T E S     //
+// /**************************************/
+// $('.showRoutes').on('click', function(event) {
+//   var RSLOTx = SLOTposition[position];
+//   var RSLOTy = 94;
+//   var RWOx = 85;
+//   var RWOy = 93;
+//   var LWOx = 10;
+//   var LWOy = 93;
+//   LWOroute(LWOx, LWOy);
+//   RWOroute(RWOx, RWOy);
+//   SLOTroute(RSLOTx, RSLOTy);
+//   var reset = function(){
+//     $('.SLOT').css({
+//       left: RSLOTx + '%',
+//       top: RSLOTy + '%'
+//     })
+//     $('.RWO').css({
+//       left: RWOx + '%',
+//       top: RWOy + '%'
+//     })
+//     $('.LWO').css({
+//       left: LWOx + '%',
+//       top: LWOy + '%'
+//     })
+//   };
+//   setTimeout(reset, 4700);
+// });
