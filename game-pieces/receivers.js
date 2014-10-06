@@ -6,9 +6,9 @@
 // All code documentation for receivers will be in LEFT WIDE OUT since all receivers are virtually the same
 
 var LWOroutes = {
-  1: {firstX: 0, firstY: -40, firstDur: 1500, secondX: 3, secondY: -30, secondDur: 1500},                                          // curl
-  2: {firstX: 0, firstY: -40, firstDur: 1500, secondX: 78, secondY: -85, secondDur: 1500},                                         // post
-  3: {firstX: 0, firstY: -38, firstDur: 1500, secondX: 78, secondY: -38, secondDur: 1500},                                         // cross
+  1: {firstX: 0, firstY: -40, firstDur: 1500, secondX: 3, secondY: -30, secondDur: 900},                                          // curl
+  2: {firstX: 0, firstY: -40, firstDur: 1500, secondX: 78, secondY: -85, secondDur: 1900},                                         // post
+  3: {firstX: 0, firstY: -38, firstDur: 1500, secondX: 78, secondY: -38, secondDur: 1900},                                         // cross
   4: {firstX: 0, firstY: -32, firstDur: 1500, secondX: 40, secondY: -60, secondDur: 1500, thirdX: 0, thirdY: -85, thirdDur: 1500}, // post corner
   5: {firstX: 75, firstY: -22, firstDur: 2500, secondX: 78, secondY: -85, secondDur: 1900}                                         // slant then corner
 }
@@ -86,10 +86,10 @@ var LWOroute = function(x, y) {
 //     R I G H T  W I D E  O U T      //
 /**************************************/
 var RWOroutes = {
-  1: {firstX: 0, firstY: -40, firstDur: 1500, secondX: -3, secondY: -30, secondDur: 1500},                               // curl
-  2: {firstX: 0, firstY: -40, firstDur: 1500, secondX: -78, secondY: -85, secondDur: 1500},                              // post
+  1: {firstX: 0, firstY: -40, firstDur: 1500, secondX: -3, secondY: -30, secondDur: 900},                               // curl
+  2: {firstX: 0, firstY: -40, firstDur: 1500, secondX: -78, secondY: -85, secondDur: 3000},                              // post
   3: {firstX: -75, firstY: -22, firstDur: 2500, secondX: -78, secondY: -85, secondDur: 1500},                            // slant then corner
-  4: {firstX: 0, firstY: -32, firstDur: 1500, secondX: -78, secondY: -32, secondDur: 1500},                              // cross
+  4: {firstX: 0, firstY: -32, firstDur: 1500, secondX: -78, secondY: -32, secondDur: 2500},                              // cross
   5: {firstX: 0, firstY: -32, firstDur: 1500, secondX: -40, secondY: -60, secondDur: 1500, thirdX: -0, thirdY: -85, thirdDur: 1500}      // post corner
 }
 var RWORouteNumber;

@@ -26,7 +26,6 @@ function preview() {
   resizeCanvas();
 
   function drawStuff() {
-    console.log('got here')
     var lwoX = 10, lwoY = 93;
     context.moveTo(canvas.width * (lwoX/100) + 9, canvas.height * (lwoY/100) + 10);
     context.lineTo(canvas.width * ((lwoX + LWOroutes[LWORouteNumber].firstX)/100) + 9, canvas.height * ((lwoY + LWOroutes[LWORouteNumber].firstY)/100) + 10);

@@ -49,6 +49,8 @@ $(document).ready(function(){
   }
   placeball();
 
+
+
   // throw ball to mouse on click
   // ball handles all collision logic
   $('.gameBoard').one('click', function(event) {
@@ -59,8 +61,8 @@ $(document).ready(function(){
     // Lobbing the ball on click will only allow the receiver to catch it as the ball ends its animation
     var lobBall = function() {
       $('.lobBall').animate({
-        left: x - 16 + 'px',
-        top: y - 10 + 'px'
+        left: x - 9 + 'px',
+        top: y - 5 + 'px'
       }, {
         duration: 600,
         step: function() {
@@ -101,6 +103,8 @@ $(document).ready(function(){
     lobBall();
   });
 
+
+
   // zips ball in a straight on on flick
   // receiver can catch the ball anywhere in the line
     $('.zipBall').mousedown(function (event) {
@@ -108,38 +112,37 @@ $(document).ready(function(){
         startDownY = event.pageY;
     });
         
-    /* Work out fling direction on end of fling */
-    $('.gameBoard').on('dblclick', function(event){
+    // $('.gameBoard').on('mouseup', function(event){
        
-        var rise = -(event.pageY - startDownY); /* Page Origin is different from graph */
-        var run = event.pageX - startDownX;
-        var newX = $('.zipBall').position().left;
-        var newY = $('.zipBall').position().top;
-        var distanceToFling = 100;
+    //     var rise = -(event.pageY - startDownY); /* Page Origin is different from graph */
+    //     var run = event.pageX - startDownX;
+    //     var newX = $('.zipBall').position().left;
+    //     var newY = $('.zipBall').position().top;
+    //     var distanceToFling = 100;
 
-        if (run == 0 || Math.abs(rise/run) > 3) {
-            if (rise > 0) {
-              newY -= distanceToFling;
-            } else if (rise < 0) {
-              newY += distanceToFling;
-            }
-        }
-        else {
-            if (run > 0) {
-                newX += distanceToFling;
-                newY -= (rise/run) * distanceToFling;
-            }
-            else {
-                newX -= distanceToFling;
-                newY += (rise/run) * distanceToFling;
-            }
-        }
+    //     if (run == 0 || Math.abs(rise/run) > 3) {
+    //         if (rise > 0) {
+    //           newY -= distanceToFling;
+    //         } else if (rise < 0) {
+    //           newY += distanceToFling;
+    //         }
+    //     }
+    //     else {
+    //         if (run > 0) {
+    //             newX += distanceToFling;
+    //             newY -= (rise/run) * distanceToFling;
+    //         }
+    //         else {
+    //             newX -= distanceToFling;
+    //             newY += (rise/run) * distanceToFling;
+    //         }
+    //     }
        
-         $('.zipBall').animate({
-             left: newX,
-             top: newY
-            }, 1000);
-    });
+    //      $('.zipBall').animate({
+    //          left: newX,
+    //          top: newY
+    //         }, 1000);
+    // });
 
 
 
