@@ -102,29 +102,29 @@ $(document).ready(function(){
           if (LWOHit.length > 0) {
             $('.LWO').stop(true, false).animate({top: event.tweens[1].end - 25 + 'px'}, 800);
             $('.lobBall').animate({top: event.tweens[1].end - 25 + 'px'}, 800);
-            if ($('.lobBall')[0].offsetTop < $('.gameBoard').height() * .359) {
-              $('.touchdown').css({height: $('.gameBoard').height() * .3, width: $('.gameBoard').width() * .9}).offset({top: $('.gameBoard').height() * .2 - $('.touchdown').height()/2, left: $('.gameBoard').width() * .55 - $('.touchdown').width()/2}).show();
-            } else {
+            // if ($('.lobBall')[0].offsetTop < $('.gameBoard').height() * .359) {
+            //   $('.touchdown').css({height: $('.gameBoard').height() * .3, width: $('.gameBoard').width() * .9}).offset({top: $('.gameBoard').height() * .2 - $('.touchdown').height()/2, left: $('.gameBoard').width() * .55 - $('.touchdown').width()/2}).show();
+            // } else {
               $('.caught').css({height: $('.gameBoard').height() * .11, width: $('.gameBoard').height() * .12}).offset({top: event.tweens[1].end - $('.caught').height()/2, left: event.tweens[0].end - $('.caught').width()/2}).show();
-            }
+            // }
             setTimeout(function(){$('.caught').hide()}, 400);
           } else if (RWOHit.length > 0) {
             $('.RWO').stop(true, false).animate({top: event.tweens[1].end - 25 + 'px'}, 800);
             $('.lobBall').animate({top: event.tweens[1].end - 25 + 'px'}, 800);
-            if ($('.lobBall')[0].offsetTop < $('.gameBoard').height() * .359) {
-              $('.touchdown').css({height: $('.gameBoard').height() * .3, width: $('.gameBoard').width() * .9}).offset({top: $('.gameBoard').height() * .2 - $('.touchdown').height()/2, left: $('.gameBoard').width() * .55 - $('.touchdown').width()/2}).show();
-            } else {
+            // if ($('.lobBall')[0].offsetTop < $('.gameBoard').height() * .359) {
+            //   $('.touchdown').css({height: $('.gameBoard').height() * .3, width: $('.gameBoard').width() * .9}).offset({top: $('.gameBoard').height() * .2 - $('.touchdown').height()/2, left: $('.gameBoard').width() * .55 - $('.touchdown').width()/2}).show();
+            // } else {
               $('.caught').css({height: $('.gameBoard').height() * .11, width: $('.gameBoard').height() * .12}).offset({top: event.tweens[1].end - $('.caught').height()/2, left: event.tweens[0].end - $('.caught').width()/2}).show();
-            }
+            // }
             setTimeout(function(){$('.caught').hide()}, 400);
           } else if (SLOTHit.length > 0) {
             $('.SLOT').stop(true, false).animate({top: event.tweens[1].end - 25 + 'px'}, 800);
             $('.lobBall').animate({top: event.tweens[1].end - 25 + 'px'}, 800);
-            if ($('.lobBall')[0].offsetTop < $('.gameBoard').height() * .359) {
-              $('.touchdown').css({height: $('.gameBoard').height() * .3, width: $('.gameBoard').width() * .9}).offset({top: $('.gameBoard').height() * .2 - $('.touchdown').height()/2, left: $('.gameBoard').width() * .55 - $('.touchdown').width()/2}).show();
-            } else {
+            // if ($('.lobBall')[0].offsetTop < $('.gameBoard').height() * .359) {
+            //   $('.touchdown').css({height: $('.gameBoard').height() * .3, width: $('.gameBoard').width() * .9}).offset({top: $('.gameBoard').height() * .2 - $('.touchdown').height()/2, left: $('.gameBoard').width() * .55 - $('.touchdown').width()/2}).show();
+            // } else {
               $('.caught').css({height: $('.gameBoard').height() * .11, width: $('.gameBoard').height() * .12}).offset({top: event.tweens[1].end - $('.caught').height()/2, left: event.tweens[0].end - $('.caught').width()/2}).show();
-            }
+            // }
             setTimeout(function(){$('.caught').hide()}, 400);
           } else {
             $('.incomplete').css({height: $('.gameBoard').height() * .11, width: $('.gameBoard').height() * .12}).offset({top: event.tweens[1].end - $('.incomplete').height()/2, left: event.tweens[0].end - $('.incomplete').width()/2}).show();

@@ -40,7 +40,7 @@ function preview() {
     LWOcontext.lineTo(LWOcanvas.width * ((lwoX + LWOroutes[LWORouteNumber].firstX)/100) + width, LWOcanvas.height * ((lwoY + LWOroutes[LWORouteNumber].firstY)/100) + 10);
     LWOcontext.lineTo(LWOcanvas.width * ((lwoX + LWOroutes[LWORouteNumber].secondX)/100) + width, LWOcanvas.height * ((lwoY + LWOroutes[LWORouteNumber].secondY)/100) + 10);
     LWOcontext.lineTo(LWOcanvas.width * ((lwoX + LWOroutes[LWORouteNumber].thirdX)/100) + width, LWOcanvas.height * ((lwoY + LWOroutes[LWORouteNumber].thirdY)/100) + 10);
-    LWOcontext.globalAlpha = 0.2;
+    LWOcontext.globalAlpha = 0.43;
     LWOcontext.strokeStyle = "blue";
     LWOcontext.lineWidth = width;
     LWOcontext.lineCap = "round";
@@ -50,7 +50,7 @@ function preview() {
     RWOcontext.lineTo(RWOcanvas.width * ((rwoX + RWOroutes[RWORouteNumber].firstX)/100) + width, RWOcanvas.height * ((rwoY + RWOroutes[RWORouteNumber].firstY)/100) + 10);
     RWOcontext.lineTo(RWOcanvas.width * ((rwoX + RWOroutes[RWORouteNumber].secondX)/100) + width, RWOcanvas.height * ((rwoY + RWOroutes[RWORouteNumber].secondY)/100) + 10);
     RWOcontext.lineTo(RWOcanvas.width * ((rwoX + RWOroutes[RWORouteNumber].thirdX)/100) + width, RWOcanvas.height * ((rwoY + RWOroutes[RWORouteNumber].thirdY)/100) + 10);
-    RWOcontext.globalAlpha = 0.2;
+    RWOcontext.globalAlpha = 0.43;
     RWOcontext.strokeStyle = "red";
     RWOcontext.lineWidth = width;
     RWOcontext.lineCap = "round";
@@ -60,7 +60,7 @@ function preview() {
     SLOTcontext.lineTo(SLOTcanvas.width * ((slotX + SLOTroutes[position][SLOTRouteNumber].firstX)/100) + width, SLOTcanvas.height * ((slotY + SLOTroutes[position][SLOTRouteNumber].firstY)/100) + 10);
     SLOTcontext.lineTo(SLOTcanvas.width * ((slotX + SLOTroutes[position][SLOTRouteNumber].secondX)/100) + width, SLOTcanvas.height * ((slotY + SLOTroutes[position][SLOTRouteNumber].secondY)/100) + 10);
     SLOTcontext.lineTo(SLOTcanvas.width * ((slotX + SLOTroutes[position][SLOTRouteNumber].thirdX)/100) + width, SLOTcanvas.height * ((slotY + SLOTroutes[position][SLOTRouteNumber].thirdY)/100) + 10);
-    SLOTcontext.globalAlpha = 0.2;
+    SLOTcontext.globalAlpha = 0.43;
     SLOTcontext.strokeStyle = "yellow";
     SLOTcontext.lineWidth = width;
     SLOTcontext.lineCap = "round";
