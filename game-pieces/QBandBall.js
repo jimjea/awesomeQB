@@ -14,7 +14,7 @@ $(document).ready(function(){
   // makes sure you can only throw once
   var notThrown = true;
 
-/**************************************/           // TODO: make caught and incomplete signs scale with field,  have slot start in position, zip ball, score touchdown
+/**************************************/           // TODO: zip ball, score touchdown
 //                Q B                 //           
 /**************************************/
 
@@ -119,7 +119,7 @@ $(document).ready(function(){
           // console.log('ball land: ', event.elem.offsetTop)
           // console.log('diff: ',diff)
           // console.log('currentYPercent: ', currentYPercent)
-          // console.log('new position %: ', newBackgroundPosition)
+          console.log('new position %: ', newBackgroundPosition)
 
           if (LWOHit.length > 0) {
             var currentLWOposition = $('.LWO').position();
@@ -146,7 +146,7 @@ $(document).ready(function(){
 
               placeqb();
               placeball();
-              leftWideOut(2000);
+              leftWideOut(2000, 10, 84);
               rightWideOut(2000);
               slot(2000);
             }, 1000);
