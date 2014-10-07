@@ -17,7 +17,7 @@ var LWORouteNumber;
 var leftWideOut = function() {
   // Define route number upon receiver placement so the random generator is not reset on previewing the route
   LWORouteNumber = Math.floor(Math.random() * 5) + 1;
-  var startX = 10, startY = 93
+  var startX = 10, startY = 92
   $('.LWO').css({
       position: 'absolute',
       height: $('.gameBoard').height() * .05,
@@ -87,7 +87,7 @@ var RWORouteNumber;
 
 var rightWideOut = function() {
   RWORouteNumber = Math.floor(Math.random() * 5) + 1;
-  var startX = 85, startY = 93;
+  var startX = 85, startY = 92;
   $('.RWO').css({
       position: 'absolute',
       height: $('.gameBoard').height() * .05,
@@ -151,7 +151,7 @@ var SLOTRouteNumber;
 
 var rightSlot = function() {
   position = Math.round(Math.random());
-  var startX = SLOTposition[position], startY = 94;
+  var startX = SLOTposition[position], startY = 93;
   SLOTRouteNumber = Math.floor(Math.random() * 4) + 1;
   $('.SLOT').css({
       position: 'absolute',
@@ -190,9 +190,9 @@ var SLOTroute = function(x, y) {
 
 // Start the game on click
 $('#SLOTpreview').on('click', function(event) {
-  $('#SLOTpreview').remove();
-  $('#RWOpreview').remove();
-  $('#LWOpreview').remove();
+  $('#SLOTpreview').hide();
+  $('#RWOpreview').hide();
+  $('#LWOpreview').hide();
   var SLOTx = SLOTposition[position];
   var SLOTy = 94;
   var LWOx = 10;

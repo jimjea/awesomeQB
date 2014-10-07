@@ -16,11 +16,11 @@ $(document).ready(function(){
       height: $('.gameBoard').height() * .05,
       width: $('.gameBoard').width() * .06,
       left: 48 + '%',
-      top: 94.7 + '%'
+      top: 94 + '%'
     });
     $('#SLOTpreview').on('click', function() {
       $('.qb').animate({
-        top: 96.5 + '%'
+        top: 95.5 + '%'
       }, 400);
     });
   };
@@ -53,7 +53,7 @@ $(document).ready(function(){
   // throw ball to mouse on click
   // ball handles all collision logic
   $('.gameBoard').one('click', function(event) {
-    $('.zipBall').remove();
+    $('.zipBall').hide();
     var x = event.clientX;
     var y = event.clientY;
     var startX = gameOptions.width * .505;

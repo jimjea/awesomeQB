@@ -24,7 +24,7 @@ canvas {
   overflow: hidden;
   background-image: url('./assets/field.png');
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: 50% 42%;
   background-size: 105%;
 }
 
