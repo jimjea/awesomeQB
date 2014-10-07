@@ -14,7 +14,7 @@ var percentChange = function(num1, num2) {
 // makes sure you can only throw once
 var notThrown = true;
 
-/**************************************/           // TODO: apply after play logic to all receivers, make caught and incomplete signs scale with field, draw new routes, have slot start in position, zip ball, score touchdown
+/**************************************/           // TODO: huge lag after playing 3-4 rounds, apply after play logic to all receivers, make caught and incomplete signs scale with field, draw new routes, have slot start in position, zip ball, score touchdown
 //                Q B                 //           
 /**************************************/
 
@@ -40,13 +40,10 @@ var notThrown = true;
 //               B A L L              //
 /**************************************/
   var placeball = function() {
-    $('.lobBall, .zipBall').css({
-      position: 'absolute',
-      height: $('.gameBoard').height() * .045,
-      width: $('.gameBoard').width() * .03,
+    $('.lobBall, .zipBall').animate({
       left: 49 + '%',
       top: 92 + '%'
-    });
+    }, 300);
     $('#SLOTpreview').on('click', function() {
       $('.lobBall, .zipBall').animate({
         left: 50.5 + '%',
@@ -123,6 +120,68 @@ var notThrown = true;
               setTimeout(function(){$('.caught').hide()}, 400);
             // }
 
+            setTimeout(function(){ // handles getting set up for the next play
+              notThrown = true;
+              $('#LWOpreview').show();
+              $('#RWOpreview').show();
+              $('#SLOTpreview').show();
+
+              $('.gameBoard').animate({
+                'background-position-x': '50%', 
+                'background-position-y': newBackgroundPosition - 3 + '%' 
+              }, 3000);
+
+              $('.RWO').stop(true, false);
+              $('.SLOT').stop(true, false);
+
+              leftWideOut();
+              rightWideOut();
+              slot();
+              preview();
+              placeball();
+            }, 1000);
+
+          } else if (RWOHit.length > 0) {
+            $('.RWO').stop(true, false).animate({top: event.tweens[1].end - 25 + 'px'}, 800);
+            $('.lobBall').animate({top: event.tweens[1].end - 25 + 'px'}, 800);
+            // if ($('.lobBall')[0].offsetTop < gameboardHeight * .359) {
+            //   $('.touchdown').css({height: gameboardHeight * .3, width: $('.gameBoard').width() * .9}).offset({top: gameboardHeight * .2 - $('.touchdown').height()/2, left: $('.gameBoard').width() * .55 - $('.touchdown').width()/2}).show();
+            // } else {
+            // }
+              $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12}).offset({top: event.tweens[1].end - $('.caught').height()/2, left: event.tweens[0].end - $('.caught').width()/2}).show();
+              setTimeout(function(){$('.caught').hide()}, 400);
+
+            setTimeout(function(){
+              notThrown = true;
+              $('#LWOpreview').show();
+              $('#RWOpreview').show();
+              $('#SLOTpreview').show();
+
+              $('.gameBoard').animate({
+                'background-position-x': '50%', 
+                'background-position-y': newBackgroundPosition + '%' 
+              }, 3000);
+
+              $('.LWO').stop(true, false);
+              $('.SLOT').stop(true, false);
+
+              leftWideOut();
+              rightWideOut();
+              slot();
+              preview();
+              placeball();
+            }, 1000);
+
+          } else if (SLOTHit.length > 0) {
+            $('.SLOT').stop(true, false).animate({top: event.tweens[1].end - 25 + 'px'}, 800);
+            $('.lobBall').animate({top: event.tweens[1].end - 25 + 'px'}, 800);
+            // if ($('.lobBall')[0].offsetTop < gameboardHeight * .359) {
+            //   $('.touchdown').css({height: gameboardHeight * .3, width: $('.gameBoard').width() * .9}).offset({top: gameboardHeight * .2 - $('.touchdown').height()/2, left: $('.gameBoard').width() * .55 - $('.touchdown').width()/2}).show();
+            // } else {
+            // }
+              $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12}).offset({top: event.tweens[1].end - $('.caught').height()/2, left: event.tweens[0].end - $('.caught').width()/2}).show();
+              setTimeout(function(){$('.caught').hide()}, 400);
+
             setTimeout(function(){
               notThrown = true;
               $('#LWOpreview').show();
@@ -135,34 +194,15 @@ var notThrown = true;
               }, 3000);
 
               $('.RWO').stop(true, false);
-              $('.SLOT').stop(true, false);
+              $('.LWO').stop(true, false);
 
               leftWideOut();
               rightWideOut();
               slot();
+              preview();
+              placeball();
             }, 1000);
 
-          } else if (RWOHit.length > 0) {
-            $('.RWO').stop(true, false).animate({top: event.tweens[1].end - 25 + 'px'}, 800);
-            $('.lobBall').animate({top: event.tweens[1].end - 25 + 'px'}, 800);
-            // if ($('.lobBall')[0].offsetTop < gameboardHeight * .359) {
-            //   $('.touchdown').css({height: gameboardHeight * .3, width: $('.gameBoard').width() * .9}).offset({top: gameboardHeight * .2 - $('.touchdown').height()/2, left: $('.gameBoard').width() * .55 - $('.touchdown').width()/2}).show();
-            // } else {
-              $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12}).offset({top: event.tweens[1].end - $('.caught').height()/2, left: event.tweens[0].end - $('.caught').width()/2}).show();
-
-            // }
-            $('.gameBoard').animate({'background-position-x': '50%', 'background-position-y': newBackgroundPosition + '%' }, 3000)
-            setTimeout(function(){$('.caught').hide()}, 400);
-          } else if (SLOTHit.length > 0) {
-            $('.SLOT').stop(true, false).animate({top: event.tweens[1].end - 25 + 'px'}, 800);
-            $('.lobBall').animate({top: event.tweens[1].end - 25 + 'px'}, 800);
-            // if ($('.lobBall')[0].offsetTop < gameboardHeight * .359) {
-            //   $('.touchdown').css({height: gameboardHeight * .3, width: $('.gameBoard').width() * .9}).offset({top: gameboardHeight * .2 - $('.touchdown').height()/2, left: $('.gameBoard').width() * .55 - $('.touchdown').width()/2}).show();
-            // } else {
-              $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12}).offset({top: event.tweens[1].end - $('.caught').height()/2, left: event.tweens[0].end - $('.caught').width()/2}).show();
-            // }
-            $('.gameBoard').animate({'background-position-x': '50%', 'background-position-y': newBackgroundPosition + '%' }, 3000)
-            setTimeout(function(){$('.caught').hide()}, 400);
           } else {
             $('.incomplete').css({height: gameboardHeight * .11, width: gameboardHeight * .12}).offset({top: event.tweens[1].end - $('.incomplete').height()/2, left: event.tweens[0].end - $('.incomplete').width()/2}).show();
             setTimeout(function(){$('.incomplete').hide()}, 400);
@@ -170,6 +210,20 @@ var notThrown = true;
             $('.LWO').stop(true, false).animate({top: $('.LWO')[0].offsetTop - 10, left: $('.LWO')[0].offsetLeft + 15}, 800);
             $('.RWO').stop(true, false).animate({top: $('.RWO')[0].offsetTop - 6, left: $('.RWO')[0].offsetLeft - 15}, 800);
             $('.SLOT').stop(true, false).animate({top: $('.SLOT')[0].offsetTop - 7, left: $('.SLOT')[0].offsetLeft}, 800);
+
+            setTimeout(function(){
+              notThrown = true;
+
+              leftWideOut();
+              rightWideOut();
+              slot();
+              preview();
+              placeball();
+
+              $('#LWOpreview').show();
+              $('#RWOpreview').show();
+              $('#SLOTpreview').show();
+            }, 1000);
           }
 
           // Signals touchdown

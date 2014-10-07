@@ -52,14 +52,16 @@ canvas {
 .lobBall, .zipBall {
   position: absolute;
   background-image: url('./assets/football.png');
-  height: 18px;
-  width: 11px;
+  height: 4.5%;
+  width: 3%;
   text-indent: 100%;
   white-space: nowrap;
   overflow: hidden;
   z-index: 31;
   background-repeat: no-repeat;
   background-size: 100% 100%;
+  top: 92%;
+  left: 49%;
   /*-webkit-transform: rotate(0deg);*/
   /*-webkit-transform-origin: 20% 40%;*/
 }
