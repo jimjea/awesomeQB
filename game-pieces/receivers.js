@@ -18,13 +18,10 @@ var leftWideOut = function() {
   // Define route number upon receiver placement so the random generator is not reset on previewing the route
   LWORouteNumber = Math.floor(Math.random() * 5) + 1;
   var startX = 10, startY = 92
-  $('.LWO').css({
-      position: 'absolute',
-      height: $('.gameBoard').height() * .05,
-      width: $('.gameBoard').width() * .06,
+  $('.LWO').animate({
       left: startX + '%',
       top: startY + '%'
-    })
+    }, 2000)
   // .data('collision', false);
   // $('.LWO').on('collision_start', function(event) {
   //   $('.gameBoard').append('<div>caught</div>').offset({top: '400px'})
@@ -88,13 +85,10 @@ var RWORouteNumber;
 var rightWideOut = function() {
   RWORouteNumber = Math.floor(Math.random() * 5) + 1;
   var startX = 85, startY = 92;
-  $('.RWO').css({
-      position: 'absolute',
-      height: $('.gameBoard').height() * .05,
-      width: $('.gameBoard').width() * .06,
-      left: 85 + '%',
-      top: 93 + '%'
-    })
+  $('.RWO').animate({
+      left: startX + '%',
+      top: startY + '%'
+    }, 2000);
 
 
 };
@@ -149,20 +143,17 @@ var SLOTroutes = {
 };
 var SLOTRouteNumber;
 
-var rightSlot = function() {
+var slot = function() {
   position = Math.round(Math.random());
   var startX = SLOTposition[position], startY = 93;
   SLOTRouteNumber = Math.floor(Math.random() * 4) + 1;
-  $('.SLOT').css({
-      position: 'absolute',
-      height: $('.gameBoard').height() * .05,
-      width: $('.gameBoard').width() * .06,
-      left: SLOTposition[position] + '%',
-      top: 94 + '%'
-    })
+  $('.SLOT').animate({
+      left: startX + '%',
+      top: startY + '%'
+    }, 2000);
 
 };
-rightSlot()
+slot()
 
 
 // SLOT Route

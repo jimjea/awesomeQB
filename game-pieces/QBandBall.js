@@ -1,10 +1,18 @@
-  var gameOptions = {
-    width: $(window).width(),
-    height: $(window).height()
-  };
+var gameOptions = {
+  width: $(window).width(),
+  height: $(window).height()
+};
 
 $(document).ready(function(){
 
+// percent change for background image moving
+var percentChange = function(num1, num2) {
+  var diff = num1 - num2;
+  return (diff/$('.gameBoard').height()) * 100;
+};
+
+// makes sure you can only throw once
+var notThrown = true;
 
 /**************************************/
 //                Q B                 //
@@ -52,8 +60,10 @@ $(document).ready(function(){
 
   // throw ball to mouse on click
   // ball handles all collision logic
-  $('.gameBoard').one('click', function(event) {
+  if (notThrown)
+  $('.gameBoard').on('click', function(event) {
     $('.zipBall').hide();
+    notThrown = false;
     var x = event.clientX;
     var y = event.clientY;
     var startX = gameOptions.width * .505;
@@ -98,36 +108,62 @@ $(document).ready(function(){
           var LWOHit = $(this).collision(".LWO");
           var RWOHit = $(this).collision(".RWO");
           var SLOTHit = $(this).collision(".SLOT");
-          console.log(event)
+          // logic for moving background image
+          var gameboardHeight = $('.gameBoard').height();
+          var diff = percentChange(startY, event.elem.offsetTop);
+          var currentYPercent = $('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2);
+          var newBackgroundPosition = currentYPercent - diff < 0 ? 0 : currentYPercent - diff;
+          var test = event.elem.offsetTop;
+          
           if (LWOHit.length > 0) {
-            $('.LWO').stop(true, false).animate({top: event.tweens[1].end - 25 + 'px'}, 800);
+            $('.LWO').stop(true, false).animate({top: (event.tweens[1].end/gameboardHeight) * 100 - 3 + '%'}, 800);
             $('.lobBall').animate({top: event.tweens[1].end - 25 + 'px'}, 800);
-            // if ($('.lobBall')[0].offsetTop < $('.gameBoard').height() * .359) {
-            //   $('.touchdown').css({height: $('.gameBoard').height() * .3, width: $('.gameBoard').width() * .9}).offset({top: $('.gameBoard').height() * .2 - $('.touchdown').height()/2, left: $('.gameBoard').width() * .55 - $('.touchdown').width()/2}).show();
+            // if ($('.lobBall')[0].offsetTop < gameboardHeight * .359) {
+            //   $('.touchdown').css({height: gameboardHeight * .3, width: $('.gameBoard').width() * .9}).offset({top: gameboardHeight * .2 - $('.touchdown').height()/2, left: $('.gameBoard').width() * .55 - $('.touchdown').width()/2}).show();
             // } else {
-              $('.caught').css({height: $('.gameBoard').height() * .11, width: $('.gameBoard').height() * .12}).offset({top: event.tweens[1].end - $('.caught').height()/2, left: event.tweens[0].end - $('.caught').width()/2}).show();
+              $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12}).offset({top: event.elem.offsetTop - $('.caught').height()/2, left: event.elem.offsetLeft - $('.caught').width()/2}).show();
+              setTimeout(function(){$('.caught').hide()}, 400);
             // }
-            setTimeout(function(){$('.caught').hide()}, 400);
+
+            setTimeout(function(){
+              notThrown = true;
+              $('#LWOpreview').show();
+              $('#RWOpreview').show();
+              $('#SLOTpreview').show();
+
+              $('.gameBoard').animate({
+                'background-position-x': '50%', 
+                'background-position-y': newBackgroundPosition + '%' 
+              }, 3000);
+
+              leftWideOut();
+              rightWideOut();
+              slot();
+            }, 1000);
+
           } else if (RWOHit.length > 0) {
             $('.RWO').stop(true, false).animate({top: event.tweens[1].end - 25 + 'px'}, 800);
             $('.lobBall').animate({top: event.tweens[1].end - 25 + 'px'}, 800);
-            // if ($('.lobBall')[0].offsetTop < $('.gameBoard').height() * .359) {
-            //   $('.touchdown').css({height: $('.gameBoard').height() * .3, width: $('.gameBoard').width() * .9}).offset({top: $('.gameBoard').height() * .2 - $('.touchdown').height()/2, left: $('.gameBoard').width() * .55 - $('.touchdown').width()/2}).show();
+            // if ($('.lobBall')[0].offsetTop < gameboardHeight * .359) {
+            //   $('.touchdown').css({height: gameboardHeight * .3, width: $('.gameBoard').width() * .9}).offset({top: gameboardHeight * .2 - $('.touchdown').height()/2, left: $('.gameBoard').width() * .55 - $('.touchdown').width()/2}).show();
             // } else {
-              $('.caught').css({height: $('.gameBoard').height() * .11, width: $('.gameBoard').height() * .12}).offset({top: event.tweens[1].end - $('.caught').height()/2, left: event.tweens[0].end - $('.caught').width()/2}).show();
+              $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12}).offset({top: event.tweens[1].end - $('.caught').height()/2, left: event.tweens[0].end - $('.caught').width()/2}).show();
+
             // }
+            $('.gameBoard').animate({'background-position-x': '50%', 'background-position-y': newBackgroundPosition + '%' }, 3000)
             setTimeout(function(){$('.caught').hide()}, 400);
           } else if (SLOTHit.length > 0) {
             $('.SLOT').stop(true, false).animate({top: event.tweens[1].end - 25 + 'px'}, 800);
             $('.lobBall').animate({top: event.tweens[1].end - 25 + 'px'}, 800);
-            // if ($('.lobBall')[0].offsetTop < $('.gameBoard').height() * .359) {
-            //   $('.touchdown').css({height: $('.gameBoard').height() * .3, width: $('.gameBoard').width() * .9}).offset({top: $('.gameBoard').height() * .2 - $('.touchdown').height()/2, left: $('.gameBoard').width() * .55 - $('.touchdown').width()/2}).show();
+            // if ($('.lobBall')[0].offsetTop < gameboardHeight * .359) {
+            //   $('.touchdown').css({height: gameboardHeight * .3, width: $('.gameBoard').width() * .9}).offset({top: gameboardHeight * .2 - $('.touchdown').height()/2, left: $('.gameBoard').width() * .55 - $('.touchdown').width()/2}).show();
             // } else {
-              $('.caught').css({height: $('.gameBoard').height() * .11, width: $('.gameBoard').height() * .12}).offset({top: event.tweens[1].end - $('.caught').height()/2, left: event.tweens[0].end - $('.caught').width()/2}).show();
+              $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12}).offset({top: event.tweens[1].end - $('.caught').height()/2, left: event.tweens[0].end - $('.caught').width()/2}).show();
             // }
+            $('.gameBoard').animate({'background-position-x': '50%', 'background-position-y': newBackgroundPosition + '%' }, 3000)
             setTimeout(function(){$('.caught').hide()}, 400);
           } else {
-            $('.incomplete').css({height: $('.gameBoard').height() * .11, width: $('.gameBoard').height() * .12}).offset({top: event.tweens[1].end - $('.incomplete').height()/2, left: event.tweens[0].end - $('.incomplete').width()/2}).show();
+            $('.incomplete').css({height: gameboardHeight * .11, width: gameboardHeight * .12}).offset({top: event.tweens[1].end - $('.incomplete').height()/2, left: event.tweens[0].end - $('.incomplete').width()/2}).show();
             setTimeout(function(){$('.incomplete').hide()}, 400);
             $('.lobBall').animate({top: event.tweens[1].end - 8 + 'px', left: event.tweens[0].end + 1 + 'px'}, 400);
             $('.LWO').stop(true, false).animate({top: $('.LWO')[0].offsetTop - 10, left: $('.LWO')[0].offsetLeft + 15}, 800);
@@ -137,7 +173,7 @@ $(document).ready(function(){
 
           // Signals touchdown
 
-          setTimeout(function(){location.reload()}, 1000);
+          // setTimeout(function(){location.reload()}, 1000);
         }
       })
     }
