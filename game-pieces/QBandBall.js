@@ -5,34 +5,32 @@ var gameOptions = {
 
 $(document).ready(function(){
 
-// percent change for background image moving
-var percentChange = function(num1, num2) {
-  var diff = num1 - num2;
-  return (diff/$('.gameBoard').height()) * 100;
-};
+  // percent change for background image moving
+  var percentChange = function(num1, num2) {
+    var diff = num1 - num2;
+    return (diff/$('.gameBoard').height()) * 100;
+  };
 
-// makes sure you can only throw once
-var notThrown = true;
+  // makes sure you can only throw once
+  var notThrown = true;
 
-/**************************************/           // TODO: huge lag after playing 3-4 rounds, apply after play logic to all receivers, make caught and incomplete signs scale with field, draw new routes, have slot start in position, zip ball, score touchdown
+/**************************************/           // TODO: make caught and incomplete signs scale with field,  have slot start in position, zip ball, score touchdown
 //                Q B                 //           
 /**************************************/
 
   var placeqb = function() {
-    $('.qb').css({
-      position: 'absolute',
-      height: $('.gameBoard').height() * .05,
-      width: $('.gameBoard').width() * .06,
-      left: 48 + '%',
-      top: 94 + '%'
-    });
-    $('#SLOTpreview').on('click', function() {
-      $('.qb').animate({
-        top: 95.5 + '%'
-      }, 400);
-    });
+    $('.qb').animate({
+      top: 94 + '%',
+      left: 48 + '%'
+    }, 400);
   };
   placeqb();
+
+  var hikeqb = function() {
+    $('.qb').animate({
+      top: 95.5 + '%'
+    })
+  };
 
 
 
@@ -43,16 +41,22 @@ var notThrown = true;
     $('.lobBall, .zipBall').animate({
       left: 49 + '%',
       top: 92 + '%'
-    }, 300);
-    $('#SLOTpreview').on('click', function() {
-      $('.lobBall, .zipBall').animate({
-        left: 50.5 + '%',
-        top: 95.5 + '%'
-      }, 400)
-    });    
+    }, 400)
   }
   placeball();
 
+  var hikeball = function() {
+    $('.lobBall, .zipBall').animate({
+      top: 95.5 + '%',
+      left: 50.5 + '%'
+    })
+  }
+
+
+  $('#SLOTpreview').on('click', function() {
+    hikeball();
+    hikeqb();
+  })
 
 
   // throw ball to mouse on click
@@ -81,24 +85,25 @@ var notThrown = true;
     // Lobbing the ball on click will only allow the receiver to catch it as the ball ends its animation
     var ballSize = 0;
     var lobBall = function() {
+      console.log(x, y)
       $('.lobBall').animate({
         left: x - $('.lobBall').width()/2 + 'px',
         top: y - $('.lobBall').height()/2  + 'px'
       }, {
         duration: 600,
-        step: function() { // adjusts the size of the ball as it travels
-          // if (ballSize < 40) {
-          //   while (ballSize < 40)
-          //     ballSize++;
-          //     $('.lobBall').height(ballSize).width(ballSize);
-          // } 
-          // // else {
-          // //   while (ballSize > 0) {
-          // //     $('.lobBall').height(ballSize).width(ballSize);
-          // //     ballSize--;
-          // //   }
-          // // }
-        },
+        // step: function() { // adjusts the size of the ball as it travels
+        //   // if (ballSize < 40) {
+        //   //   while (ballSize < 40)
+        //   //     ballSize++;
+        //   //     $('.lobBall').height(ballSize).width(ballSize);
+        //   // } 
+        //   // // else {
+        //   // //   while (ballSize > 0) {
+        //   // //     $('.lobBall').height(ballSize).width(ballSize);
+        //   // //     ballSize--;
+        //   // //   }
+        //   // // }
+        // },
         done: function(event) {
           var LWOHit = $(this).collision(".LWO");
           var RWOHit = $(this).collision(".RWO");
@@ -122,23 +127,20 @@ var notThrown = true;
 
             setTimeout(function(){ // handles getting set up for the next play
               notThrown = true;
-              $('#LWOpreview').show();
-              $('#RWOpreview').show();
-              $('#SLOTpreview').show();
 
               $('.gameBoard').animate({
                 'background-position-x': '50%', 
-                'background-position-y': newBackgroundPosition - 3 + '%' 
-              }, 3000);
+                'background-position-y': newBackgroundPosition + '%' 
+              }, 1500);
 
               $('.RWO').stop(true, false);
               $('.SLOT').stop(true, false);
 
+              placeqb();
+              placeball();
               leftWideOut();
               rightWideOut();
               slot();
-              preview();
-              placeball();
             }, 1000);
 
           } else if (RWOHit.length > 0) {
@@ -153,23 +155,21 @@ var notThrown = true;
 
             setTimeout(function(){
               notThrown = true;
-              $('#LWOpreview').show();
-              $('#RWOpreview').show();
-              $('#SLOTpreview').show();
 
               $('.gameBoard').animate({
                 'background-position-x': '50%', 
                 'background-position-y': newBackgroundPosition + '%' 
-              }, 3000);
+              }, 1500);
 
               $('.LWO').stop(true, false);
               $('.SLOT').stop(true, false);
 
+              placeqb();
+              placeball();
               leftWideOut();
               rightWideOut();
               slot();
-              preview();
-              placeball();
+              // placeball();
             }, 1000);
 
           } else if (SLOTHit.length > 0) {
@@ -184,23 +184,21 @@ var notThrown = true;
 
             setTimeout(function(){
               notThrown = true;
-              $('#LWOpreview').show();
-              $('#RWOpreview').show();
-              $('#SLOTpreview').show();
 
               $('.gameBoard').animate({
                 'background-position-x': '50%', 
                 'background-position-y': newBackgroundPosition + '%' 
-              }, 3000);
+              }, 1500);
 
               $('.RWO').stop(true, false);
               $('.LWO').stop(true, false);
 
+              placeqb();
+              placeball();
               leftWideOut();
               rightWideOut();
               slot();
-              preview();
-              placeball();
+              // placeball();
             }, 1000);
 
           } else {
@@ -214,15 +212,13 @@ var notThrown = true;
             setTimeout(function(){
               notThrown = true;
 
+              placeqb();
+              placeball();
               leftWideOut();
               rightWideOut();
               slot();
-              preview();
-              placeball();
+              // placeball();
 
-              $('#LWOpreview').show();
-              $('#RWOpreview').show();
-              $('#SLOTpreview').show();
             }, 1000);
           }
 

@@ -21,7 +21,15 @@ var leftWideOut = function() {
   $('.LWO').animate({
       left: startX + '%',
       top: startY + '%'
-    }, 2000)
+    }, {
+      duration: 2000,
+      done: function() { // only need this done logic once
+        preview();
+        $('#LWOpreview').show();
+        $('#RWOpreview').show();
+        $('#SLOTpreview').show();
+      }
+    })
   // .data('collision', false);
   // $('.LWO').on('collision_start', function(event) {
   //   $('.gameBoard').append('<div>caught</div>').offset({top: '400px'})
@@ -147,7 +155,8 @@ var slot = function() {
   position = Math.round(Math.random());
   var startX = SLOTposition[position], startY = 93;
   SLOTRouteNumber = Math.floor(Math.random() * 4) + 1;
-  $('.SLOT').animate({
+  $('.SLOT')
+  .animate({
       left: startX + '%',
       top: startY + '%'
     }, 2000);

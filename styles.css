@@ -24,8 +24,8 @@ canvas {
   overflow: hidden;
   background-image: url('./assets/field.png');
   background-repeat: no-repeat;
-  background-position: 50% 42%;
-  background-size: 105%;
+  background-position: 50% 65%;
+  background-size: 105% 350%;
 }
 
 #SLOTpreview {
@@ -81,6 +81,11 @@ canvas {
   z-index: 30;
   background-repeat: no-repeat;
   background-size: 100% 100%;
+}
+
+.qb {
+  top: 94%;
+  left: 48%;
 }
 
 .lwo {
