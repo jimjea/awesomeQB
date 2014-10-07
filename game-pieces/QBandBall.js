@@ -85,7 +85,6 @@ $(document).ready(function(){
     // Lobbing the ball on click will only allow the receiver to catch it as the ball ends its animation
     var ballSize = 0;
     var lobBall = function() {
-      console.log(x, y)
       $('.lobBall').animate({
         left: x - $('.lobBall').width()/2 + 'px',
         top: y - $('.lobBall').height()/2  + 'px'
@@ -105,6 +104,7 @@ $(document).ready(function(){
         //   // // }
         // },
         done: function(event) {
+
           var LWOHit = $(this).collision(".LWO");
           var RWOHit = $(this).collision(".RWO");
           var SLOTHit = $(this).collision(".SLOT");
@@ -112,9 +112,17 @@ $(document).ready(function(){
           var gameboardHeight = $('.gameBoard').height();
           var diff = percentChange(startY, event.elem.offsetTop);
           var currentYPercent = $('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2);
-          var newBackgroundPosition = currentYPercent - diff < 0 ? 0 : currentYPercent - diff;
+          var newBackgroundPosition = currentYPercent - diff/2 < 0 ? 0 : currentYPercent - diff/2;
           var test = event.elem.offsetTop;
+
+          console.log('length: ', currentYPercent.length)
           
+          console.log('start: ',startY)
+          console.log('ball land: ', event.elem.offsetTop)
+          console.log('diff: ',diff)
+          console.log('currentYPercent: ', currentYPercent)
+          console.log('new position %: ', newBackgroundPosition)
+
           if (LWOHit.length > 0) {
             $('.LWO').stop(true, false).animate({top: (event.tweens[1].end/gameboardHeight) * 100 - 3 + '%'}, 800);
             $('.lobBall').animate({top: event.tweens[1].end - 25 + 'px'}, 800);
