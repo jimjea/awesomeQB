@@ -14,8 +14,8 @@ var percentChange = function(num1, num2) {
 // makes sure you can only throw once
 var notThrown = true;
 
-/**************************************/
-//                Q B                 //
+/**************************************/           // TODO: apply after play logic to all receivers, make caught and incomplete signs scale with field, draw new routes, have slot start in position, zip ball, score touchdown
+//                Q B                 //           
 /**************************************/
 
   var placeqb = function() {
@@ -60,10 +60,8 @@ var notThrown = true;
 
   // throw ball to mouse on click
   // ball handles all collision logic
-  if (notThrown)
   $('.gameBoard').on('click', function(event) {
     $('.zipBall').hide();
-    notThrown = false;
     var x = event.clientX;
     var y = event.clientY;
     var startX = gameOptions.width * .505;
@@ -136,6 +134,9 @@ var notThrown = true;
                 'background-position-y': newBackgroundPosition + '%' 
               }, 3000);
 
+              $('.RWO').stop(true, false);
+              $('.SLOT').stop(true, false);
+
               leftWideOut();
               rightWideOut();
               slot();
@@ -177,7 +178,10 @@ var notThrown = true;
         }
       })
     }
-    lobBall();
+    if (notThrown) {
+      lobBall();
+      notThrown = false;
+    }
   });
 
 
