@@ -3,6 +3,7 @@ var gameOptions = {
   height: $(window).height()
 };
 
+var notThrown = true;
 $(document).ready(function(){
 
   // percent change for background image moving
@@ -12,7 +13,6 @@ $(document).ready(function(){
   };
 
   // makes sure you can only throw once
-  var notThrown = true;
 
 /**************************************/           // TODO: zip ball, score touchdown
 //                Q B                 //           
@@ -133,8 +133,8 @@ $(document).ready(function(){
               setTimeout(function(){$('.caught').hide()}, 400);
             // }
 
-            setTimeout(function(){ // handles getting set up for the next play
-              notThrown = true;
+            // handles reseting play
+            setTimeout(function(){ 
 
               $('.gameBoard').animate({
                 'background-position-x': '50%', 
@@ -144,11 +144,19 @@ $(document).ready(function(){
               $('.RWO').stop(true, false);
               $('.SLOT').stop(true, false);
 
-              placeqb();
-              placeball();
-              leftWideOut(2000, 10, 84);
-              rightWideOut(2000);
-              slot(2000);
+              // handles placing receivers up until we reach the end of the field
+              // then places them incrementally closer to the end zone
+              if (newBackgroundPosition) {
+                placeqb();
+                placeball();
+                leftWideOut(2000, 10, 92);
+                rightWideOut(2000, 85, 92);
+                generateSLOTposition();
+                slot(2000, SLOTposition[position], 93); 
+              } else {
+                leftWideOut(2000, 10, -10);
+              }
+
             }, 1000);
 
           } else if (RWOHit.length > 0) {
@@ -163,7 +171,6 @@ $(document).ready(function(){
               setTimeout(function(){$('.caught').hide()}, 400);
 
             setTimeout(function(){
-              notThrown = true;
 
               $('.gameBoard').animate({
                 'background-position-x': '50%', 
@@ -175,9 +182,10 @@ $(document).ready(function(){
 
               placeqb();
               placeball();
-              leftWideOut(2000);
-              rightWideOut(2000);
-              slot(2000);
+              leftWideOut(2000, 10, 92);
+              rightWideOut(2000, 85, 92);
+              generateSLOTposition();
+              slot(2000, SLOTposition[position], 93); 
               // placeball();
             }, 1000);
 
@@ -193,7 +201,6 @@ $(document).ready(function(){
               setTimeout(function(){$('.caught').hide()}, 400);
 
             setTimeout(function(){
-              notThrown = true;
 
               $('.gameBoard').animate({
                 'background-position-x': '50%', 
@@ -205,9 +212,10 @@ $(document).ready(function(){
 
               placeqb();
               placeball();
-              leftWideOut(2000);
-              rightWideOut(2000);
-              slot(2000);
+              leftWideOut(2000, 10, 92);
+              rightWideOut(2000, 85, 92);
+              generateSLOTposition();
+              slot(2000, SLOTposition[position], 93); 
               // placeball();
             }, 1000);
 
@@ -225,10 +233,10 @@ $(document).ready(function(){
 
               placeqb();
               placeball();
-              leftWideOut(800);
-              rightWideOut(800);
-              slot(800);
-              // placeball();
+              leftWideOut(2000, 10, 92);
+              rightWideOut(2000, 85, 92);
+              generateSLOTposition();
+              slot(2000, SLOTposition[position], 93); 
 
             }, 1000);
           }

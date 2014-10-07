@@ -28,6 +28,8 @@ var leftWideOut = function(dur, startX, startY) {
         $('#LWOpreview').show();
         $('#RWOpreview').show();
         $('#SLOTpreview').show();
+
+        notThrown = true;
       }
     })
   // .data('collision', false);
@@ -90,10 +92,9 @@ var RWOroutes = {
 }
 var RWORouteNumber;
 
-var rightWideOut = function(dur) {
+var rightWideOut = function(dur, startX, startY) {
   dur = dur || undefined;
   RWORouteNumber = Math.floor(Math.random() * 5) + 1;
-  var startX = 85, startY = 92;
   $('.RWO').animate({
       left: startX + '%',
       top: startY + '%'
@@ -101,7 +102,7 @@ var rightWideOut = function(dur) {
 
 
 };
-rightWideOut()
+rightWideOut(undefined, 85, 92);
 
 
 // RWO Route
@@ -151,12 +152,12 @@ var SLOTroutes = {
   }
 };
 var SLOTRouteNumber;
-
-var slot = function(dur) {
-  dur = dur || undefined;
+var generateSLOTposition = function() {
   position = Math.round(Math.random());
-  var startX = SLOTposition[position], startY = 93;
   SLOTRouteNumber = Math.floor(Math.random() * 4) + 1;
+};
+var slot = function(dur, startX, startY) {
+  dur = dur || undefined;
   $('.SLOT')
   .animate({
       left: startX + '%',
@@ -164,7 +165,8 @@ var slot = function(dur) {
     }, dur);
 
 };
-slot()
+generateSLOTposition();
+slot(undefined, SLOTposition[position], 93);
 
 
 // SLOT Route
