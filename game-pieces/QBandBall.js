@@ -131,16 +131,16 @@ $(document).ready(function(){
               $('.gameBoard').animate({
                 'background-position-x': '50%', 
                 'background-position-y': newBackgroundPosition + '%' 
-              }, 1500);
+              }, 2000);
 
               $('.RWO').stop(true, false);
               $('.SLOT').stop(true, false);
 
               placeqb();
               placeball();
-              leftWideOut();
-              rightWideOut();
-              slot();
+              leftWideOut(2000);
+              rightWideOut(2000);
+              slot(2000);
             }, 1000);
 
           } else if (RWOHit.length > 0) {
@@ -159,16 +159,16 @@ $(document).ready(function(){
               $('.gameBoard').animate({
                 'background-position-x': '50%', 
                 'background-position-y': newBackgroundPosition + '%' 
-              }, 1500);
+              }, 2000);
 
               $('.LWO').stop(true, false);
               $('.SLOT').stop(true, false);
 
               placeqb();
               placeball();
-              leftWideOut();
-              rightWideOut();
-              slot();
+              leftWideOut(2000);
+              rightWideOut(2000);
+              slot(2000);
               // placeball();
             }, 1000);
 
@@ -188,16 +188,16 @@ $(document).ready(function(){
               $('.gameBoard').animate({
                 'background-position-x': '50%', 
                 'background-position-y': newBackgroundPosition + '%' 
-              }, 1500);
+              }, 2000);
 
               $('.RWO').stop(true, false);
               $('.LWO').stop(true, false);
 
               placeqb();
               placeball();
-              leftWideOut();
-              rightWideOut();
-              slot();
+              leftWideOut(2000);
+              rightWideOut(2000);
+              slot(2000);
               // placeball();
             }, 1000);
 
@@ -214,9 +214,9 @@ $(document).ready(function(){
 
               placeqb();
               placeball();
-              leftWideOut();
-              rightWideOut();
-              slot();
+              leftWideOut(800);
+              rightWideOut(800);
+              slot(800);
               // placeball();
 
             }, 1000);

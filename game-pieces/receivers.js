@@ -14,7 +14,8 @@ var LWOroutes = {
 }
 var LWORouteNumber;
 
-var leftWideOut = function() {
+var leftWideOut = function(dur) {
+  dur = dur || undefined;
   // Define route number upon receiver placement so the random generator is not reset on previewing the route
   LWORouteNumber = Math.floor(Math.random() * 5) + 1;
   var startX = 10, startY = 92
@@ -22,7 +23,7 @@ var leftWideOut = function() {
       left: startX + '%',
       top: startY + '%'
     }, {
-      duration: 1200,
+      duration: dur,
       done: function() { // only need this done logic once
         preview();
         $('#LWOpreview').show();
@@ -90,13 +91,14 @@ var RWOroutes = {
 }
 var RWORouteNumber;
 
-var rightWideOut = function() {
+var rightWideOut = function(dur) {
+  dur = dur || undefined;
   RWORouteNumber = Math.floor(Math.random() * 5) + 1;
   var startX = 85, startY = 92;
   $('.RWO').animate({
       left: startX + '%',
       top: startY + '%'
-    }, 1200);
+    }, dur);
 
 
 };
@@ -151,7 +153,8 @@ var SLOTroutes = {
 };
 var SLOTRouteNumber;
 
-var slot = function() {
+var slot = function(dur) {
+  dur = dur || undefined;
   position = Math.round(Math.random());
   var startX = SLOTposition[position], startY = 93;
   SLOTRouteNumber = Math.floor(Math.random() * 4) + 1;
@@ -159,7 +162,7 @@ var slot = function() {
   .animate({
       left: startX + '%',
       top: startY + '%'
-    }, 1200);
+    }, dur);
 
 };
 slot()
