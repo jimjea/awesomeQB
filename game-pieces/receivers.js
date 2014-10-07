@@ -22,7 +22,7 @@ var leftWideOut = function() {
       left: startX + '%',
       top: startY + '%'
     }, {
-      duration: 2000,
+      duration: 1200,
       done: function() { // only need this done logic once
         preview();
         $('#LWOpreview').show();
@@ -96,7 +96,7 @@ var rightWideOut = function() {
   $('.RWO').animate({
       left: startX + '%',
       top: startY + '%'
-    }, 2000);
+    }, 1200);
 
 
 };
@@ -159,7 +159,7 @@ var slot = function() {
   .animate({
       left: startX + '%',
       top: startY + '%'
-    }, 2000);
+    }, 1200);
 
 };
 slot()
