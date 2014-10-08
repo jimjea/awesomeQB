@@ -114,15 +114,15 @@ $(document).ready(function(){
           var currentYPercent = $('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2);
           var newBackgroundPosition = currentYPercent - diff/2 < 0 ? 0 : currentYPercent - diff/2;
 
-          // console.log('length: ', currentYPercent.length)
+
+          if (LWOHit.length > 0) {
+            var currentLWOposition = $('.LWO').position();
+
           // console.log('start: ',startY)
           // console.log('ball land: ', event.elem.offsetTop)
           // console.log('diff: ',diff)
           // console.log('currentYPercent: ', currentYPercent)
-          console.log('new position %: ', newBackgroundPosition)
-
-          if (LWOHit.length > 0) {
-            var currentLWOposition = $('.LWO').position();
+          // console.log('new position %: ', newBackgroundPosition)
             $('.LWO').stop(true, false).animate({top: (event.tweens[1].end/gameboardHeight) * 100 - 3 + '%'}, 800);
             $('.lobBall').animate({top: event.tweens[1].end - 25 + 'px'}, 800);
             // if ($('.lobBall')[0].offsetTop < gameboardHeight * .359) {
@@ -135,7 +135,6 @@ $(document).ready(function(){
 
             // handles reseting play
             setTimeout(function(){ 
-
               $('.gameBoard').animate({
                 'background-position-x': '50%', 
                 'background-position-y': newBackgroundPosition + '%' 
@@ -146,18 +145,18 @@ $(document).ready(function(){
 
               // handles placing receivers up until we reach the end of the field
               // then places them incrementally closer to the end zone
-              if (newBackgroundPosition) {
+              // if (true) {
                 placeqb(48, 94);
-                hikeqb(94);
                 placeball(49, 92);
-                hikeball(49, 92);
                 leftWideOut(2000, 10, 92);
                 rightWideOut(2000, 85, 92);
                 generateSLOTposition();
                 slot(2000, SLOTposition[position], 93); 
-              } else { // RED ZONE LOGIC
-                leftWideOut(2000, 10, 10);
-              }
+              // } 
+              // else { // RED ZONE LOGIC
+                
+              //   placeball(49, ($('.lobBall').position().left/gameOptions.width) * 100)
+              // }
 
             }, 1000);
 
@@ -183,9 +182,7 @@ $(document).ready(function(){
               $('.SLOT').stop(true, false);
 
               placeqb(48, 94);
-              hikeqb(94);
               placeball(49, 92);
-              hikeball(49, 92);
               leftWideOut(2000, 10, 92);
               rightWideOut(2000, 85, 92);
               generateSLOTposition();
@@ -214,9 +211,7 @@ $(document).ready(function(){
               $('.LWO').stop(true, false);
 
               placeqb(48, 94);
-              hikeqb(94);
               placeball(49, 92);
-              hikeball(49, 92);
               leftWideOut(2000, 10, 92);
               rightWideOut(2000, 85, 92);
               generateSLOTposition();
@@ -235,8 +230,8 @@ $(document).ready(function(){
             setTimeout(function(){
               notThrown = true;
 
-              placeqb();
-              placeball();
+              placeqb(48, 94);
+              placeball(49, 92);
               leftWideOut(2000, 10, 92);
               rightWideOut(2000, 85, 92);
               generateSLOTposition();
