@@ -87,9 +87,9 @@ $(document).ready(function(){
       } else if (distancePercent < 60 && distancePercent > 40) {
         return [180, 1400];
       } else if (distancePercent < 80 && distancePercent > 60) {
-        return [210, 1600];
+        return [200, 1600];
       } else {
-        return [230, 1800];
+        return [210, 1800];
       }
     }
 
@@ -112,7 +112,7 @@ $(document).ready(function(){
         step: function(ev) { 
           console.log('hi')
           increment--;
-          if (increment > count/2) {
+          if (increment > count/1.95) {
             ballHeight += .5;
             ballWidth += .35;
           } else {
