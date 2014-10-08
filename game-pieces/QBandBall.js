@@ -62,7 +62,7 @@ $(document).ready(function(){
 
   // throw ball to mouse on click
   // ball handles all collision logic
-  $('.gameBoard').on('click', function(event) {
+  $('.gameBoard').on('dblclick', function(event) {
     $('.zipBall').hide();
     var x = event.clientX;
     var y = event.clientY;
@@ -81,15 +81,15 @@ $(document).ready(function(){
       var ballTravel = y/gameOptions.height * 100;
       var distancePercent = start - ballTravel;
       if (distancePercent < 20) {
-        return [130, 1000];
+        return [135, 1000];
       } else if (distancePercent < 40 && distancePercent > 20) {
         return [150, 1200];
       } else if (distancePercent < 60 && distancePercent > 40) {
-        return [180, 1400];
+        return [190, 1400];
       } else if (distancePercent < 80 && distancePercent > 60) {
-        return [200, 1600];
+        return [210, 1600];
       } else {
-        return [210, 1800];
+        return [230, 1800];
       }
     }
 
@@ -110,14 +110,13 @@ $(document).ready(function(){
 
         // adjusts the size of the ball as it travels)
         step: function(ev) { 
-          console.log('hi')
           increment--;
           if (increment > count/1.95) {
             ballHeight += .5;
-            ballWidth += .35;
+            ballWidth += .45;
           } else {
             ballHeight -= .5;
-            ballWidth -= .35;
+            ballWidth -= .45;
           }
           $('.lobBall').css({height: ballHeight, width: ballWidth});
         },
@@ -271,42 +270,47 @@ $(document).ready(function(){
 
   // zips ball in a straight on on flick
   // receiver can catch the ball anywhere in the line
-    // $('.zipBall').mousedown(function (event) {
-    //     startDownX = event.pageX;
-    //     startDownY = event.pageY;
-    // });
+    $('.gameBoard').mousedown(function (event) {
+        startDownX = event.offsetX;
+        startDownY = event.offsetY;
+        if (startDownX < gameOptions.width * .6 && startDownX > gameOptions.width * .4 && startDownY > gameOptions.height * .9 && startDownY < gameOptions.height) {
+          $('.gameBoard').on('mouseup', function(event){
         
-    // $('.gameBoard').on('mouseup', function(event){
-       
-    //     var rise = -(event.pageY - startDownY); /* Page Origin is different from graph */
-    //     var run = event.pageX - startDownX;
-    //     var newX = $('.zipBall').position().left;
-    //     var newY = $('.zipBall').position().top;
-    //     var distanceToFling = 100;
+            var rise = -(event.pageY - startDownY);
+            var run = event.pageX - startDownX;
+            var newX = $('.zipBall').position().left;
+            var newY = $('.zipBall').position().top;
+            var distanceToFling = gameOptions.height;
 
-    //     if (run == 0 || Math.abs(rise/run) > 3) {
-    //         if (rise > 0) {
-    //           newY -= distanceToFling;
-    //         } else if (rise < 0) {
-    //           newY += distanceToFling;
-    //         }
-    //     }
-    //     else {
-    //         if (run > 0) {
-    //             newX += distanceToFling;
-    //             newY -= (rise/run) * distanceToFling;
-    //         }
-    //         else {
-    //             newX -= distanceToFling;
-    //             newY += (rise/run) * distanceToFling;
-    //         }
-    //     }
-       
-    //      $('.zipBall').animate({
-    //          left: newX,
-    //          top: newY
-    //         }, 1000);
-    // });
+            if (run == 0 || Math.abs(rise/run) > 3) {
+              if (rise > 0) {
+                newY -= distanceToFling;
+              } else if (rise < 0) {
+                newY += distanceToFling;
+              }
+            }
+            else {
+              if (run > 0) {
+                newX += distanceToFling;
+                newY -= (rise/run) * distanceToFling;
+              }
+              else {
+                newX -= distanceToFling;
+                newY += (rise/run) * distanceToFling;
+              }
+            }
+             
+           $('.zipBall').animate({
+               left: newX,
+               top: newY
+              }, 1300);
+          });
+          
+        }
+        startDownX = event.pageX;
+        startDownY = event.pageY;
+    });
+        
 
 
 
