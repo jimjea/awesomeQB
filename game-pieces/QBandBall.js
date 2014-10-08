@@ -62,7 +62,7 @@ $(document).ready(function(){
 
   // throw ball to mouse on click
   // ball handles all collision logic
-  $('.gameBoard').on('doubletap', function(event) {
+  $('.gameBoard').on('dblclick', function(event) {
     $('.zipBall').hide();
     var x = event.clientX;
     var y = event.clientY;

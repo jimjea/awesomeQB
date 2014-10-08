@@ -29,6 +29,9 @@ var leftWideOut = function(dur, startX, startY) {
         $('#RWOpreview').show();
         $('#SLOTpreview').show();
 
+        $('.zipBall').show();
+        $('.lobBall').show();
+
         notThrown = true;
       }
     })
