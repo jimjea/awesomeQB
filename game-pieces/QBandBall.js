@@ -79,6 +79,7 @@ $(document).ready(function(){
 
     // set ball timing based on distance thrown
     // broken up into thirds of the field
+    // ************************* BREAK THIS UP INTO SIXTHS *************************
     var setBallDuration = function() {
       var start = 95;
       var ballTravel = y/gameOptions.height * 100;
@@ -123,6 +124,7 @@ $(document).ready(function(){
           $('.lobBall').css('-webkit-transform', 'rotateX(' + ballXrotation + 'deg)');
         },
         done: function(event) {
+          $('.lobBall').height('4.5%').width('3%').css('-webkit-transform', 'rotateX(' + ballXrotation + 'deg)');
           var LWOHit = $(this).collision(".LWO");
           var RWOHit = $(this).collision(".RWO");
           var SLOTHit = $(this).collision(".SLOT");
@@ -131,8 +133,6 @@ $(document).ready(function(){
           var diff = percentChange(startY, event.elem.offsetTop);
           var currentYPercent = $('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2);
           var newBackgroundPosition = currentYPercent - diff/2 < 0 ? 0 : currentYPercent - diff/2;
-          console.log('got here')
-          $('.lobBall').height('4.5%').width('3%').css('-webkit-transform', 'rotateX(0deg)')
           if (LWOHit.length > 0) {
             var currentLWOposition = $('.LWO').position();
 
