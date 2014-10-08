@@ -6,7 +6,7 @@ var gameOptions = {
 var notThrown = true;
 
 $(document).ready(function(){
-
+  document.body.addEventListener('touchstart', function(e){ e.preventDefault(); });
   // percent change for background image moving
   var percentChange = function(num1, num2) {
     var diff = num1 - num2;
@@ -62,7 +62,7 @@ $(document).ready(function(){
 
   // throw ball to mouse on click
   // ball handles all collision logic
-  $('.gameBoard').on('dblclick', function(event) {
+  $('.gameBoard').on('click', function(event) {
     $('.zipBall').hide();
     var x = event.clientX;
     var y = event.clientY;
