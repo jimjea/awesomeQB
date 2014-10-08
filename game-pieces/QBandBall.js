@@ -79,8 +79,18 @@ $(document).ready(function(){
     // set ball timing based on distance thrown
     // broken up into thirds of the field
     var setBallDuration = function() {
-
+      var start = 95;
+      var ballTravel = y/gameOptions.height * 100;
+      var distancePercent = start - ballTravel;
+      if (distancePercent < 33) {
+        return 600
+      } else if (distancePercent < 66 && distancePercent > 33) {
+        return 800
+      } else {
+        return 1200
+      }
     }
+    setBallDuration()
 
     // Lobbing the ball on click will only allow the receiver to catch it as the ball ends its animation
     var ballSize = 0;
@@ -89,7 +99,9 @@ $(document).ready(function(){
         left: x - $('.lobBall').width()/2 + 'px',
         top: y - $('.lobBall').height()/2  + 'px'
       }, {
-        duration: 600,
+        duration: setBallDuration(),
+        // END OF THROW DISTANCE IS DEFINED IN Y AND X (EVENT.CLIENTX)
+
         // step: function() { // adjusts the size of the ball as it travels
         //   // if (ballSize < 40) {
         //   //   while (ballSize < 40)
