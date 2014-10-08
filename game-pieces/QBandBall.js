@@ -93,11 +93,14 @@ $(document).ready(function(){
     }
 
     // Use this code for resize ball animation
-    var ballHeight = gameOptions.height * .045;
+    var ballHeight = gameOptions.height * .04;
     var ballWidth = gameOptions.width * .03;
     var ballXrotation = 0;
     var count = setBallDuration()[0];
     var increment = count;
+
+    var gameboardHeight = $('.gameBoard').height();
+    var currentYPercent = $('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2);
 
     // Lobbing the ball on click will only allow the receiver to catch it as the ball ends its animation
     var lobBall = function() {
@@ -110,7 +113,7 @@ $(document).ready(function(){
         // adjusts the size of the ball as it travels)
         step: function(ev) { 
           increment--;
-          if (increment > count/1.5) { // mobile: 1.6, web: 2
+          if (increment > count/2) { // mobile: 1.5, web: 2
             ballHeight += .5;
             ballWidth += .45;
           } else {
@@ -125,27 +128,24 @@ $(document).ready(function(){
           var RWOHit = $(this).collision(".RWO");
           var SLOTHit = $(this).collision(".SLOT");
           // logic for moving background image
-          var gameboardHeight = $('.gameBoard').height();
           var diff = percentChange(startY, event.elem.offsetTop);
-          var currentYPercent = $('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2);
+
+
           var newBackgroundPosition = currentYPercent - diff/2 < 0 ? 0 : currentYPercent - diff/2;
           if (LWOHit.length > 0) {
             var currentLWOposition = $('.LWO').position();
 
-          // console.log('start: ',startY)
-          // console.log('ball land: ', event.elem.offsetTop)
-          // console.log('diff: ',diff)
-          // console.log('currentYPercent: ', currentYPercent)
-          // console.log('new position %: ', newBackgroundPosition)
+            // stops receiver and ball animation
             $('.LWO').stop(true, false).animate({top: (event.tweens[1].end/gameboardHeight) * 100 - 3 + '%'}, 800);
             $('.lobBall').animate({top: event.tweens[1].end - 25 + 'px'}, 800);
-            // if ($('.lobBall')[0].offsetTop < gameboardHeight * .359) {
-            //   $('.touchdown').css({height: gameboardHeight * .3, width: $('.gameBoard').width() * .9}).offset({top: gameboardHeight * .2 - $('.touchdown').height()/2, left: $('.gameBoard').width() * .55 - $('.touchdown').width()/2}).show();
-            // } else {
-            // }
-              
-              $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12, top: currentLWOposition.top - $('.caught').height()/4, left: currentLWOposition.left - $('.caught').width()/4}).show();
-              setTimeout(function(){$('.caught').hide()}, 400);
+            
+            //signifies a catch
+            $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12, top: currentLWOposition.top - $('.caught').height()/4, left: currentLWOposition.left - $('.caught').width()/4}).show();
+            setTimeout(function(){$('.caught').hide()}, 400);
+
+            if ((currentYPercent.indexOf('%') > 0 || currentYPercent.indexOf('.') > 0) && currentLWOposition.top/gameboardHeight < .1) {
+              console.log('touchdown')
+            }
 
             // handles reseting play
             setTimeout(function(){ 
@@ -178,12 +178,13 @@ $(document).ready(function(){
             var currentRWOposition = $('.RWO').position();
             $('.RWO').stop(true, false).animate({top: event.tweens[1].end - 25 + 'px'}, 800);
             $('.lobBall').animate({top: event.tweens[1].end - 25 + 'px'}, 800);
-            // if ($('.lobBall')[0].offsetTop < gameboardHeight * .359) {
-            //   $('.touchdown').css({height: gameboardHeight * .3, width: $('.gameBoard').width() * .9}).offset({top: gameboardHeight * .2 - $('.touchdown').height()/2, left: $('.gameBoard').width() * .55 - $('.touchdown').width()/2}).show();
-            // } else {
-            // }
-              $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12, top: currentRWOposition.top - $('.caught').height()/4, left: currentRWOposition.left - $('.caught').width()/4}).show();
-              setTimeout(function(){$('.caught').hide()}, 400);
+
+            $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12, top: currentRWOposition.top - $('.caught').height()/4, left: currentRWOposition.left - $('.caught').width()/4}).show();
+            setTimeout(function(){$('.caught').hide()}, 400);
+
+            if ((currentYPercent.indexOf('%') > 0 || currentYPercent.indexOf('.') > 0) && currentRWOposition.top/gameboardHeight < .1) {
+              console.log('touchdown')
+            }
 
             setTimeout(function(){
 
@@ -207,12 +208,13 @@ $(document).ready(function(){
             var currentSLOTposition = $('.SLOT').position();
             $('.SLOT').stop(true, false).animate({top: event.tweens[1].end - 25 + 'px'}, 800);
             $('.lobBall').animate({top: event.tweens[1].end - 25 + 'px'}, 800);
-            // if ($('.lobBall')[0].offsetTop < gameboardHeight * .359) {
-            //   $('.touchdown').css({height: gameboardHeight * .3, width: $('.gameBoard').width() * .9}).offset({top: gameboardHeight * .2 - $('.touchdown').height()/2, left: $('.gameBoard').width() * .55 - $('.touchdown').width()/2}).show();
-            // } else {
-            // }
-              $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12, top: currentSLOTposition.top - $('.caught').height()/4, left: currentSLOTposition.left - $('.caught').width()/4}).show();
-              setTimeout(function(){$('.caught').hide()}, 400);
+
+            $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12, top: currentSLOTposition.top - $('.caught').height()/4, left: currentSLOTposition.left - $('.caught').width()/4}).show();
+            setTimeout(function(){$('.caught').hide()}, 400);
+
+            if ((currentYPercent.indexOf('%') > 0 || currentYPercent.indexOf('.') > 0) && currentSLOTposition.top/gameboardHeight < .1) {
+              console.log('touchdown')
+            }
 
             setTimeout(function(){
 

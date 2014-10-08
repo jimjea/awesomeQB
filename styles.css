@@ -52,7 +52,7 @@ canvas {
 .ball, .zipBall, .lobBall {
   position: absolute;
   background-image: url('./assets/football.png');
-  height: 4.5%;
+  height: 4%;
   width: 3%;
   text-indent: 100%;
   white-space: nowrap;
