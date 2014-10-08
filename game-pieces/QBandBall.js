@@ -83,13 +83,13 @@ $(document).ready(function(){
       if (distancePercent < 20) {
         return [130, 1000];
       } else if (distancePercent < 40 && distancePercent > 20) {
-        return [160, 1200];
+        return [150, 1200];
       } else if (distancePercent < 60 && distancePercent > 40) {
         return [180, 1400];
       } else if (distancePercent < 80 && distancePercent > 60) {
         return [210, 1600];
       } else {
-        return [225, 1800];
+        return [230, 1800];
       }
     }
 
