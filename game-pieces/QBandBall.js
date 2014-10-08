@@ -15,7 +15,7 @@ $(document).ready(function(){
 
   // makes sure you can only throw once
 
-/**************************************/           // TODO: zip ball, score touchdown
+/**************************************/           // TODO: zip ball, score touchdown, break up ball duration, bug in resizing ball on done
 //                Q B                 //           
 /**************************************/
 
@@ -69,13 +69,9 @@ $(document).ready(function(){
     var startX = gameOptions.width * .505;
     var startY = gameOptions.height * .955;
 
-    // var angle1 = Math.atan2(startX, startY - y)
-    // var angle2 = Math.atan2(x - startX, y - startY)
-    // var degree = (angle1 - angle2) *100;
-    // console.log (x,y)
-    // console.log (startX,startY)
-    // console.log(startX, startY - y)
-    // $('.lobBall').css('-webkit-transform', 'rotate(' + degree + 'deg)')
+    var angle = Math.atan2(startX-x,startY-y)
+    var degree = -angle * (180/Math.PI)
+    $('.lobBall').css('-webkit-transform', 'rotate(' + degree + 'deg)')
 
     // set ball timing based on distance thrown
     // broken up into thirds of the field
@@ -112,19 +108,16 @@ $(document).ready(function(){
         step: function(ev) { 
           increment--;
           if (increment > count/2) {
-            ballXrotation += .5;
-            ballHeight += .3;
-            ballWidth += .2;
+            ballHeight += .4;
+            ballWidth += .3;
           } else {
-            ballXrotation -= 1;
-            ballHeight -= .3;
-            ballWidth -= .2;
+            ballHeight -= .4;
+            ballWidth -= .3;
           }
           $('.lobBall').css({height: ballHeight, width: ballWidth});
-          $('.lobBall').css('-webkit-transform', 'rotateX(' + ballXrotation + 'deg)');
         },
         done: function(event) {
-          $('.lobBall').height('4.5%').width('3%').css('-webkit-transform', 'rotateX(0deg)');
+          $('.lobBall').height(gameOptions.height * .04).width(gameOptions.width * .03).css('-webkit-transform', 'rotate(0deg)');
           var LWOHit = $(this).collision(".LWO");
           var RWOHit = $(this).collision(".RWO");
           var SLOTHit = $(this).collision(".SLOT");
