@@ -40,7 +40,7 @@ $(document).ready(function(){
 /**************************************/
   var placeball = function(startX, startY) {
     $('.lobBall, .zipBall').css('-webkit-transform', 'rotateX(0deg)')
-    .height('4.5%').width('3%')
+    .height('4.5%').width('3.1%')
     .animate({
       left: startX + '%',
       top: startY + '%'
@@ -126,7 +126,7 @@ $(document).ready(function(){
           $('.lobBall').css({height: ballHeight, width: ballWidth});
         },
         done: function(event) {
-
+          $('.lobBall').height('4.5%').width('3%').css('-webkit-transform', 'rotateX(0deg)');
           var LWOHit = $(this).collision(".LWO");
           var RWOHit = $(this).collision(".RWO");
           var SLOTHit = $(this).collision(".SLOT");
@@ -244,7 +244,7 @@ $(document).ready(function(){
             var currentBallPosition = $('.lobBall').position();
             $('.incomplete').css({height: gameboardHeight * .11, width: gameboardHeight * .12, top: currentBallPosition.top - $('.lobBall').height() - 10, left: currentBallPosition.left - $('.lobBall').width() - 10}).show();
             setTimeout(function(){$('.incomplete').hide()}, 400);
-            $('.lobBall').animate({top: event.tweens[1].end - 8 + 'px', left: event.tweens[0].end + 1 + 'px'}, 400);
+            $('.lobBall').animate({top: event.tweens[1].end - 8 + 'px', left: event.tweens[0].end + 1 + 'px'}, 800);
             $('.LWO').stop(true, false).animate({top: $('.LWO')[0].offsetTop - 10, left: $('.LWO')[0].offsetLeft + 15}, 800);
             $('.RWO').stop(true, false).animate({top: $('.RWO')[0].offsetTop - 6, left: $('.RWO')[0].offsetLeft - 15}, 800);
             $('.SLOT').stop(true, false).animate({top: $('.SLOT')[0].offsetTop - 7, left: $('.SLOT')[0].offsetLeft}, 800);
