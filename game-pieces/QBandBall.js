@@ -95,9 +95,7 @@ $(document).ready(function(){
         return 1200
       }
     }
-    setBallDuration()
 
-    console.log(startY, y)
 
     // Lobbing the ball on click will only allow the receiver to catch it as the ball ends its animation
     var ballSize = 0;
@@ -109,7 +107,7 @@ $(document).ready(function(){
         duration: setBallDuration(),
 
         step: function(x) { // adjusts the size of the ball as it travels
-          count ++;
+          
           // ballHeight += .1;
           // ballWidth += .1;
           // $('.lobBall').css({height: ballHeight, width: ballWidth})
@@ -239,7 +237,6 @@ $(document).ready(function(){
             $('.SLOT').stop(true, false).animate({top: $('.SLOT')[0].offsetTop - 7, left: $('.SLOT')[0].offsetLeft}, 800);
 
             setTimeout(function(){
-              notThrown = true;
 
               placeqb(48, 94);
               placeball(49, 92);
