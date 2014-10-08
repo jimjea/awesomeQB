@@ -81,15 +81,15 @@ $(document).ready(function(){
       var ballTravel = y/gameOptions.height * 100;
       var distancePercent = start - ballTravel;
       if (distancePercent < 20) {
-        return [135, 1000];
+        return [130, 1000];
       } else if (distancePercent < 40 && distancePercent > 20) {
-        return [165, 1200];
+        return [160, 1200];
       } else if (distancePercent < 60 && distancePercent > 40) {
-        return [185, 1400];
+        return [180, 1400];
       } else if (distancePercent < 80 && distancePercent > 60) {
-        return [215, 1600];
+        return [210, 1600];
       } else {
-        return [230, 1800];
+        return [225, 1800];
       }
     }
 
@@ -113,11 +113,11 @@ $(document).ready(function(){
           console.log('hi')
           increment--;
           if (increment > count/2) {
-            ballHeight += .45;
-            ballWidth += .3;
+            ballHeight += .5;
+            ballWidth += .35;
           } else {
-            ballHeight -= .45;
-            ballWidth -= .3;
+            ballHeight -= .5;
+            ballWidth -= .35;
           }
           $('.lobBall').css({height: ballHeight, width: ballWidth});
         },
