@@ -110,7 +110,7 @@ $(document).ready(function(){
         // adjusts the size of the ball as it travels)
         step: function(ev) { 
           increment--;
-          if (increment > count/1.6) {
+          if (increment > count/1.5) { // mobile: 1.6, web: 2
             ballHeight += .5;
             ballWidth += .45;
           } else {
