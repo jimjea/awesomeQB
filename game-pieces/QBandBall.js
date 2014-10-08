@@ -124,7 +124,7 @@ $(document).ready(function(){
           $('.lobBall').css('-webkit-transform', 'rotateX(' + ballXrotation + 'deg)');
         },
         done: function(event) {
-          $('.lobBall').height('4.5%').width('3%').css('-webkit-transform', 'rotateX(' + ballXrotation + 'deg)');
+          $('.lobBall').height('4.5%').width('3%').css('-webkit-transform', 'rotateX(0deg)');
           var LWOHit = $(this).collision(".LWO");
           var RWOHit = $(this).collision(".RWO");
           var SLOTHit = $(this).collision(".SLOT");
