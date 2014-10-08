@@ -5,10 +5,6 @@ var gameOptions = {
 
 var notThrown = true;
 
-var ballHeight = gameOptions.height * .045;
-var ballWidth = gameOptions.width * .03;
-var count = 0;
-
 $(document).ready(function(){
 
   // percent change for background image moving
@@ -43,7 +39,9 @@ $(document).ready(function(){
 //               B A L L              //
 /**************************************/
   var placeball = function(startX, startY) {
-    $('.lobBall, .zipBall').animate({
+    $('.lobBall, .zipBall').css('-webkit-transform', 'rotateX(0deg)')
+    .height('4.5%').width('3%')
+    .animate({
       left: startX + '%',
       top: startY + '%'
     }, 400)
@@ -88,29 +86,44 @@ $(document).ready(function(){
       var ballTravel = y/gameOptions.height * 100;
       var distancePercent = start - ballTravel;
       if (distancePercent < 33) {
-        return 800
+        return [105, 800];
       } else if (distancePercent < 66 && distancePercent > 33) {
-        return 1000
+        return [135, 1000];
       } else {
-        return 1200
+        return [160, 1200];
       }
     }
 
+    // Use this code for resize ball animation
+    var ballHeight = gameOptions.height * .045;
+    var ballWidth = gameOptions.width * .03;
+    var ballXrotation = 0;
+    var count = setBallDuration()[0];
+    var increment = count;
 
     // Lobbing the ball on click will only allow the receiver to catch it as the ball ends its animation
-    var ballSize = 0;
     var lobBall = function() {
       $('.lobBall').animate({
         left: x - $('.lobBall').width()/2 + 'px',
         top: y - $('.lobBall').height()/2  + 'px'
       }, {
-        duration: setBallDuration(),
+        duration: setBallDuration()[1],
 
-        step: function(x) { // adjusts the size of the ball as it travels
-          
-          // ballHeight += .1;
-          // ballWidth += .1;
-          // $('.lobBall').css({height: ballHeight, width: ballWidth})
+        // adjusts the size of the ball as it travels)
+        step: function(ev) { 
+          increment--;
+          if (increment > count/2) {
+            ballXrotation += .5;
+            ballHeight += .3;
+            ballWidth += .2;
+            $('.lobBall').css('-webkit-transform', 'rotateX(' + ballXrotation + 'deg)');
+          } else {
+            ballXrotation -= 1;
+            ballHeight -= .3;
+            ballWidth -= .2;
+            $('.lobBall').css('-webkit-transform', 'rotateX(' + ballXrotation + 'deg)');
+          }
+          $('.lobBall').css({height: ballHeight, width: ballWidth});
         },
         done: function(event) {
 
