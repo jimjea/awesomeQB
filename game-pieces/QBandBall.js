@@ -80,12 +80,16 @@ $(document).ready(function(){
       var start = 95;
       var ballTravel = y/gameOptions.height * 100;
       var distancePercent = start - ballTravel;
-      if (distancePercent < 33) {
-        return [105, 800];
-      } else if (distancePercent < 66 && distancePercent > 33) {
+      if (distancePercent < 20) {
         return [135, 1000];
+      } else if (distancePercent < 40 && distancePercent > 20) {
+        return [165, 1200];
+      } else if (distancePercent < 60 && distancePercent > 40) {
+        return [185, 1400];
+      } else if (distancePercent < 80 && distancePercent > 60) {
+        return [215, 1600];
       } else {
-        return [160, 1200];
+        return [230, 1800];
       }
     }
 
@@ -106,12 +110,13 @@ $(document).ready(function(){
 
         // adjusts the size of the ball as it travels)
         step: function(ev) { 
+          console.log('hi')
           increment--;
           if (increment > count/2) {
-            ballHeight += .4;
+            ballHeight += .45;
             ballWidth += .3;
           } else {
-            ballHeight -= .4;
+            ballHeight -= .45;
             ballWidth -= .3;
           }
           $('.lobBall').css({height: ballHeight, width: ballWidth});
