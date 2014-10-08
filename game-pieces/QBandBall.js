@@ -39,9 +39,7 @@ $(document).ready(function(){
 //               B A L L              //
 /**************************************/
   var placeball = function(startX, startY) {
-    $('.lobBall, .zipBall').css('-webkit-transform', 'rotateX(0deg)')
-    .height('4.5%').width('3.1%')
-    .animate({
+    $('.lobBall, .zipBall').animate({
       left: startX + '%',
       top: startY + '%'
     }, 400)
@@ -116,17 +114,15 @@ $(document).ready(function(){
             ballXrotation += .5;
             ballHeight += .3;
             ballWidth += .2;
-            $('.lobBall').css('-webkit-transform', 'rotateX(' + ballXrotation + 'deg)');
           } else {
             ballXrotation -= 1;
             ballHeight -= .3;
             ballWidth -= .2;
-            $('.lobBall').css('-webkit-transform', 'rotateX(' + ballXrotation + 'deg)');
           }
           $('.lobBall').css({height: ballHeight, width: ballWidth});
+          $('.lobBall').css('-webkit-transform', 'rotateX(' + ballXrotation + 'deg)');
         },
         done: function(event) {
-          $('.lobBall').height('4.5%').width('3%').css('-webkit-transform', 'rotateX(0deg)');
           var LWOHit = $(this).collision(".LWO");
           var RWOHit = $(this).collision(".RWO");
           var SLOTHit = $(this).collision(".SLOT");
@@ -135,8 +131,8 @@ $(document).ready(function(){
           var diff = percentChange(startY, event.elem.offsetTop);
           var currentYPercent = $('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2);
           var newBackgroundPosition = currentYPercent - diff/2 < 0 ? 0 : currentYPercent - diff/2;
-
-
+          console.log('got here')
+          $('.lobBall').height('4.5%').width('3%').css('-webkit-transform', 'rotateX(0deg)')
           if (LWOHit.length > 0) {
             var currentLWOposition = $('.LWO').position();
 
