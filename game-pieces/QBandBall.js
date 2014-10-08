@@ -18,17 +18,17 @@ $(document).ready(function(){
 //                Q B                 //           
 /**************************************/
 
-  var placeqb = function() {
+  var placeqb = function(startX, startY) {
     $('.qb').animate({
-      top: 94 + '%',
-      left: 48 + '%'
+      left: startX + '%',
+      top: startY + '%'
     }, 400);
   };
   placeqb();
 
-  var hikeqb = function() {
+  var hikeqb = function(startX) {
     $('.qb').animate({
-      top: 95.5 + '%'
+      top: startX + 1.5 + '%'
     })
   };
 
@@ -37,25 +37,25 @@ $(document).ready(function(){
 /**************************************/
 //               B A L L              //
 /**************************************/
-  var placeball = function() {
+  var placeball = function(startX, startY) {
     $('.lobBall, .zipBall').animate({
-      left: 49 + '%',
-      top: 92 + '%'
+      left: startX + '%',
+      top: startY + '%'
     }, 400)
   }
-  placeball();
+  placeball(49, 92);
 
-  var hikeball = function() {
+  var hikeball = function(startX, startY) {
     $('.lobBall, .zipBall').animate({
-      top: 95.5 + '%',
-      left: 50.5 + '%'
+      left: startX + 1.5 + '%',
+      top: startY + 3 + '%'
     })
   }
 
 
   $('#SLOTpreview').on('click', function() {
-    hikeball();
-    hikeqb();
+    hikeball(49, 92);
+    hikeqb(94);
   })
 
 
@@ -147,14 +147,16 @@ $(document).ready(function(){
               // handles placing receivers up until we reach the end of the field
               // then places them incrementally closer to the end zone
               if (newBackgroundPosition) {
-                placeqb();
-                placeball();
+                placeqb(48, 94);
+                hikeqb(94);
+                placeball(49, 92);
+                hikeball(49, 92);
                 leftWideOut(2000, 10, 92);
                 rightWideOut(2000, 85, 92);
                 generateSLOTposition();
                 slot(2000, SLOTposition[position], 93); 
-              } else {
-                leftWideOut(2000, 10, -10);
+              } else { // RED ZONE LOGIC
+                leftWideOut(2000, 10, 10);
               }
 
             }, 1000);
@@ -180,13 +182,14 @@ $(document).ready(function(){
               $('.LWO').stop(true, false);
               $('.SLOT').stop(true, false);
 
-              placeqb();
-              placeball();
+              placeqb(48, 94);
+              hikeqb(94);
+              placeball(49, 92);
+              hikeball(49, 92);
               leftWideOut(2000, 10, 92);
               rightWideOut(2000, 85, 92);
               generateSLOTposition();
               slot(2000, SLOTposition[position], 93); 
-              // placeball();
             }, 1000);
 
           } else if (SLOTHit.length > 0) {
@@ -210,13 +213,14 @@ $(document).ready(function(){
               $('.RWO').stop(true, false);
               $('.LWO').stop(true, false);
 
-              placeqb();
-              placeball();
+              placeqb(48, 94);
+              hikeqb(94);
+              placeball(49, 92);
+              hikeball(49, 92);
               leftWideOut(2000, 10, 92);
               rightWideOut(2000, 85, 92);
               generateSLOTposition();
               slot(2000, SLOTposition[position], 93); 
-              // placeball();
             }, 1000);
 
           } else {
