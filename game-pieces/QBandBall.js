@@ -6,7 +6,6 @@ var gameOptions = {
 var notThrown = true;
 
 $(document).ready(function(){
-  document.body.addEventListener('touchstart', function(e){ e.preventDefault(); });
   // percent change for background image moving
   var percentChange = function(num1, num2) {
     var diff = num1 - num2;
@@ -270,46 +269,46 @@ $(document).ready(function(){
 
   // zips ball in a straight on on flick
   // receiver can catch the ball anywhere in the line
-    $('.gameBoard').mousedown(function (event) {
-        startDownX = event.offsetX;
-        startDownY = event.offsetY;
-        if (startDownX < gameOptions.width * .6 && startDownX > gameOptions.width * .4 && startDownY > gameOptions.height * .9 && startDownY < gameOptions.height) {
-          $('.gameBoard').on('mouseup', function(event){
+    // $('.gameBoard').mousedown(function (event) {
+    //     startDownX = event.offsetX;
+    //     startDownY = event.offsetY;
+    //     if (startDownX < gameOptions.width * .6 && startDownX > gameOptions.width * .4 && startDownY > gameOptions.height * .9 && startDownY < gameOptions.height) {
+    //       $('.gameBoard').on('mouseup', function(event){
         
-            var rise = -(event.pageY - startDownY);
-            var run = event.pageX - startDownX;
-            var newX = $('.zipBall').position().left;
-            var newY = $('.zipBall').position().top;
-            var distanceToFling = gameOptions.height;
+    //         var rise = -(event.pageY - startDownY);
+    //         var run = event.pageX - startDownX;
+    //         var newX = $('.zipBall').position().left;
+    //         var newY = $('.zipBall').position().top;
+    //         var distanceToFling = gameOptions.height;
 
-            if (run == 0 || Math.abs(rise/run) > 3) {
-              if (rise > 0) {
-                newY -= distanceToFling;
-              } else if (rise < 0) {
-                newY += distanceToFling;
-              }
-            }
-            else {
-              if (run > 0) {
-                newX += distanceToFling;
-                newY -= (rise/run) * distanceToFling;
-              }
-              else {
-                newX -= distanceToFling;
-                newY += (rise/run) * distanceToFling;
-              }
-            }
+    //         if (run == 0 || Math.abs(rise/run) > 3) {
+    //           if (rise > 0) {
+    //             newY -= distanceToFling;
+    //           } else if (rise < 0) {
+    //             newY += distanceToFling;
+    //           }
+    //         }
+    //         else {
+    //           if (run > 0) {
+    //             newX += distanceToFling;
+    //             newY -= (rise/run) * distanceToFling;
+    //           }
+    //           else {
+    //             newX -= distanceToFling;
+    //             newY += (rise/run) * distanceToFling;
+    //           }
+    //         }
              
-           $('.zipBall').animate({
-               left: newX,
-               top: newY
-              }, 1300);
-          });
+    //        $('.zipBall').animate({
+    //            left: newX,
+    //            top: newY
+    //           }, 1300);
+    //       });
           
-        }
-        startDownX = event.pageX;
-        startDownY = event.pageY;
-    });
+    //     }
+    //     startDownX = event.pageX;
+    //     startDownY = event.pageY;
+    // });
         
 
 
