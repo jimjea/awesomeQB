@@ -84,11 +84,11 @@ $(document).ready(function(){
       } else if (distancePercent < 40 && distancePercent > 20) {
         return [150, 1200];
       } else if (distancePercent < 60 && distancePercent > 40) {
-        return [190, 1400];
+        return [170, 1400];
       } else if (distancePercent < 80 && distancePercent > 60) {
-        return [210, 1600];
+        return [190, 1600];
       } else {
-        return [230, 1800];
+        return [200, 1800];
       }
     }
 
