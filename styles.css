@@ -22,7 +22,7 @@ canvas {
   height: 100%;
   border: solid 1px black;
   overflow: hidden;
-  background-image: url('./assets/field.png');
+  background-image: url('./assets/football_field.png');
   background-repeat: no-repeat;
   background-position: 50% 65%;
   background-size: 100% 285%;

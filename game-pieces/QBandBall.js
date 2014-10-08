@@ -4,6 +4,11 @@ var gameOptions = {
 };
 
 var notThrown = true;
+
+var ballHeight = gameOptions.height * .045;
+var ballWidth = gameOptions.width * .03;
+var count = 0;
+
 $(document).ready(function(){
 
   // percent change for background image moving
@@ -83,14 +88,16 @@ $(document).ready(function(){
       var ballTravel = y/gameOptions.height * 100;
       var distancePercent = start - ballTravel;
       if (distancePercent < 33) {
-        return 600
-      } else if (distancePercent < 66 && distancePercent > 33) {
         return 800
+      } else if (distancePercent < 66 && distancePercent > 33) {
+        return 1000
       } else {
         return 1200
       }
     }
     setBallDuration()
+
+    console.log(startY, y)
 
     // Lobbing the ball on click will only allow the receiver to catch it as the ball ends its animation
     var ballSize = 0;
@@ -100,21 +107,13 @@ $(document).ready(function(){
         top: y - $('.lobBall').height()/2  + 'px'
       }, {
         duration: setBallDuration(),
-        // END OF THROW DISTANCE IS DEFINED IN Y AND X (EVENT.CLIENTX)
 
-        // step: function() { // adjusts the size of the ball as it travels
-        //   // if (ballSize < 40) {
-        //   //   while (ballSize < 40)
-        //   //     ballSize++;
-        //   //     $('.lobBall').height(ballSize).width(ballSize);
-        //   // } 
-        //   // // else {
-        //   // //   while (ballSize > 0) {
-        //   // //     $('.lobBall').height(ballSize).width(ballSize);
-        //   // //     ballSize--;
-        //   // //   }
-        //   // // }
-        // },
+        step: function(x) { // adjusts the size of the ball as it travels
+          count ++;
+          // ballHeight += .1;
+          // ballWidth += .1;
+          // $('.lobBall').css({height: ballHeight, width: ballWidth})
+        },
         done: function(event) {
 
           var LWOHit = $(this).collision(".LWO");
@@ -140,10 +139,10 @@ $(document).ready(function(){
             // if ($('.lobBall')[0].offsetTop < gameboardHeight * .359) {
             //   $('.touchdown').css({height: gameboardHeight * .3, width: $('.gameBoard').width() * .9}).offset({top: gameboardHeight * .2 - $('.touchdown').height()/2, left: $('.gameBoard').width() * .55 - $('.touchdown').width()/2}).show();
             // } else {
+            // }
               
               $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12, top: currentLWOposition.top - $('.caught').height()/4, left: currentLWOposition.left - $('.caught').width()/4}).show();
               setTimeout(function(){$('.caught').hide()}, 400);
-            // }
 
             // handles reseting play
             setTimeout(function(){ 
