@@ -128,6 +128,7 @@ $(document).ready(function(){
           var LWOHit = $(this).collision(".LWO");
           var RWOHit = $(this).collision(".RWO");
           var SLOTHit = $(this).collision(".SLOT");
+
           // logic for moving background image
           var diff = percentChange(startY, event.elem.offsetTop);
 
@@ -321,22 +322,35 @@ $(document).ready(function(){
                   var SLOThit = $(this).collision('.SLOT');
 
                   if (LWOhit.length > 0) {
-                    $('.zipBall').stop(true, false);
+                    var LWOposition = $('.LWO').position();
                     $('.LWO').stop(true, false);
+                    $('.zipBall').stop(true, false).animate({top: LWOposition.top, left: LWOposition.left}).css('-webkit-transform', 'rotate(0deg)');
+                    $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12, top: LWOposition.top - $('.caught').height()/4, left: LWOposition.left - $('.caught').width()/4}).show();
+                    setTimeout(function(){$('.caught').hide()}, 400);
                   }
 
                   if (RWOhit.length > 0) {
-                    $('.zipBall').stop(true, false);
+                    var RWOposition = $('.RWO').position();
                     $('.RWO').stop(true, false);
+                    $('.zipBall').stop(true, false).animate({top: RWOposition.top, left: RWOposition.left}).css('-webkit-transform', 'rotate(0deg)');
+                    $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12, top: RWOposition.top - $('.caught').height()/4, left: RWOposition.left - $('.caught').width()/4}).show();
+                    setTimeout(function(){$('.caught').hide()}, 400);
                   }
 
                   if (SLOThit.length > 0) {
-                    $('.zipBall').stop(true, false);
+                    var SLOTposition = $('.SLOT').position();
                     $('.SLOT').stop(true, false);
+                    $('.zipBall').stop(true, false).animate({top: SLOTposition.top, left: SLOTposition.left}).css('-webkit-transform', 'rotate(0deg)');
+                    $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12, top: SLOTposition.top - $('.caught').height()/4, left: SLOTposition.left - $('.caught').width()/4}).show();
+                    setTimeout(function(){$('.caught').hide()}, 400);
                   }
                 },
                 done: function() {
-                  console.log('done')
+                  $('.incomplete').css({height: gameboardHeight * .11, width: gameboardHeight * .12, top: gameOptions.height * .5, left: gameOptions.width * .4}).show();
+                  setTimeout(function(){$('.incomplete').hide()}, 800);
+                  $('.LWO').stop(true, false);
+                  $('.RWO').stop(true, false);
+                  $('.SLOT').stop(true, false);
                 }
               });
           });
