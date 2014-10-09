@@ -144,7 +144,7 @@ $(document).ready(function(){
             setTimeout(function(){$('.caught').hide()}, 400);
 
             if ((currentYPercent.indexOf('%') > 0 || currentYPercent.indexOf('.') > 0) && currentLWOposition.top/gameboardHeight < .1) {
-              console.log('touchdown')
+              $('.touchdown').show();
             }
 
             // handles reseting play
@@ -183,7 +183,7 @@ $(document).ready(function(){
             setTimeout(function(){$('.caught').hide()}, 400);
 
             if ((currentYPercent.indexOf('%') > 0 || currentYPercent.indexOf('.') > 0) && currentRWOposition.top/gameboardHeight < .1) {
-              console.log('touchdown')
+              $('.touchdown').show();
             }
 
             setTimeout(function(){
@@ -213,7 +213,7 @@ $(document).ready(function(){
             setTimeout(function(){$('.caught').hide()}, 400);
 
             if ((currentYPercent.indexOf('%') > 0 || currentYPercent.indexOf('.') > 0) && currentSLOTposition.top/gameboardHeight < .1) {
-              console.log('touchdown')
+              $('.touchdown').show();
             }
 
             setTimeout(function(){
