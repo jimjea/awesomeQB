@@ -4,6 +4,8 @@ var gameOptions = {
 };
 
 var notThrown = true;
+var gameboardHeight = $('.gameBoard').height();
+var currentYPercent = $('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2);
 
 $(document).ready(function(){
   // percent change for background image moving
@@ -61,7 +63,7 @@ $(document).ready(function(){
 
   // throw ball to mouse on click
   // ball handles all collision logic
-  $('.gameBoard').on('click', function(event) {
+  $('.gameBoard').on('dblclick', function(event) {
     $('.zipBall').hide();
     var x = event.clientX;
     var y = event.clientY;
@@ -99,8 +101,7 @@ $(document).ready(function(){
     var count = setBallDuration()[0];
     var increment = count;
 
-    var gameboardHeight = $('.gameBoard').height();
-    var currentYPercent = $('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2);
+
 
     // Lobbing the ball on click will only allow the receiver to catch it as the ball ends its animation
     var lobBall = function() {
@@ -271,46 +272,79 @@ $(document).ready(function(){
 
   // zips ball in a straight on on flick
   // receiver can catch the ball anywhere in the line
-    // $('.gameBoard').mousedown(function (event) {
-    //     startDownX = event.offsetX;
-    //     startDownY = event.offsetY;
-    //     if (startDownX < gameOptions.width * .6 && startDownX > gameOptions.width * .4 && startDownY > gameOptions.height * .9 && startDownY < gameOptions.height) {
-    //       $('.gameBoard').on('mouseup', function(event){
-        
-    //         var rise = -(event.pageY - startDownY);
-    //         var run = event.pageX - startDownX;
-    //         var newX = $('.zipBall').position().left;
-    //         var newY = $('.zipBall').position().top;
-    //         var distanceToFling = gameOptions.height;
+    $('.gameBoard').mousedown(function (event) {
+        startDownX = event.offsetX;
+        startDownY = event.offsetY;
+        if (startDownX < gameOptions.width * .6 && startDownX > gameOptions.width * .4 && startDownY > gameOptions.height * .9 && startDownY < gameOptions.height) {
+          $('.gameBoard').on('mouseup', function(ev){
+            var duration = 1200;
+            var rise = -(ev.pageY - startDownY);
+            var run = ev.pageX - startDownX;
+            var newX = $('.zipBall').position().left;
+            var newY = $('.zipBall').position().top;
+            var distanceToFling = gameOptions.height;
 
-    //         if (run == 0 || Math.abs(rise/run) > 3) {
-    //           if (rise > 0) {
-    //             newY -= distanceToFling;
-    //           } else if (rise < 0) {
-    //             newY += distanceToFling;
-    //           }
-    //         }
-    //         else {
-    //           if (run > 0) {
-    //             newX += distanceToFling;
-    //             newY -= (rise/run) * distanceToFling;
-    //           }
-    //           else {
-    //             newX -= distanceToFling;
-    //             newY += (rise/run) * distanceToFling;
-    //           }
-    //         }
+            if (rise/run === Infinity) {
+              duration = 500;
+            } else if (Math.abs(rise/run) > 5) {
+              duration = 2200;
+            } 
+
+            if (run == 0) {
+              if (rise > 0) {
+                newY -= distanceToFling;
+              } 
+            } else {
+              if (run > 0) {
+                newX += distanceToFling;
+                newY -= (rise/run) * distanceToFling;
+              }
+              else {
+                newX -= distanceToFling;
+                newY += (rise/run) * distanceToFling;
+              }
+            }
+
+
+            var angle = Math.atan2(startDownX-ev.offsetX, startDownY-ev.offsetY)
+            var degree = -angle * (180/Math.PI)
+            $('.zipBall').css('-webkit-transform', 'rotate(' + degree + 'deg)')
              
-    //        $('.zipBall').animate({
-    //            left: newX,
-    //            top: newY
-    //           }, 1300);
-    //       });
+           $('.zipBall').animate({
+               left: newX,
+               top: newY
+              }, {
+                duration: duration,
+                step: function() {
+                  var LWOhit = $(this).collision('.LWO');
+                  var RWOhit = $(this).collision('.RWO');
+                  var SLOThit = $(this).collision('.SLOT');
+
+                  if (LWOhit.length > 0) {
+                    $('.zipBall').stop(true, false);
+                    $('.LWO').stop(true, false);
+                  }
+
+                  if (RWOhit.length > 0) {
+                    $('.zipBall').stop(true, false);
+                    $('.RWO').stop(true, false);
+                  }
+
+                  if (SLOThit.length > 0) {
+                    $('.zipBall').stop(true, false);
+                    $('.SLOT').stop(true, false);
+                  }
+                },
+                done: function() {
+                  console.log('done')
+                }
+              });
+          });
           
-    //     }
-    //     startDownX = event.pageX;
-    //     startDownY = event.pageY;
-    // });
+        }
+        startDownX = event.pageX;
+        startDownY = event.pageY;
+    });
         
 
 

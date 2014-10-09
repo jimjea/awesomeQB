@@ -52,11 +52,9 @@ canvas {
 .ball, .zipBall, .lobBall {
   position: absolute;
   background-image: url('./assets/football.png');
+  pointer-events: none;
   height: 4%;
   width: 3%;
-  text-indent: 100%;
-  white-space: nowrap;
-  overflow: hidden;
   z-index: 31;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -86,6 +84,7 @@ canvas {
 .qb {
   top: 94%;
   left: 48%;
+  pointer-events: none;
 }
 
 .lwo {
