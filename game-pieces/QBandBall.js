@@ -148,7 +148,7 @@ $(document).ready(function(){
             if ((currentYPercent.indexOf('.') > 0 || currentYPercent.length === 0) && currentLWOposition.top/gameboardHeight < .1) {
               $('.touchdown').show();
               setTimeout(function(){$('.touchdown').hide()}, 1000);
-            } else if (currentYPercent.indexOf('%') > 0 && currentLWOposition.top/gameboardHeight < .23) {
+            } else if (currentYPercent.indexOf('%') > 0 && currentLWOposition.top/gameboardHeight < .25) {
               $('.touchdown').show();
               setTimeout(function(){$('.touchdown').hide()}, 1000);
             }
@@ -191,7 +191,7 @@ $(document).ready(function(){
             if ((currentYPercent.indexOf('.') > 0 || currentYPercent.length === 0) && currentRWOposition.top/gameboardHeight < .1) {
               $('.touchdown').show();
               setTimeout(function(){$('.touchdown').hide()}, 1000);
-            } else if (currentYPercent.indexOf('%') > 0 && currentRWOposition.top/gameboardHeight < .23) {
+            } else if (currentYPercent.indexOf('%') > 0 && currentRWOposition.top/gameboardHeight < .25) {
               $('.touchdown').show();
               setTimeout(function(){$('.touchdown').hide()}, 1000);
             }
@@ -225,7 +225,7 @@ $(document).ready(function(){
             if ((currentYPercent.indexOf('.') > 0 || currentYPercent.length === 0) && currentSLOTposition.top/gameboardHeight < .1) {
               $('.touchdown').show();
               setTimeout(function(){$('.touchdown').hide()}, 1000);
-            } else if (currentYPercent.indexOf('%') > 0 && currentSLOTposition.top/gameboardHeight < .23) {
+            } else if (currentYPercent.indexOf('%') > 0 && currentSLOTposition.top/gameboardHeight < .25) {
               $('.touchdown').show();
               setTimeout(function(){$('.touchdown').hide()}, 1000);
             }
