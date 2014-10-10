@@ -3,20 +3,18 @@ var gameOptions = {
   height: $(window).height()
 };
 
-var notThrown = true;
-var gameboardHeight = $('.gameBoard').height();
-var currentYPercent = $('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2);
+var notThrown = true;  // throw once
+
+
+var percentChange = function(num1, num2) {
+  var diff = num1 - num2;
+  return (diff/$('.gameBoard').height()) * 100;
+};
 
 $(document).ready(function(){
-  // percent change for background image moving
-  var percentChange = function(num1, num2) {
-    var diff = num1 - num2;
-    return (diff/$('.gameBoard').height()) * 100;
-  };
 
-  // makes sure you can only throw once
 
-/**************************************/           // TODO: zip ball, score touchdown, break up ball duration, bug in resizing ball on done
+/**************************************/           // TODO: field not scaling properly
 //                Q B                 //           
 /**************************************/
 
@@ -102,7 +100,6 @@ $(document).ready(function(){
     var increment = count;
 
 
-
     // Lobbing the ball on click will only allow the receiver to catch it as the ball ends its animation
     var lobBall = function() {
       $('.lobBall').animate({
@@ -130,10 +127,12 @@ $(document).ready(function(){
           var SLOTHit = $(this).collision(".SLOT");
 
           // logic for moving background image
+          var gameboardHeight = $('.gameBoard').height();  // for scaling the background image
+          var currentYPercent = $('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2);
           var diff = percentChange(startY, event.elem.offsetTop);
-
-
           var newBackgroundPosition = currentYPercent - diff/2 < 0 ? 0 : currentYPercent - diff/2;
+          
+
           if (LWOHit.length > 0) {
             var currentLWOposition = $('.LWO').position();
 
@@ -145,8 +144,13 @@ $(document).ready(function(){
             $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12, top: currentLWOposition.top - $('.caught').height()/4, left: currentLWOposition.left - $('.caught').width()/4}).show();
             setTimeout(function(){$('.caught').hide()}, 400);
 
-            if ((currentYPercent.indexOf('%') > 0 || currentYPercent.indexOf('.') > 0) && currentLWOposition.top/gameboardHeight < .1) {
+
+            if ((currentYPercent.indexOf('.') > 0 || currentYPercent.length === 0) && currentLWOposition.top/gameboardHeight < .1) {
               $('.touchdown').show();
+              setTimeout(function(){$('.touchdown').hide()}, 1000);
+            } else if (currentYPercent.indexOf('%') > 0 && currentLWOposition.top/gameboardHeight < .23) {
+              $('.touchdown').show();
+              setTimeout(function(){$('.touchdown').hide()}, 1000);
             }
 
             // handles reseting play
@@ -184,8 +188,12 @@ $(document).ready(function(){
             $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12, top: currentRWOposition.top - $('.caught').height()/4, left: currentRWOposition.left - $('.caught').width()/4}).show();
             setTimeout(function(){$('.caught').hide()}, 400);
 
-            if ((currentYPercent.indexOf('%') > 0 || currentYPercent.indexOf('.') > 0) && currentRWOposition.top/gameboardHeight < .1) {
+            if ((currentYPercent.indexOf('.') > 0 || currentYPercent.length === 0) && currentRWOposition.top/gameboardHeight < .1) {
               $('.touchdown').show();
+              setTimeout(function(){$('.touchdown').hide()}, 1000);
+            } else if (currentYPercent.indexOf('%') > 0 && currentRWOposition.top/gameboardHeight < .23) {
+              $('.touchdown').show();
+              setTimeout(function(){$('.touchdown').hide()}, 1000);
             }
 
             setTimeout(function(){
@@ -214,8 +222,12 @@ $(document).ready(function(){
             $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12, top: currentSLOTposition.top - $('.caught').height()/4, left: currentSLOTposition.left - $('.caught').width()/4}).show();
             setTimeout(function(){$('.caught').hide()}, 400);
 
-            if ((currentYPercent.indexOf('%') > 0 || currentYPercent.indexOf('.') > 0) && currentSLOTposition.top/gameboardHeight < .1) {
+            if ((currentYPercent.indexOf('.') > 0 || currentYPercent.length === 0) && currentSLOTposition.top/gameboardHeight < .1) {
               $('.touchdown').show();
+              setTimeout(function(){$('.touchdown').hide()}, 1000);
+            } else if (currentYPercent.indexOf('%') > 0 && currentSLOTposition.top/gameboardHeight < .23) {
+              $('.touchdown').show();
+              setTimeout(function(){$('.touchdown').hide()}, 1000);
             }
 
             setTimeout(function(){
@@ -249,10 +261,10 @@ $(document).ready(function(){
 
               placeqb(48, 94);
               placeball(49, 92);
-              leftWideOut(2000, 10, 92);
-              rightWideOut(2000, 85, 92);
+              leftWideOut(800, 10, 92);
+              rightWideOut(800, 85, 92);
               generateSLOTposition();
-              slot(2000, SLOTposition[position], 93); 
+              slot(800, SLOTposition[position], 93); 
 
             }, 1000);
           }
@@ -273,92 +285,170 @@ $(document).ready(function(){
 
   // zips ball in a straight on on flick
   // receiver can catch the ball anywhere in the line
-    $('.gameBoard').mousedown(function (event) {
-        startDownX = event.offsetX;
-        startDownY = event.offsetY;
-        if (startDownX < gameOptions.width * .6 && startDownX > gameOptions.width * .4 && startDownY > gameOptions.height * .9 && startDownY < gameOptions.height) {
-          $('.gameBoard').on('mouseup', function(ev){
-            var duration = 1200;
-            var rise = -(ev.pageY - startDownY);
-            var run = ev.pageX - startDownX;
-            var newX = $('.zipBall').position().left;
-            var newY = $('.zipBall').position().top;
-            var distanceToFling = gameOptions.height;
-
-            if (rise/run === Infinity) {
-              duration = 500;
-            } else if (Math.abs(rise/run) > 5) {
-              duration = 2200;
-            } 
-
-            if (run == 0) {
-              if (rise > 0) {
-                newY -= distanceToFling;
-              } 
-            } else {
-              if (run > 0) {
-                newX += distanceToFling;
-                newY -= (rise/run) * distanceToFling;
-              }
-              else {
-                newX -= distanceToFling;
-                newY += (rise/run) * distanceToFling;
-              }
-            }
 
 
-            var angle = Math.atan2(startDownX-ev.offsetX, startDownY-ev.offsetY)
-            var degree = -angle * (180/Math.PI)
-            $('.zipBall').css('-webkit-transform', 'rotate(' + degree + 'deg)')
+  // ******************* FLICKING HAS ISSUES
+  // ******************* ON RWO OR LWO CATCH, SLOT DOESN'T RESET
+  // ******************* AFTER ONE INCOMPLETE, A LOB WILL TRIGGER INCOMPLETE FOR THE ZIPBALL TWICE
+
+    // $('.gameBoard').mousedown(function (event) {
+    //     startDownX = event.offsetX;
+    //     startDownY = event.offsetY;
+
+    //     if (startDownX < gameOptions.width * .6 && startDownX > gameOptions.width * .4 && startDownY > gameOptions.height * .9 && startDownY < gameOptions.height) {
+    //       $('.gameBoard').on('mouseup', function(ev){
+    //         var duration = 1200;
+    //         var rise = -(ev.pageY - startDownY);
+    //         var run = ev.pageX - startDownX;
+    //         var newX = $('.zipBall').position().left;
+    //         var newY = $('.zipBall').position().top;
+    //         var distanceToFling = gameOptions.height;
+
+    //         if (rise/run === Infinity) {
+    //           duration = 500;
+    //         } else if (Math.abs(rise/run) > 5) {
+    //           duration = 2200;
+    //         } 
+
+    //         if (run == 0) {
+    //           if (rise > 0) {
+    //             newY -= distanceToFling;
+    //           } 
+    //         } else {
+    //           if (run > 0) {
+    //             newX += distanceToFling;
+    //             newY -= (rise/run) * distanceToFling;
+    //           }
+    //           else {
+    //             newX -= distanceToFling;
+    //             newY += (rise/run) * distanceToFling;
+    //           }
+    //         }
+
+
+    //         var angle = Math.atan2(startDownX - ev.offsetX, startDownY - ev.offsetY)
+    //         var degree = -angle * (180/Math.PI)
+    //         $('.zipBall').css('-webkit-transform', 'rotate(' + degree + 'deg)')
              
-           $('.zipBall').animate({
-               left: newX,
-               top: newY
-              }, {
-                duration: duration,
-                step: function() {
-                  var LWOhit = $(this).collision('.LWO');
-                  var RWOhit = $(this).collision('.RWO');
-                  var SLOThit = $(this).collision('.SLOT');
+    //         $('.zipBall').animate({
+    //            left: newX,
+    //            top: newY
+    //           }, {
+    //             duration: duration,
+    //             step: function() {
+    //               var LWOhit = $(this).collision('.LWO');
+    //               var RWOhit = $(this).collision('.RWO');
+    //               var SLOThit = $(this).collision('.SLOT');
 
-                  if (LWOhit.length > 0) {
-                    var LWOposition = $('.LWO').position();
-                    $('.LWO').stop(true, false);
-                    $('.zipBall').stop(true, false).animate({top: LWOposition.top, left: LWOposition.left}).css('-webkit-transform', 'rotate(0deg)');
-                    $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12, top: LWOposition.top - $('.caught').height()/4, left: LWOposition.left - $('.caught').width()/4}).show();
-                    setTimeout(function(){$('.caught').hide()}, 400);
-                  }
+    //               var gameboardHeight = $('.gameBoard').height();  // for scaling the background image
+    //               var currentYPercent = $('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2);
+    //               var diff = percentChange(startDownY, ev.offsetY);
+    //               var newBackgroundPosition = currentYPercent - diff/2 < 0 ? 0 : currentYPercent - diff/2;
 
-                  if (RWOhit.length > 0) {
-                    var RWOposition = $('.RWO').position();
-                    $('.RWO').stop(true, false);
-                    $('.zipBall').stop(true, false).animate({top: RWOposition.top, left: RWOposition.left}).css('-webkit-transform', 'rotate(0deg)');
-                    $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12, top: RWOposition.top - $('.caught').height()/4, left: RWOposition.left - $('.caught').width()/4}).show();
-                    setTimeout(function(){$('.caught').hide()}, 400);
-                  }
+    //               if (LWOhit.length > 0) {
+    //                 var LWOposition = $('.LWO').position();
+    //                 $('.LWO').stop(true, false);
+    //                 $('.zipBall').stop(true, false).animate({top: LWOposition.top, left: LWOposition.left}).css('-webkit-transform', 'rotate(0deg)');
+    //                 $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12, top: LWOposition.top - $('.caught').height()/4, left: LWOposition.left - $('.caught').width()/4}).show();
+    //                 setTimeout(function(){$('.caught').hide()}, 400);
 
-                  if (SLOThit.length > 0) {
-                    var SLOTposition = $('.SLOT').position();
-                    $('.SLOT').stop(true, false);
-                    $('.zipBall').stop(true, false).animate({top: SLOTposition.top, left: SLOTposition.left}).css('-webkit-transform', 'rotate(0deg)');
-                    $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12, top: SLOTposition.top - $('.caught').height()/4, left: SLOTposition.left - $('.caught').width()/4}).show();
-                    setTimeout(function(){$('.caught').hide()}, 400);
-                  }
-                },
-                done: function() {
-                  $('.incomplete').css({height: gameboardHeight * .11, width: gameboardHeight * .12, top: gameOptions.height * .5, left: gameOptions.width * .4}).show();
-                  setTimeout(function(){$('.incomplete').hide()}, 800);
-                  $('.LWO').stop(true, false);
-                  $('.RWO').stop(true, false);
-                  $('.SLOT').stop(true, false);
-                }
-              });
-          });
+    //                 setTimeout(function(){ 
+    //                   $('.gameBoard').animate({
+    //                     'background-position-x': '50%', 
+    //                     'background-position-y': newBackgroundPosition + '%' 
+    //                   }, 2000);
+
+    //                   $('.RWO').stop(true, false);
+    //                   $('.SLOT').stop(true, false);
+
+    //                   placeqb(48, 94);
+    //                   placeball(49, 92);
+    //                   leftWideOut(2000, 10, 92);
+    //                   rightWideOut(2000, 85, 92);
+    //                   generateSLOTposition();
+    //                   slot(2000, SLOTposition[position], 93); 
+
+    //                 }, 1000);
+    //               }
+
+    //               if (RWOhit.length > 0) {
+    //                 var RWOposition = $('.RWO').position();
+    //                 $('.RWO').stop(true, false);
+    //                 $('.zipBall').stop(true, false).animate({top: RWOposition.top, left: RWOposition.left}).css('-webkit-transform', 'rotate(0deg)');
+    //                 $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12, top: RWOposition.top - $('.caught').height()/4, left: RWOposition.left - $('.caught').width()/4}).show();
+    //                 setTimeout(function(){$('.caught').hide()}, 400);
+
+    //                 setTimeout(function(){ 
+    //                   $('.gameBoard').animate({
+    //                     'background-position-x': '50%', 
+    //                     'background-position-y': newBackgroundPosition + '%' 
+    //                   }, 2000);
+
+    //                   $('.LWO').stop(true, false);
+    //                   $('.SLOT').stop(true, false);
+
+    //                   placeqb(48, 94);
+    //                   placeball(49, 92);
+    //                   leftWideOut(2000, 10, 92);
+    //                   rightWideOut(2000, 85, 92);
+    //                   generateSLOTposition();
+    //                   slot(2000, SLOTposition[position], 93); 
+
+    //                 }, 1000);
+    //               }
+
+    //               if (SLOThit.length > 0) {
+    //                 var SLOTposition = $('.SLOT').position();
+    //                 $('.SLOT').stop(true, false);
+    //                 $('.zipBall').stop(true, false).animate({top: SLOTposition.top, left: SLOTposition.left}).css('-webkit-transform', 'rotate(0deg)');
+    //                 $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12, top: SLOTposition.top - $('.caught').height()/4, left: SLOTposition.left - $('.caught').width()/4}).show();
+    //                 setTimeout(function(){$('.caught').hide()}, 400);
+
+    //                 setTimeout(function(){ 
+    //                   $('.gameBoard').animate({
+    //                     'background-position-x': '50%', 
+    //                     'background-position-y': newBackgroundPosition + '%' 
+    //                   }, 2000);
+
+    //                   $('.RWO').stop(true, false);
+    //                   $('.LWO').stop(true, false);
+
+    //                   placeqb(48, 94);
+    //                   placeball(49, 92);
+    //                   leftWideOut(2000, 10, 92);
+    //                   rightWideOut(2000, 85, 92);
+    //                   generateSLOTposition();
+    //                   slot(2000, SLOTposition[position], 93); 
+
+    //                 }, 1000);
+    //               }
+    //             },
+    //             done: function() {
+    //               var gameboardHeight = $('.gameBoard').height();
+
+    //               console.log(RWOhit.length)
+    //               $('.incomplete').css({height: gameboardHeight * .11, width: gameboardHeight * .12, top: gameOptions.height * .5, left: gameOptions.width * .4}).show();
+    //               setTimeout(function(){$('.incomplete').hide()}, 800);
+    //               $('.LWO').stop(true, false);
+    //               $('.RWO').stop(true, false);
+    //               $('.SLOT').stop(true, false);
+
+    //               setTimeout(function(){ 
+
+    //                 placeqb(48, 94);
+    //                 placeball(49, 92);
+    //                 leftWideOut(2000, 10, 92);
+    //                 rightWideOut(2000, 85, 92);
+    //                 generateSLOTposition();
+    //                 slot(2000, SLOTposition[position], 93); 
+
+    //               }, 1000);
+    //             }
+    //           });
+    //       });
           
-        }
-        startDownX = event.pageX;
-        startDownY = event.pageY;
-    });
+    //     }
+    // });
         
 
 

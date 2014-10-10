@@ -159,6 +159,7 @@ var generateSLOTposition = function() {
   position = Math.round(Math.random());
   SLOTRouteNumber = Math.floor(Math.random() * 4) + 1;
 };
+
 var slot = function(dur, startX, startY) {
   dur = dur || undefined;
   $('.SLOT')
