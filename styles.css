@@ -16,6 +16,15 @@ canvas {
   display: block;
 }
 
+.start {
+  position: absolute;
+  color: red;
+  font-family: arial;
+  font-size: 20;
+  left: 17%;
+  background-color: white;
+}
+
 .gameBoard {
   position: absolute;
   width: 100%;

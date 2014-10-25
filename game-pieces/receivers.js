@@ -197,6 +197,7 @@ var SLOTroute = function(x, y) {
 
 // Start the game on click
 $('#SLOTpreview').on('click', function(event) {
+  $('.start').hide();
   $('#SLOTpreview').hide();
   $('#RWOpreview').hide();
   $('#LWOpreview').hide();
