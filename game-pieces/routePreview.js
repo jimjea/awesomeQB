@@ -35,7 +35,7 @@ function preview() {
 
   function drawStuff() {
     var lwoX = 10, lwoY = 93;
-    var width = $('.gameBoard').width() * .025;
+    var width = $('.gameBoard').width() * .022;
     LWOcontext.moveTo(LWOcanvas.width * (lwoX/100) + width, LWOcanvas.height * (lwoY/100) + 10);
     LWOcontext.lineTo(LWOcanvas.width * ((lwoX + LWOroutes[LWORouteNumber].firstX)/100) + width, LWOcanvas.height * ((lwoY + LWOroutes[LWORouteNumber].firstY)/100) + 10);
     LWOcontext.lineTo(LWOcanvas.width * ((lwoX + LWOroutes[LWORouteNumber].secondX)/100) + width, LWOcanvas.height * ((lwoY + LWOroutes[LWORouteNumber].secondY)/100) + 10);
