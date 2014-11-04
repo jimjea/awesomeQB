@@ -415,7 +415,16 @@ $(document).ready(function(){
 
                   }, 1000);
                 } else {
-                  console.log('incomplete')
+                  LWOtoggle = false;
+                  RWOtoggle = false;
+                  SLOTtoggle = false;
+
+                  placeqb(48, 94);
+                  placeball(49, 92);
+                  leftWideOut(2000, 10, 92);
+                  rightWideOut(2000, 85, 92);
+                  generateSLOTposition();
+                  slot(2000, SLOTposition[position], 93); 
                 }
                   
                 }
