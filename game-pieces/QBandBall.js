@@ -64,7 +64,7 @@ $(document).ready(function(){
 
   // throw ball to mouse on click
   // ball handles all collision logic
-  $('.gameBoard').on('dblclick', function(event) {
+  $('.gameBoard').on('click', function(event) {
     $('.zipBall').hide();
     var x = event.clientX;
     var y = event.clientY;
@@ -113,7 +113,6 @@ $(document).ready(function(){
 
         // adjusts the size of the ball as it travels)
         step: function(ev) { 
-          console.log('lobbed start')
           increment--;
           if (increment > count/2) { // mobile: 1.5, web: 2
             ballHeight += .5;
@@ -125,7 +124,6 @@ $(document).ready(function(){
           $('.lobBall').css({height: ballHeight, width: ballWidth});
         },
         done: function(event) {
-          console.log('lobbed ball end')
           $('.lobBall').height(gameOptions.height * .04).width(gameOptions.width * .03).css('-webkit-transform', 'rotate(0deg)');
           var LWOHit = $(this).collision(".LWO");
           var RWOHit = $(this).collision(".RWO");
@@ -296,6 +294,7 @@ $(document).ready(function(){
 
 
     $('.gameBoard').on('touchstart', function (event) {
+      console.log('touch starting')
       startDownX = event.originalEvent.touches[0].clientX;
       startDownY = event.originalEvent.touches[0].clientY;
 
@@ -306,10 +305,10 @@ $(document).ready(function(){
         $('.lobBall').hide();
 
         $('.gameBoard').on('touchend', function(ev){
-          console.log(ev)
+          console.log('zipping')
           var duration = 1200;
-          var rise = -(ev.pageY - startDownY);
-          var run = ev.pageX - startDownX;
+          var rise = -(ev.originalEvent.changedTouches[0].clientY - startDownY);
+          var run = ev.originalEvent.changedTouches[0].clientX - startDownX;
           var newX = $('.zipBall').position().left;
           var newY = $('.zipBall').position().top;
           var distanceToFling = gameOptions.height;
@@ -336,7 +335,7 @@ $(document).ready(function(){
           }
 
 
-          var angle = Math.atan2(startDownX - ev.offsetX, startDownY - ev.offsetY)
+          var angle = Math.atan2(startDownX - ev.originalEvent.changedTouches[0].clientX, startDownY - ev.originalEvent.changedTouches[0].clientY)
           var degree = -angle * (180/Math.PI)
           $('.zipBall').css('-webkit-transform', 'rotate(' + degree + 'deg)')
           
@@ -387,7 +386,7 @@ $(document).ready(function(){
 
                 var gameboardHeight = $('.gameBoard').height();  // for scaling the background image
                 var currentYPercent = $('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2);
-                var diff = percentChange(startDownY, ev.offsetY);
+                var diff = percentChange(startDownY, ev.originalEvent.changedTouches[0].clientY);
                 
                 var newBackgroundPosition = currentYPercent - diff/2 < 0 ? 0 : currentYPercent - diff/2;
 
