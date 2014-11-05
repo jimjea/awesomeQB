@@ -105,6 +105,7 @@ $(document).ready(function(){
 
     // Lobbing the ball on click will only allow the receiver to catch it as the ball ends its animation
     var lobBall = function() {
+      console.log('lobbing')
       $('.lobBall').animate({
         left: x - $('.lobBall').width()/2 + 'px',
         top: y - $('.lobBall').height()/2  + 'px'
@@ -275,6 +276,7 @@ $(document).ready(function(){
       })
     }
     if (notThrown) {
+      console.log(notThrown)
       lobBall();
       notThrown = false;
     }
@@ -292,20 +294,22 @@ $(document).ready(function(){
 
 
 
-
     $('.gameBoard').on('touchstart', function (event) {
-      console.log('touch starting')
       startDownX = event.originalEvent.touches[0].clientX;
       startDownY = event.originalEvent.touches[0].clientY;
 
+
       if (startDownX < gameOptions.width * .6 && startDownX > gameOptions.width * .4 && startDownY > gameOptions.height * .9 && startDownY < gameOptions.height) {
+      // add test class to game board, then delete test class once it is zipped
+        $('.gameBoard').addClass('test');
         var LWOtoggle = false;
         var RWOtoggle = false;
         var SLOTtoggle = false;
         $('.lobBall').hide();
 
         $('.gameBoard').on('touchend', function(ev){
-          console.log('zipping')
+          if ($(this).hasClass('test')) {
+
           var duration = 1200;
           var rise = -(ev.originalEvent.changedTouches[0].clientY - startDownY);
           var run = ev.originalEvent.changedTouches[0].clientX - startDownX;
@@ -341,70 +345,83 @@ $(document).ready(function(){
           
 
           var zipBall = function() {
-          $('.zipBall').animate({
-             left: newX,
-             top: newY
-            }, {
-              duration: duration,
-              step: function() {
-                var LWOhit = $(this).collision('.LWO');
-                var RWOhit = $(this).collision('.RWO');
-                var SLOThit = $(this).collision('.SLOT');
+            $('.zipBall').animate({
+               left: newX,
+               top: newY
+              }, {
+                duration: duration,
+                step: function() {
+                  var LWOhit = $(this).collision('.LWO');
+                  var RWOhit = $(this).collision('.RWO');
+                  var SLOThit = $(this).collision('.SLOT');
 
-                var gameboardHeight = $('.gameBoard').height(); 
+                  var gameboardHeight = $('.gameBoard').height(); 
 
-                if (LWOhit.length > 0) {
-                  var LWOposition = $('.LWO').position();
-                  LWOtoggle = true;
+                  if (LWOhit.length > 0) {
+                    var LWOposition = $('.LWO').position();
+                    LWOtoggle = true;
+                    $('.LWO').stop(true, false);
+                    $('.zipBall').stop(true, true).animate({top: LWOposition.top, left: LWOposition.left}).css('-webkit-transform', 'rotate(0deg)');
+                    $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12, top: LWOposition.top - $('.caught').height()/4, left: LWOposition.left - $('.caught').width()/4}).show();
+                    setTimeout(function(){$('.caught').hide()}, 400);
+                  }
+
+                  if (RWOhit.length > 0) {
+                    var RWOposition = $('.RWO').position();
+                    RWOtoggle = true;
+                    $('.RWO').stop(true, false);
+                    $('.zipBall').stop(true, true).animate({top: RWOposition.top, left: RWOposition.left}).css('-webkit-transform', 'rotate(0deg)');
+                    $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12, top: RWOposition.top - $('.caught').height()/4, left: RWOposition.left - $('.caught').width()/4}).show();
+                    setTimeout(function(){$('.caught').hide()}, 400);
+
+                  }
+
+                  if (SLOThit.length > 0) {
+                    var SLOTposition = $('.SLOT').position();
+                    SLOTtoggle = true;
+                    $('.SLOT').stop(true, false);
+                    $('.zipBall').stop(true, true).animate({top: SLOTposition.top, left: SLOTposition.left}).css('-webkit-transform', 'rotate(0deg)');
+                    $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12, top: SLOTposition.top - $('.caught').height()/4, left: SLOTposition.left - $('.caught').width()/4}).show();
+                    setTimeout(function(){$('.caught').hide()}, 400);
+
+                  }
+                },
+                done: function(x) {
+                  $('.gameBoard').removeClass('test');
+                  var gameboardHeight = $('.gameBoard').height();  // for scaling the background image
+                  var currentYPercent = $('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2);
+                  var diff = percentChange(startDownY, ev.originalEvent.changedTouches[0].clientY);
+                  
+                  var newBackgroundPosition = currentYPercent - diff/2 < 0 ? 0 : currentYPercent - diff/2;
+
                   $('.LWO').stop(true, false);
-                  $('.zipBall').stop(true, true).animate({top: LWOposition.top, left: LWOposition.left}).css('-webkit-transform', 'rotate(0deg)');
-                  $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12, top: LWOposition.top - $('.caught').height()/4, left: LWOposition.left - $('.caught').width()/4}).show();
-                  setTimeout(function(){$('.caught').hide()}, 400);
-                }
-
-                if (RWOhit.length > 0) {
-                  var RWOposition = $('.RWO').position();
-                  RWOtoggle = true;
                   $('.RWO').stop(true, false);
-                  $('.zipBall').stop(true, true).animate({top: RWOposition.top, left: RWOposition.left}).css('-webkit-transform', 'rotate(0deg)');
-                  $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12, top: RWOposition.top - $('.caught').height()/4, left: RWOposition.left - $('.caught').width()/4}).show();
-                  setTimeout(function(){$('.caught').hide()}, 400);
-
-                }
-
-                if (SLOThit.length > 0) {
-                  var SLOTposition = $('.SLOT').position();
-                  SLOTtoggle = true;
                   $('.SLOT').stop(true, false);
-                  $('.zipBall').stop(true, true).animate({top: SLOTposition.top, left: SLOTposition.left}).css('-webkit-transform', 'rotate(0deg)');
-                  $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12, top: SLOTposition.top - $('.caught').height()/4, left: SLOTposition.left - $('.caught').width()/4}).show();
-                  setTimeout(function(){$('.caught').hide()}, 400);
 
-                }
-              },
-              done: function(x) {
+                  if (LWOtoggle || RWOtoggle || SLOTtoggle) {
+                    setTimeout(function(){ 
 
-                var gameboardHeight = $('.gameBoard').height();  // for scaling the background image
-                var currentYPercent = $('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2);
-                var diff = percentChange(startDownY, ev.originalEvent.changedTouches[0].clientY);
-                
-                var newBackgroundPosition = currentYPercent - diff/2 < 0 ? 0 : currentYPercent - diff/2;
+                      LWOtoggle = false;
+                      RWOtoggle = false;
+                      SLOTtoggle = false;
 
-                $('.LWO').stop(true, false);
-                $('.RWO').stop(true, false);
-                $('.SLOT').stop(true, false);
+                      $('.gameBoard').animate({
+                        'background-position-x': '50%', 
+                        'background-position-y': newBackgroundPosition + '%' 
+                      }, 2000);
 
-                if (LWOtoggle || RWOtoggle || SLOTtoggle) {
-                  setTimeout(function(){ 
+                      placeqb(48, 94);
+                      placeball(49, 92);
+                      leftWideOut(2000, 10, 92);
+                      rightWideOut(2000, 85, 92);
+                      generateSLOTposition();
+                      slot(2000, SLOTposition[position], 93); 
 
+                    }, 1000);
+                  } else {
                     LWOtoggle = false;
                     RWOtoggle = false;
                     SLOTtoggle = false;
-
-                    $('.gameBoard').animate({
-                      'background-position-x': '50%', 
-                      'background-position-y': newBackgroundPosition + '%' 
-                    }, 2000);
 
                     placeqb(48, 94);
                     placeball(49, 92);
@@ -412,23 +429,11 @@ $(document).ready(function(){
                     rightWideOut(2000, 85, 92);
                     generateSLOTposition();
                     slot(2000, SLOTposition[position], 93); 
-
-                  }, 1000);
-                } else {
-                  LWOtoggle = false;
-                  RWOtoggle = false;
-                  SLOTtoggle = false;
-
-                  placeqb(48, 94);
-                  placeball(49, 92);
-                  leftWideOut(2000, 10, 92);
-                  rightWideOut(2000, 85, 92);
-                  generateSLOTposition();
-                  slot(2000, SLOTposition[position], 93); 
-                }
-                  
+                  }
+                    
                 }
             });
+          }
           }
           if (notThrown) {
             zipBall();
