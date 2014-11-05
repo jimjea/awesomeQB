@@ -32,6 +32,12 @@ var leftWideOut = function(dur, startX, startY) {
         $('.zipBall').show();
         $('.lobBall').show();
 
+        if ($('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2) < 52) {
+          $('.gameBoard').removeClass('notredzone');
+        }
+
+
+
         notThrown = true;
       }
     })
@@ -196,18 +202,38 @@ var SLOTroute = function(x, y) {
 }
 
 // Start the game on click
-$('#SLOTpreview').on('click', function(event) {
-  $('.start').hide();
-  $('#SLOTpreview').hide();
-  $('#RWOpreview').hide();
-  $('#LWOpreview').hide();
-  var SLOTx = SLOTposition[position];
-  var SLOTy = ($('.SLOT').offset().top/gameOptions.height) * 100;
-  var LWOx = 10;
-  var LWOy = ($('.LWO').offset().top/gameOptions.height) * 100;
-  var RWOx = 85;
-  var RWOy = ($('.RWO').offset().top/gameOptions.height) * 100;
-  RWOroute(RWOx, RWOy);
-  LWOroute(LWOx, LWOy);
-  SLOTroute(SLOTx, SLOTy);
-});
+  $('#SLOTpreview').on('click', function(event) {
+    var percentDiff = 52 - $('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2);
+
+    if ($('.gameBoard').hasClass('notredzone')) {
+      $('.start').hide();
+      $('#SLOTpreview').hide();
+      $('#RWOpreview').hide();
+      $('#LWOpreview').hide();
+      var SLOTx = SLOTposition[position];
+      var SLOTy = ($('.SLOT').offset().top/gameOptions.height) * 100;
+      var LWOx = 10;
+      var LWOy = ($('.LWO').offset().top/gameOptions.height) * 100;
+      var RWOx = 85;
+      var RWOy = ($('.RWO').offset().top/gameOptions.height) * 100;
+      RWOroute(RWOx, RWOy);
+      LWOroute(LWOx, LWOy);
+      SLOTroute(SLOTx, SLOTy);
+    } else {
+
+      $('.start').hide();
+      $('#SLOTpreview').hide();
+      $('#RWOpreview').hide();
+      $('#LWOpreview').hide();
+      var SLOTx = SLOTposition[position];
+      var SLOTy = ($('.SLOT').offset().top/gameOptions.height) * 100;
+      var LWOx = 10;
+      var LWOy = ($('.LWO').offset().top/gameOptions.height) * 100;
+      var RWOx = 85;
+      var RWOy = ($('.RWO').offset().top/gameOptions.height) * 100;
+      RWOroute(RWOx, RWOy + percentDiff);
+      LWOroute(LWOx, LWOy + percentDiff);
+      SLOTroute(SLOTx, SLOTy + percentDiff);
+    }
+  });
+

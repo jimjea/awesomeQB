@@ -11,10 +11,9 @@ var percentChange = function(num1, num2) {
   return (diff/$('.gameBoard').height()) * 100;
 };
 
-
+$('.gameBoard').addClass('notredzone');
 
 $(document).ready(function(){
-
 
 /**************************************/           // TODO: in the middle of the lob, the done method is being called
 //                Q B                 //           
@@ -132,10 +131,8 @@ $(document).ready(function(){
           var gameboardHeight = $('.gameBoard').height();  // for scaling the background image
           var currentYPercent = $('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2);
           var diff = percentChange(startY, event.elem.offsetTop);
-          var newBackgroundPosition = currentYPercent - diff/2  < 13.5 ? 13.5 : currentYPercent - diff/2;
+          newBackgroundPosition = currentYPercent - diff/2  < 13.5 ? 13.5 : currentYPercent - diff/2;
 
-
-          console.log(currentYPercent, diff, newBackgroundPosition)
 
           if (LWOHit.length > 0) {
             var currentLWOposition = $('.LWO').position();
@@ -411,9 +408,8 @@ $(document).ready(function(){
                   var gameboardHeight = $('.gameBoard').height();  // for scaling the background image
                   var currentYPercent = $('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2);
                   var diff = percentChange(startDownY, ev.originalEvent.changedTouches[0].clientY);
-                  console.log(currentYPercent - diff/2);
                   
-                  var newBackgroundPosition = currentYPercent - diff/2 < 13.5 ? 13.5 : currentYPercent - diff/1.9;
+                  newBackgroundPosition = currentYPercent - diff/2 < 13.5 ? 13.5 : currentYPercent - diff/1.9;
 
                   $('.LWO').stop(true, false);
                   $('.RWO').stop(true, false);
