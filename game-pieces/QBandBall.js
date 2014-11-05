@@ -11,7 +11,6 @@ var percentChange = function(num1, num2) {
   return (diff/$('.gameBoard').height()) * 100;
 };
 
-var zip = false;
 
 
 $(document).ready(function(){
@@ -29,9 +28,9 @@ $(document).ready(function(){
   };
   placeqb();
 
-  var hikeqb = function(startX) {
+  var hikeqb = function() {
     $('.qb').animate({
-      top: startX + 1.5 + '%'
+      top: ($('.qb').position().top/gameOptions.height) * 100 + 1.5 + '%'
     })
   };
 
@@ -48,17 +47,17 @@ $(document).ready(function(){
   }
   placeball(49, 92);
 
-  var hikeball = function(startX, startY) {
+  var hikeball = function() {
     $('.lobBall, .zipBall').animate({
-      left: startX + 1.5 + '%',
-      top: startY + 3 + '%'
+      left: ($('.lobBall').position().left/gameOptions.width) * 100 + 1.5 + '%',
+      top: ($('.lobBall').position().top/gameOptions.height) * 100 + 3 + '%'
     })
   }
 
 
   $('#SLOTpreview').on('click', function() {
-    hikeball(49, 92);
-    hikeqb(94);
+    hikeball();
+    hikeqb();
   })
 
 
@@ -105,7 +104,6 @@ $(document).ready(function(){
 
     // Lobbing the ball on click will only allow the receiver to catch it as the ball ends its animation
     var lobBall = function() {
-      console.log('lobbing')
       $('.lobBall').animate({
         left: x - $('.lobBall').width()/2 + 'px',
         top: y - $('.lobBall').height()/2  + 'px'
@@ -134,8 +132,10 @@ $(document).ready(function(){
           var gameboardHeight = $('.gameBoard').height();  // for scaling the background image
           var currentYPercent = $('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2);
           var diff = percentChange(startY, event.elem.offsetTop);
-          var newBackgroundPosition = currentYPercent - diff/2 < 0 ? 0 : currentYPercent - diff/2;
+          var newBackgroundPosition = currentYPercent - diff/2  < 13.5 ? 13.5 : currentYPercent - diff/2;
 
+
+          console.log(currentYPercent, diff, newBackgroundPosition)
 
           if (LWOHit.length > 0) {
             var currentLWOposition = $('.LWO').position();
@@ -149,17 +149,19 @@ $(document).ready(function(){
             setTimeout(function(){$('.caught').hide();}, 400);
 
 
-            if ((currentYPercent.indexOf('.') > 0 || currentYPercent.length === 0) && currentLWOposition.top/gameboardHeight < .2) {
-              $('.touchdown').show();
-              setTimeout(function(){location.reload()}, 1500);
-            } else if (currentYPercent.indexOf('%') > 0 && currentLWOposition.top/gameboardHeight < .25) {
-              $('.touchdown').show();
-              setTimeout(function(){location.reload()}, 1500);
-            }
+
+            // if ((currentYPercent.indexOf('.') > 0 || currentYPercent.length === 0) && currentLWOposition.top/gameboardHeight < .2) {
+            //   $('.touchdown').show();
+            //   setTimeout(function(){location.reload()}, 1500);
+            // } else if (currentYPercent.indexOf('%') > 0 && currentLWOposition.top/gameboardHeight < .25) {
+            //   $('.touchdown').show();
+            //   setTimeout(function(){location.reload()}, 1500);
+            // }
 
 
             // handles reseting play
             var resetLWO = function() { 
+
               $('.gameBoard').animate({
                 'background-position-x': '50%', 
                 'background-position-y': newBackgroundPosition + '%' 
@@ -175,6 +177,9 @@ $(document).ready(function(){
               rightWideOut(2000, 85, 92);
               generateSLOTposition();
               slot(2000, SLOTposition[position], 93); 
+
+
+
 
             };
 
@@ -206,12 +211,14 @@ $(document).ready(function(){
               $('.LWO').stop(true, false);
               $('.SLOT').stop(true, false);
 
+
               placeqb(48, 94);
               placeball(49, 92);
               leftWideOut(2000, 10, 92);
               rightWideOut(2000, 85, 92);
               generateSLOTposition();
               slot(2000, SLOTposition[position], 93); 
+
             }, 1000);
 
           } else if (SLOTHit.length > 0) {
@@ -238,7 +245,8 @@ $(document).ready(function(){
               }, 2000);
 
               $('.RWO').stop(true, false);
-              $('.LWO').stop(true, false);
+              $('.currentLWOposition').stop(true, false);
+
 
               placeqb(48, 94);
               placeball(49, 92);
@@ -246,6 +254,7 @@ $(document).ready(function(){
               rightWideOut(2000, 85, 92);
               generateSLOTposition();
               slot(2000, SLOTposition[position], 93); 
+
             }, 1000);
 
           } else {
@@ -259,12 +268,24 @@ $(document).ready(function(){
 
             setTimeout(function(){
 
-              placeqb(48, 94);
-              placeball(49, 92);
-              leftWideOut(800, 10, 92);
-              rightWideOut(800, 85, 92);
-              generateSLOTposition();
-              slot(800, SLOTposition[position], 93); 
+              // if (newBackgroundPosition > 0) {
+
+                placeqb(48, 94);
+                placeball(49, 92);
+                leftWideOut(2000, 10, 92);
+                rightWideOut(2000, 85, 92);
+                generateSLOTposition();
+                slot(2000, SLOTposition[position], 93); 
+
+              // } else {
+
+              //   placeqb(48, 94 - redzoneTop);
+              //   placeball(49, 92 - redzoneTop);
+              //   leftWideOut(2000, 10, 92 - redzoneTop);
+              //   rightWideOut(2000, 85, 92 - redzoneTop);
+              //   generateSLOTposition();
+              //   slot(2000, SLOTposition[position], 93 - redzoneTop); 
+              // }
 
             }, 1000);
           }
@@ -276,7 +297,6 @@ $(document).ready(function(){
       })
     }
     if (notThrown) {
-      console.log(notThrown)
       lobBall();
       notThrown = false;
     }
@@ -391,8 +411,9 @@ $(document).ready(function(){
                   var gameboardHeight = $('.gameBoard').height();  // for scaling the background image
                   var currentYPercent = $('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2);
                   var diff = percentChange(startDownY, ev.originalEvent.changedTouches[0].clientY);
+                  console.log(currentYPercent - diff/2);
                   
-                  var newBackgroundPosition = currentYPercent - diff/2 < 0 ? 0 : currentYPercent - diff/2;
+                  var newBackgroundPosition = currentYPercent - diff/2 < 13.5 ? 13.5 : currentYPercent - diff/1.9;
 
                   $('.LWO').stop(true, false);
                   $('.RWO').stop(true, false);
@@ -423,6 +444,8 @@ $(document).ready(function(){
                     RWOtoggle = false;
                     SLOTtoggle = false;
 
+                    $('.zipBall .lobBall').hide();
+
                     placeqb(48, 94);
                     placeball(49, 92);
                     leftWideOut(2000, 10, 92);
@@ -436,8 +459,12 @@ $(document).ready(function(){
           }
           }
           if (notThrown) {
-            zipBall();
-            notThrown = false;
+            if (!zipBall) {
+              return;
+            } else {
+              zipBall();
+              notThrown = false;
+            }
           }
         });
         
