@@ -141,19 +141,15 @@ $(document).ready(function(){
             $('.LWO').stop(true, false).animate({top: (event.tweens[1].end/gameboardHeight) * 100 - 3 + '%'}, 800);
             $('.lobBall').animate({top: event.tweens[1].end - 25 + 'px'}, 800);
             
-            //signifies a catch
+            // signifies a catch
             $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12, top: currentLWOposition.top - $('.caught').height()/4, left: currentLWOposition.left - $('.caught').width()/4}).show();
             setTimeout(function(){$('.caught').hide();}, 400);
 
 
-
-            // if ((currentYPercent.indexOf('.') > 0 || currentYPercent.length === 0) && currentLWOposition.top/gameboardHeight < .2) {
-            //   $('.touchdown').show();
-            //   setTimeout(function(){location.reload()}, 1500);
-            // } else if (currentYPercent.indexOf('%') > 0 && currentLWOposition.top/gameboardHeight < .25) {
-            //   $('.touchdown').show();
-            //   setTimeout(function(){location.reload()}, 1500);
-            // }
+            // touchdown logic
+              // find the earliest spot where the endzone appears
+                // make touchdown catch based on location
+              // increment up
 
 
             // handles reseting play
@@ -190,13 +186,7 @@ $(document).ready(function(){
             $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12, top: currentRWOposition.top - $('.caught').height()/4, left: currentRWOposition.left - $('.caught').width()/4}).show();
             setTimeout(function(){$('.caught').hide()}, 400);
 
-            if ((currentYPercent.indexOf('.') > 0 || currentYPercent.length === 0) && currentRWOposition.top/gameboardHeight < .2) {
-              $('.touchdown').show();
-              setTimeout(function(){location.reload()}, 1500);
-            } else if (currentYPercent.indexOf('%') > 0 && currentRWOposition.top/gameboardHeight < .25) {
-              $('.touchdown').show();
-              setTimeout(function(){location.reload()}, 1500);
-            }
+
 
             setTimeout(function(){
 
@@ -226,13 +216,7 @@ $(document).ready(function(){
             $('.caught').css({height: gameboardHeight * .11, width: gameboardHeight * .12, top: currentSLOTposition.top - $('.caught').height()/4, left: currentSLOTposition.left - $('.caught').width()/4}).show();
             setTimeout(function(){$('.caught').hide()}, 400);
 
-            if ((currentYPercent.indexOf('.') > 0 || currentYPercent.length === 0) && currentSLOTposition.top/gameboardHeight < .2) {
-              $('.touchdown').show();
-              setTimeout(function(){location.reload()}, 1500);
-            } else if (currentYPercent.indexOf('%') > 0 && currentSLOTposition.top/gameboardHeight < .25) {
-              $('.touchdown').show();
-              setTimeout(function(){location.reload()}, 1500);
-            }
+
 
             setTimeout(function(){
 
@@ -242,7 +226,7 @@ $(document).ready(function(){
               }, 2000);
 
               $('.RWO').stop(true, false);
-              $('.currentLWOposition').stop(true, false);
+              $('.LWO').stop(true, false);
 
 
               placeqb(48, 94);
@@ -269,10 +253,10 @@ $(document).ready(function(){
 
                 placeqb(48, 94);
                 placeball(49, 92);
-                leftWideOut(2000, 10, 92);
-                rightWideOut(2000, 85, 92);
+                leftWideOut(1000, 10, 92);
+                rightWideOut(1000, 85, 92);
                 generateSLOTposition();
-                slot(2000, SLOTposition[position], 93); 
+                slot(1000, SLOTposition[position], 93); 
 
               // } else {
 
@@ -409,7 +393,7 @@ $(document).ready(function(){
                   var currentYPercent = $('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2);
                   var diff = percentChange(startDownY, ev.originalEvent.changedTouches[0].clientY);
                   
-                  newBackgroundPosition = currentYPercent - diff/2 < 13.5 ? 13.5 : currentYPercent - diff/1.9;
+                  newBackgroundPosition = currentYPercent - diff/2 < 13.5 ? 13.5 : currentYPercent - diff/1.5;
 
                   $('.LWO').stop(true, false);
                   $('.RWO').stop(true, false);
@@ -421,6 +405,7 @@ $(document).ready(function(){
                       LWOtoggle = false;
                       RWOtoggle = false;
                       SLOTtoggle = false;
+
 
                       $('.gameBoard').animate({
                         'background-position-x': '50%', 
@@ -444,10 +429,10 @@ $(document).ready(function(){
 
                     placeqb(48, 94);
                     placeball(49, 92);
-                    leftWideOut(2000, 10, 92);
-                    rightWideOut(2000, 85, 92);
+                    leftWideOut(1000, 10, 92);
+                    rightWideOut(1000, 85, 92);
                     generateSLOTposition();
-                    slot(2000, SLOTposition[position], 93); 
+                    slot(1000, SLOTposition[position], 93); 
                   }
                     
                 }
