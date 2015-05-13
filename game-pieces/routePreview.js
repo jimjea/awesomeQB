@@ -72,7 +72,6 @@ preview();
 
 
 function previewClose(diffPercent) {
-  console.log('close preview')
   var LWOcanvas = document.getElementById('LWOpreview'),
   LWOcontext = LWOcanvas.getContext('2d');
   var RWOcanvas = document.getElementById('RWOpreview'),
@@ -131,7 +130,6 @@ function previewClose(diffPercent) {
 
 
 function previewRedzone() {
-  console.log('redzone preview')
   var LWOcanvas = document.getElementById('LWOpreview'),
   LWOcontext = LWOcanvas.getContext('2d');
   var RWOcanvas = document.getElementById('RWOpreview'),

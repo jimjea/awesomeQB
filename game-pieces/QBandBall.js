@@ -5,19 +5,31 @@ var gameOptions = {
 
 var notThrown = true;  // throw once
 
-
+// accounts for percent change for moving background image in ball throwing logic
 var percentChange = function(num1, num2) {
   var diff = num1 - num2;
   return (diff/$('.gameBoard').height()) * 100;
 };
 
-$('.gameBoard').addClass('notredzone');
+$('.gameBoard').addClass('notredzone'); // fires off whether you are in the redzone or not
+
+/**************************************/
+//           E N D Z O N E            //
+/**************************************/
+// $('.endzone').hide();
+
+var placeEndzone = function(top) {
+  $('.endzone').offset({
+    top: top
+  })
+}
 
 $(document).ready(function(){
 
-/**************************************/           // TODO: in the middle of the lob, the done method is being called
-//                Q B                 //           
-/**************************************/
+
+  /**************************************/           // TODO: in the middle of the lob, the done method is being called
+  //                Q B                 //           
+  /**************************************/
 
   var placeqb = function(startX, startY) {
     $('.qb').animate({
@@ -35,9 +47,10 @@ $(document).ready(function(){
 
 
 
-/**************************************/
-//               B A L L              //
-/**************************************/
+
+  /**************************************/
+  //               B A L L              //
+  /**************************************/
   var placeball = function(startX, startY) {
     $('.lobBall, .zipBall').css({
       left: startX + '%',
@@ -75,7 +88,6 @@ $(document).ready(function(){
 
     // set ball timing based on distance thrown
     // broken up into thirds of the field
-    // ************************* BREAK THIS UP INTO SIXTHS *************************
     var setBallDuration = function() {
       var start = 95;
       var ballTravel = y/gameOptions.height * 100;
@@ -133,6 +145,8 @@ $(document).ready(function(){
           var diff = percentChange(startY, event.elem.offsetTop);
           newBackgroundPosition = currentYPercent - diff/2  < 13.5 ? 13.5 : currentYPercent - diff/2;
 
+          // moves endzone as field scales
+          var moveEndzone = Math.abs(52 - currentYPercent - 5);
 
           if (LWOHit.length > 0) {
             var currentLWOposition = $('.LWO').position();
@@ -198,7 +212,6 @@ $(document).ready(function(){
               $('.LWO').stop(true, false);
               $('.SLOT').stop(true, false);
 
-
               placeqb(48, 94);
               placeball(49, 92);
               leftWideOut(2000, 10, 92);
@@ -227,7 +240,6 @@ $(document).ready(function(){
 
               $('.RWO').stop(true, false);
               $('.LWO').stop(true, false);
-
 
               placeqb(48, 94);
               placeball(49, 92);

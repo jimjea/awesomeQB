@@ -4,14 +4,15 @@
 
 
 // All code documentation for receivers will be in LEFT WIDE OUT since all receivers are virtually the same
+var percentFieldDiff;
 
 var LWOroutes = {
-  1: {firstX: 0, firstY: -50, firstDur: 1500, secondX: 3, secondY: -40, secondDur: 600},                                          // curl
-  2: {firstX: 0, firstY: -50, firstDur: 1500, secondX: 78, secondY: -75, secondDur: 1900},                                         // post
-  3: {firstX: 0, firstY: -45, firstDur: 1500, secondX: 78, secondY: -45, secondDur: 1700},                                         // cross
-  4: {firstX: 0, firstY: -40, firstDur: 1500, secondX: 40, secondY: -60, secondDur: 1500, thirdX: 0, thirdY: -75, thirdDur: 1500}, // post corner
+  1: {firstX: 0, firstY: -45, firstDur: 1500, secondX: 3, secondY: -35, secondDur: 600},                                          // curl
+  2: {firstX: 0, firstY: -35, firstDur: 1500, secondX: 78, secondY: -75, secondDur: 1900},                                         // post
+  3: {firstX: 0, firstY: -30, firstDur: 1500, secondX: 78, secondY: -30, secondDur: 1700},                                         // cross
+  4: {firstX: 0, firstY: -30, firstDur: 1500, secondX: 40, secondY: -60, secondDur: 1500, thirdX: 0, thirdY: -75, thirdDur: 1500}, // post corner
   5: {firstX: 75, firstY: -40, firstDur: 2000, secondX: 78, secondY: -75, secondDur: 1900}                                         // slant then corner
-}
+};
 var LWORouteNumber;
 
 var leftWideOut = function(dur, startX, startY) {
@@ -31,17 +32,25 @@ var leftWideOut = function(dur, startX, startY) {
         $('.zipBall').show();
         $('.lobBall').show();
 
-        var pixelDiffRedzone = (Math.abs(52 - $('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2)) / 100) * gameOptions.height;
 
-        console.log($('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2))
+        // handles close to endzone and redzone
+        var backgroundPosition = $('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2);
+        var pixelDiffRedzone = (Math.abs(52 - backgroundPosition) / 100) * gameOptions.height;
+        percentFieldDiff = Math.abs(52 - backgroundPosition);
 
-        if ($('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2) <= 27) {
+
+        if (backgroundPosition <= 32) {
           previewRedzone();
-        } else if ($('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2) < 52) {
+        } else if (backgroundPosition < 52) {
           $('.gameBoard').removeClass('notredzone');
           previewClose(pixelDiffRedzone);
         } else {
           preview();
+        }
+
+        // handles unhiding endzone ********************* NEEDS TO SCALE THE ENDZONE PROPERLY TO THE ACTUAL ENDZONE. AS WE GET CLOSER TO 0%, THE ENDZONE DIV DOESN'T MOVE DOWN ENOUGH
+        if (backgroundPosition <= 52) {
+          placeEndzone(((percentFieldDiff + 5)/100) * gameOptions.height)
         }
 
 
@@ -101,11 +110,11 @@ var LWOroute = function(x, y) {
 //     R I G H T  W I D E  O U T      //
 /**************************************/
 var RWOroutes = {
-  1: {firstX: 0, firstY: -50, firstDur: 1500, secondX: -3, secondY: -40, secondDur: 600},                               // curl
-  2: {firstX: 0, firstY: -50, firstDur: 1500, secondX: -78, secondY: -75, secondDur: 2000},                              // post
+  1: {firstX: 0, firstY: -45, firstDur: 1500, secondX: -3, secondY: -35, secondDur: 600},                               // curl
+  2: {firstX: 0, firstY: -35, firstDur: 1500, secondX: -78, secondY: -75, secondDur: 2000},                              // post
   3: {firstX: -75, firstY: -40, firstDur: 2000, secondX: -78, secondY: -75, secondDur: 1500},                            // slant then corner
-  4: {firstX: 0, firstY: -50, firstDur: 1500, secondX: -78, secondY: -50, secondDur: 1700},                              // cross
-  5: {firstX: 0, firstY: -40, firstDur: 1500, secondX: -40, secondY: -60, secondDur: 1500, thirdX: -0, thirdY: -75, thirdDur: 1500}      // post corner
+  4: {firstX: 0, firstY: -32, firstDur: 1500, secondX: -78, secondY: -32, secondDur: 1700},                              // cross
+  5: {firstX: 0, firstY: -30, firstDur: 1500, secondX: -40, secondY: -60, secondDur: 1500, thirdX: -0, thirdY: -75, thirdDur: 1500}      // post corner
 }
 var RWORouteNumber;
 
@@ -158,13 +167,13 @@ var SLOTroutes = {
   0: { // routes when slot is on the right
     1: {firstX: 0, firstY: -30, firstDur: 1500, secondX: -35, secondY: -50, secondDur: 1500, thirdX: 21, thirdY: -70, thirdDur: 1500},  // post corner
     2: {firstX: -60, firstY: -35, firstDur: 1500, secondX: -61, secondY: -80, secondDur: 1500},                                         // slant to corner
-    3: {firstX: 0, firstY: -30, firstDur: 1500, secondX: 20, secondY: -30, secondDur: 1500},                                            // out
+    3: {firstX: 0, firstY: -30, firstDur: 1500, secondX: 20, secondY: -30, secondDur: 800},                                             // out
     4: {firstX: 0, firstY: -30, firstDur: 1500, secondX: 20, secondY: -30, secondDur: 1000, thirdX: -60, thirdY: -30, thirdDur: 1900},  // out then in
   },
   1: {  // routes when slot is on the left
     1: {firstX: 0, firstY: -30, firstDur: 1500, secondX: 35, secondY: -50, secondDur: 1500, thirdX: -21, thirdY: -70, thirdDur: 1500},  // post corner
     2: {firstX: 59, firstY: -35, firstDur: 1500, secondX: 60, secondY: -80, secondDur: 1500},                                           // slant to corner
-    3: {firstX: 0, firstY: -30, firstDur: 1500, secondX: -20, secondY: -30, secondDur: 1500},                                           // out
+    3: {firstX: 0, firstY: -30, firstDur: 1500, secondX: -20, secondY: -30, secondDur: 800},                                            // out
     4: {firstX: 0, firstY: -30, firstDur: 1500, secondX: -20, secondY: -30, secondDur: 1000, thirdX: 60, thirdY: -30, thirdDur: 1900},  // out then in
   }
 };
@@ -206,8 +215,8 @@ var SLOTroute = function(x, y) {
     top: y + SLOTroutes[position][SLOTRouteNumber].thirdY + '%'
   }, {
     duration: SLOTroutes[position][SLOTRouteNumber].thirdDur
-  })
-}
+  });
+};
 
 
 /**************************************/
@@ -218,22 +227,22 @@ var SLOTroute = function(x, y) {
 // figure out a way to get more granular as we get closer, perhaps make it dynamic as we approach the end zone
   // subtract the percentage diff from the y axis as we move up
   // possibly subtract that percentage diff from the duration to speed up the shortened routes as well
-  
+
 var LWOredzoneRoutes = {
-  1: {firstX: 0, firstY: -50, firstDur: 1500, secondX: 3, secondY: -40, secondDur: 600},                                           // curl
-  2: {firstX: 0, firstY: -50, firstDur: 1500, secondX: 78, secondY: -75, secondDur: 1900},                                         // post
-  3: {firstX: 0, firstY: -45, firstDur: 1500, secondX: 78, secondY: -45, secondDur: 1700},                                         // cross
-  4: {firstX: 0, firstY: -40, firstDur: 1500, secondX: 40, secondY: -60, secondDur: 1500, thirdX: 0, thirdY: -75, thirdDur: 1500}, // post corner
-  5: {firstX: 75, firstY: -40, firstDur: 2000, secondX: 78, secondY: -75, secondDur: 1900}                                         // slant then corner
-}
+  1: {firstX: 0, firstY: -percentFieldDiff/2, firstDur: 1500, secondX: 3, secondY: -40, secondDur: 600},                                           // curl
+  2: {firstX: 0, firstY: -percentFieldDiff/2, firstDur: 1500, secondX: 78, secondY: -percentFieldDiff, secondDur: 1900},                                         // post
+  3: {firstX: 0, firstY: -percentFieldDiff/2, firstDur: 1500, secondX: 78, secondY: -percentFieldDiff/2, secondDur: 1700},                                         // cross
+  4: {firstX: 0, firstY: -percentFieldDiff/6, firstDur: 1500, secondX: 40, secondY: -percentFieldDiff/3, secondDur: 1500, thirdX: 0, thirdY: -percentFieldDiff, thirdDur: 1500}, // post corner
+  5: {firstX: 75, firstY: -percentFieldDiff/2, firstDur: 2000, secondX: 78, secondY: -percentFieldDiff, secondDur: 1900}                                         // slant then corner
+};
 
 var RWOredzoneRoutes = {
-  1: {firstX: 0, firstY: -50, firstDur: 1500, secondX: -3, secondY: -40, secondDur: 600},                               // curl
+  1: {firstX: 0, firstY: -50, firstDur: 1500, secondX: -3, secondY: -40, secondDur: 600},                                // curl
   2: {firstX: 0, firstY: -50, firstDur: 1500, secondX: -78, secondY: -75, secondDur: 2000},                              // post
   3: {firstX: -75, firstY: -40, firstDur: 2000, secondX: -78, secondY: -75, secondDur: 1500},                            // slant then corner
   4: {firstX: 0, firstY: -50, firstDur: 1500, secondX: -78, secondY: -50, secondDur: 1700},                              // cross
   5: {firstX: 0, firstY: -40, firstDur: 1500, secondX: -40, secondY: -60, secondDur: 1500, thirdX: -0, thirdY: -75, thirdDur: 1500}      // post corner
-}
+};
 
 var SLOTredzoneRoutes = {
   0: { // routes when slot is on the right
@@ -338,7 +347,7 @@ var SLOTredzone = function(x, y) {
       LWOroute(LWOx, LWOy);
       SLOTroute(SLOTx, SLOTy);
     } else {
-      if ($('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2) <= 27) {
+      if ($('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2) <= 32) {
         $('.start').hide();
         $('#SLOTpreview').hide();
         $('#RWOpreview').hide();
