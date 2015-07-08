@@ -76,7 +76,7 @@ $(document).ready(function(){
   // throw ball to mouse on click
   // ball handles all collision logic
   $('.gameBoard').on('click', function(event) {
-    event.preventDefault();
+    // event.preventDefault();
     $('.zipBall').hide();
     var x = event.clientX;
     var y = event.clientY;
