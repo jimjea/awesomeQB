@@ -76,6 +76,7 @@ $(document).ready(function(){
   // throw ball to mouse on click
   // ball handles all collision logic
   $('.gameBoard').on('click', function(event) {
+    event.preventDefault();
     $('.zipBall').hide();
     var x = event.clientX;
     var y = event.clientY;
@@ -308,6 +309,7 @@ $(document).ready(function(){
 
 
     $('.gameBoard').on('touchstart', function (event) {
+      event.preventDefault();
       startDownX = event.originalEvent.touches[0].clientX;
       startDownY = event.originalEvent.touches[0].clientY;
 
