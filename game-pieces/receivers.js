@@ -62,7 +62,7 @@ var leftWideOut = function(dur, startX, startY) {
   // $('.LWO').on('collision_start', function(event) {
   //   $('.gameBoard').append('<div>caught</div>').offset({top: '400px'})
   // })
-  
+
 
 };
 leftWideOut(undefined, 10, 92);
@@ -77,7 +77,7 @@ var LWOroute = function(x, y) {
     duration: LWOroutes[LWORouteNumber].firstDur,
     // LEAVING ONE EXAMPLE TO USE LATER TO DISPLAY A SINGLE INSTANCE
     // step: function() {
-      
+
     //   // handles only revealing the caught message once
     //   var hit_list = $(this).collision(".zipBall");
     //   var current_collision = hit_list.length != 0;
@@ -325,10 +325,6 @@ var SLOTredzone = function(x, y) {
 
 
 
-
-
-
-
 // Start the game on click
   $('#SLOTpreview').on('click', function(event) {
     var percentDiff = Math.abs(52 - $('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2));
@@ -378,4 +374,3 @@ var SLOTredzone = function(x, y) {
       }
     }
   });
-
