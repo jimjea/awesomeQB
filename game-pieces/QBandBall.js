@@ -219,7 +219,9 @@ $(document).ready(function(){
                   }
                 },
                 done: function(x) {
-                  // refactor this out so we can reuse it when the zipped ball stops
+                  // TODO: refactor this out so we can reuse it when the zipped ball stops
+                  // figure out what variables are being called from the parent scope
+                    // y, ev,
                   $('.gameBoard').removeClass('test');
                   var gameboardHeight = $('.gameBoard').height();  // for scaling the background image
                   var currentYPercent = $('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2);
