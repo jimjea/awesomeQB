@@ -30,7 +30,7 @@ function preview() {
     SLOTcanvas.width = window.innerWidth;
     SLOTcanvas.height = window.innerHeight;
 
-    drawStuff(); 
+    drawStuff();
   }
   resizeCanvas();
 
@@ -89,7 +89,7 @@ function previewClose(diffPercent) {
     SLOTcanvas.width = window.innerWidth;
     SLOTcanvas.height = window.innerHeight;
 
-    drawStuff(); 
+    drawStuff();
   }
   resizeCanvas();
 
@@ -147,7 +147,7 @@ function previewRedzone() {
     SLOTcanvas.width = window.innerWidth;
     SLOTcanvas.height = window.innerHeight;
 
-    drawStuff(); 
+    drawStuff();
   }
   resizeCanvas();
 

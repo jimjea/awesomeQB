@@ -1,48 +1,53 @@
+// DESIGN:
+  // init will initiate things like height/width, placing the endzone, etc., and then instantiate gameboard with
+
+
+// for purposes of responsiveness
+// MOVE: init
 var gameOptions = {
   width: $(window).width(),
   height: $(window).height()
 };
 
-var notThrown = true;  // throw once
+// stores state for only throwing the ball once
+// MOVE: BALL
+var notThrown = true;
 
 // accounts for percent change for moving background image in ball throwing logic
+// MOVE: GAME BOARD
 var percentChange = function(num1, num2) {
   var diff = num1 - num2;
-  return (diff/$('.gameBoard').height()) * 100;
+  return (diff/gameOptions.height * 100);
 };
-
-$('.gameBoard').addClass('notredzone'); // fires off whether you are in the redzone or not
 
 /**************************************/
 //           E N D Z O N E            //
 /**************************************/
-// $('.endzone').hide();
-
+// MOVE: GAME BOARD
 var placeEndzone = function(top) {
   $('.endzone').offset({
     top: top
-  })
-}
-
+  });
+};
+// MOVE: INIT
 $(document).ready(function(){
 
 
-  /**************************************/           // TODO: in the middle of the lob, the done method is being called
+  /**************************************/
   //                Q B                 //
   /**************************************/
-
+  // MOVE: QB
   var placeqb = function(startX, startY) {
     $('.qb').animate({
       left: startX + '%',
       top: startY + '%'
     }, 400);
   };
-  placeqb();
 
   var hikeqb = function() {
     $('.qb').animate({
       top: ($('.qb').position().top/gameOptions.height) * 100 + 1.5 + '%'
-    })
+    });
   };
 
 
@@ -51,79 +56,31 @@ $(document).ready(function(){
   /**************************************/
   //               B A L L              //
   /**************************************/
+  // MOVE: BALL
   var placeball = function(startX, startY) {
     $('.lobBall, .zipBall').css({
       left: startX + '%',
       top: startY + '%'
-    })
-  }
-  placeball(49, 92);
+    });
+  };
 
   var hikeball = function() {
     $('.lobBall, .zipBall').animate({
       left: ($('.lobBall').position().left/gameOptions.width) * 100 + 1.5 + '%',
       top: ($('.lobBall').position().top/gameOptions.height) * 100 + 3 + '%'
-    })
-  }
+    });
+  };
 
-
+  // MOVE: GAME BOARD
   $('#SLOTpreview').on('click', function() {
     hikeball();
     hikeqb();
   });
 
-  var resetPieces = function() {
-    $('.gameBoard').removeClass('test');
-    var gameboardHeight = $('.gameBoard').height();  // for scaling the background image
-    var currentYPercent = $('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2);
-    var diff = percentChange(y, ev.originalEvent.changedTouches[0].clientY);
-
-    newBackgroundPosition = currentYPercent - diff/2 < 13.5 ? 13.5 : currentYPercent - diff/1.5;
-
-    $('.LWO').stop(true, false);
-    $('.RWO').stop(true, false);
-    $('.SLOT').stop(true, false);
-
-    if (LWOtoggle || RWOtoggle || SLOTtoggle) {
-      setTimeout(function(){
-
-        LWOtoggle = false;
-        RWOtoggle = false;
-        SLOTtoggle = false;
-
-
-        $('.gameBoard').animate({
-          'background-position-x': '50%',
-          'background-position-y': newBackgroundPosition + '%'
-        }, 2000);
-
-        placeqb(48, 94);
-        placeball(49, 92);
-        leftWideOut(2000, 10, 92);
-        rightWideOut(2000, 85, 92);
-        generateSLOTposition();
-        slot(2000, SLOTposition[position], 93);
-
-      }, 1000);
-    } else {
-      LWOtoggle = false;
-      RWOtoggle = false;
-      SLOTtoggle = false;
-
-      $('.zipBall .lobBall').hide();
-
-      placeqb(48, 94);
-      placeball(49, 92);
-      leftWideOut(1000, 10, 92);
-      rightWideOut(1000, 85, 92);
-      generateSLOTposition();
-      slot(1000, SLOTposition[position], 93);
-    }
-  };
-
-
   // throw ball to mouse on click
   // ball handles all collision logic
+  // MOVE: GAME BOARD
+  // DEPENDENCY INJECTION: INIT, QB, BALL, RECEIVER, ROUTES PREVIEW
   $('.gameBoard').on('touchstart', function(e) {
     e.preventDefault();
 
@@ -132,17 +89,21 @@ $(document).ready(function(){
     var startX = gameOptions.width * .505;
     var startY = gameOptions.height * .955;
 
+      // starting location of zipping the ball (creates a rectangular area for your thumb)
       if (x < gameOptions.width * .6 && x > gameOptions.width * .4 && y > gameOptions.height * .9 && y < gameOptions.height) {
-      // add test class to game board, then delete test class once it is zipped
-        $('.gameBoard').addClass('test');
+        // add zipping-ball class to game board, then delete zipping-ball class once it is zipped
+        $('.gameBoard').addClass('zipping-ball');
         var LWOtoggle = false;
         var RWOtoggle = false;
         var SLOTtoggle = false;
         $('.lobBall').hide();
 
+        // stays within the gameboard 'touch start' event
         $('.gameBoard').on('touchend', function(ev){
-          if ($(this).hasClass('test')) {
+          // this is where the branching of whether to zip or lob happens
+          if ($(this).hasClass('zipping-ball')) {
 
+            // I should really pass 'ev' into the Ball dependency and have the Ball handle anything related to the ball
           var duration = 1200;
           var rise = -(ev.originalEvent.changedTouches[0].clientY - y);
           var run = ev.originalEvent.changedTouches[0].clientX - x;
@@ -172,23 +133,26 @@ $(document).ready(function(){
           }
 
 
-          var angle = Math.atan2(x - ev.originalEvent.changedTouches[0].clientX, y - ev.originalEvent.changedTouches[0].clientY)
+          var angle = Math.atan2(x - ev.originalEvent.changedTouches[0].clientX, y - ev.originalEvent.changedTouches[0].clientY);
           var degree = -angle * (180/Math.PI)
           $('.zipBall').css('-webkit-transform', 'rotate(' + degree + 'deg)')
+          // See last comment, include all of this in Ball dependency
 
-
-          var zipBall = function() {
+          // import { ZipBall } from ./ball.js
+          var zipBall = function(/* add ev from the gameboard, called gameboardEvents*/) {
             $('.zipBall').animate({
                left: newX,
                top: newY
               }, {
                 duration: duration,
                 step: function() {
+                  // wondering if this will be an issue with new dependecy structure
+                  // TODO: IMPORTANT. Will I be able to simply inject receivers and ball into gameboard and have them access each other? I believe so. Since the ball scope will look up to find
                   var LWOhit = $(this).collision('.LWO');
                   var RWOhit = $(this).collision('.RWO');
                   var SLOThit = $(this).collision('.SLOT');
 
-                  var gameboardHeight = $('.gameBoard').height();
+                  var gameboardHeight = gameOptions.height;
 
                   if (LWOhit.length > 0) {
                     var LWOposition = $('.LWO').position();
@@ -222,7 +186,7 @@ $(document).ready(function(){
                   // TODO: refactor this out so we can reuse it when the zipped ball stops
                   // figure out what variables are being called from the parent scope
                     // y, ev,
-                  $('.gameBoard').removeClass('test');
+                  $('.gameBoard').removeClass('zipping-ball');
                   var gameboardHeight = $('.gameBoard').height();  // for scaling the background image
                   var currentYPercent = $('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2);
                   var diff = percentChange(y, ev.originalEvent.changedTouches[0].clientY);
@@ -280,6 +244,8 @@ $(document).ready(function(){
         });
 
       } else {
+          // again, put this all in Ball dependency
+
           // set ball timing based on distance thrown
           // broken up into thirds of the field
           var setBallDuration = function() {
@@ -335,9 +301,9 @@ $(document).ready(function(){
               },
               done: function(event) {
                 $('.lobBall').height(gameOptions.height * .04).width(gameOptions.width * .03).css('-webkit-transform', 'rotate(0deg)');
-                var LWOHit = $(this).collision(".LWO");
-                var RWOHit = $(this).collision(".RWO");
-                var SLOTHit = $(this).collision(".SLOT");
+                var LWOHit = $(this).collision(".LWO").length;
+                var RWOHit = $(this).collision(".RWO").length;
+                var SLOTHit = $(this).collision(".SLOT").length;
 
                 // logic for moving background image
                 var gameboardHeight = $('.gameBoard').height();  // for scaling the background image
@@ -345,10 +311,7 @@ $(document).ready(function(){
                 var diff = percentChange(startY, event.elem.offsetTop);
                 newBackgroundPosition = currentYPercent - diff/2  < 13.5 ? 13.5 : currentYPercent - diff/2;
 
-                // moves endzone as field scales
-                var moveEndzone = Math.abs(52 - currentYPercent - 5);
-
-                if (LWOHit.length > 0) {
+                if (LWOHit) {
                   var currentLWOposition = $('.LWO').position();
 
                   // stops receiver and ball animation
@@ -392,7 +355,7 @@ $(document).ready(function(){
 
                   setTimeout(resetLWO, 1000);
 
-                } else if (RWOHit.length > 0) {
+                } else if (RWOHit) {
                   var currentRWOposition = $('.RWO').position();
                   $('.RWO').stop(true, false).animate({top: event.tweens[1].end - 25 + 'px'}, 800);
                   $('.lobBall').animate({top: event.tweens[1].end - 25 + 'px'}, 800);
@@ -421,7 +384,7 @@ $(document).ready(function(){
 
                   }, 1000);
 
-                } else if (SLOTHit.length > 0) {
+                } else if (SLOTHit) {
                   var currentSLOTposition = $('.SLOT').position();
                   $('.SLOT').stop(true, false).animate({top: event.tweens[1].end - 25 + 'px'}, 800);
                   $('.lobBall').animate({top: event.tweens[1].end - 25 + 'px'}, 800);
@@ -484,6 +447,13 @@ $(document).ready(function(){
                 }
 
                 // Signals touchdown
+                // moves endzone as field scales
+                var moveEndzone = Math.abs(52 - currentYPercent - 5);
+                // touchdown logic
+                var touchdown = $(this).collision(".endzone").length;
+                if (RWOHit && touchdown || LWOHit && touchdown || SLOTHit && touchdown) {
+                  console.log('touchdown')
+                }
 
                 // setTimeout(function(){location.reload()}, 1000);
               }
@@ -516,15 +486,15 @@ $(document).ready(function(){
 
 
     //   if (startDownX < gameOptions.width * .6 && startDownX > gameOptions.width * .4 && startDownY > gameOptions.height * .9 && startDownY < gameOptions.height) {
-    //   // add test class to game board, then delete test class once it is zipped
-    //     $('.gameBoard').addClass('test');
+    //   // add zipping-ball class to game board, then delete zipping-ball class once it is zipped
+    //     $('.gameBoard').addClass('zipping-ball');
     //     var LWOtoggle = false;
     //     var RWOtoggle = false;
     //     var SLOTtoggle = false;
     //     $('.lobBall').hide();
 
     //     $('.gameBoard').on('touchend', function(ev){
-    //       if ($(this).hasClass('test')) {
+    //       if ($(this).hasClass('zipping-ball')) {
 
     //       var duration = 1200;
     //       var rise = -(ev.originalEvent.changedTouches[0].clientY - startDownY);
@@ -603,7 +573,7 @@ $(document).ready(function(){
     //               }
     //             },
     //             done: function(x) {
-    //               $('.gameBoard').removeClass('test');
+    //               $('.gameBoard').removeClass('zipping-ball');
     //               var gameboardHeight = $('.gameBoard').height();  // for scaling the background image
     //               var currentYPercent = $('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2);
     //               var diff = percentChange(startDownY, ev.originalEvent.changedTouches[0].clientY);

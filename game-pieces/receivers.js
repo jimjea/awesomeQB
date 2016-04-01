@@ -25,13 +25,22 @@ var leftWideOut = function(dur, startX, startY) {
     }, {
       duration: dur,
       done: function() { // only need this done logic once
+
+        // TODO: DO I REALLY NEED THIS LOGIC HERE?
+          // it's here currently bc we want to fire off preview() and showing previews after receivers are set
+          // let's try to move this into Ball dependency
+        // wrap these in a function
+        /*
+          function (routes) {
+            routesPreview.preview(routes);
+            $('#LWOpreview').show();
+            $('#RWOpreview').show();
+            $('#SLOTpreview').show();
+          }
+        */
         $('#LWOpreview').show();
         $('#RWOpreview').show();
         $('#SLOTpreview').show();
-
-        $('.zipBall').show();
-        $('.lobBall').show();
-
 
         // handles close to endzone and redzone
         var backgroundPosition = $('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2);
