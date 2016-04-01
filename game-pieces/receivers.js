@@ -42,6 +42,9 @@ var leftWideOut = function(dur, startX, startY) {
         $('#RWOpreview').show();
         $('#SLOTpreview').show();
 
+        $('.zipBall').show();
+        $('.lobBall').show();
+
         // handles close to endzone and redzone
         var backgroundPosition = $('.gameBoard').css('backgroundPosition').split(' ')[1].slice(0,2);
         var pixelDiffRedzone = (Math.abs(52 - backgroundPosition) / 100) * gameOptions.height;
@@ -84,20 +87,6 @@ var LWOroute = function(x, y) {
     top: y + LWOroutes[LWORouteNumber].firstY + '%'
   }, {
     duration: LWOroutes[LWORouteNumber].firstDur,
-    // LEAVING ONE EXAMPLE TO USE LATER TO DISPLAY A SINGLE INSTANCE
-    // step: function() {
-
-    //   // handles only revealing the caught message once
-    //   var hit_list = $(this).collision(".zipBall");
-    //   var current_collision = hit_list.length != 0;
-
-    //   var changed_collision = current_collision != $(this).data("collision");
-
-    //   if (changed_collision) {
-    //       $(this).data("collision", current_collision);
-    //       $(this).trigger("collision_" + (current_collision ? "start" : "stop"));
-    //   }
-    // }
   })
   .animate({
     left: x + LWOroutes[LWORouteNumber].secondX + '%',
